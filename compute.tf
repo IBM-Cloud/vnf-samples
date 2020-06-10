@@ -22,7 +22,7 @@ data "ibm_is_instance_profile" "vnf_profile" {
 # Create RHEL 7 virtual server.
 ##############################################################################
 
-
+/*
 resource "ibm_is_security_group" "rhel7_security_group" {
     name = "secgroup"
     vpc = "${data.ibm_is_vpc.rhel7_vpc.id}"
@@ -45,6 +45,7 @@ resource "ibm_is_security_group_rule" "test_rhel7_sg_rule_all" {
   direction = "inbound"
   remote    = "0.0.0.0/0"
 }
+*/
 
 data "template_file" "user_data" {
   template = "${file("${path.module}/boot.tpl")}"
@@ -62,7 +63,7 @@ resource "ibm_is_instance" "rhel7_vsi" {
 
   primary_network_interface {
     subnet = "${data.ibm_is_subnet.rhel7_subnet1.id}"
-    security_groups = [ibm_is_security_group.rhel7_security_group.id]
+    // security_groups = [ibm_is_security_group.rhel7_security_group.id]
   }
 
   vpc  = "${data.ibm_is_vpc.rhel7_vpc.id}"
