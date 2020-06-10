@@ -67,11 +67,6 @@ variable "vnf_profile" {
   description = "The profile of compute CPU and memory resources to be used when provisioning RHEL7 VSI. To list available profiles, run `ibmcloud is instance-profiles`."
 }
 
-variable "vnf_license" {
-  default     = ""
-  description = "Optional. The BYOL license key that you want your RHEL7 virtual server in a VPC to be used by registration flow during cloud-init."
-}
-
 variable "ssh_key" {
   default     = ""
   description = "Optional. The value of the ssh key to be used during cloud-init."
