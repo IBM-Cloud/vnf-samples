@@ -1,12 +1,12 @@
 # vnf-samples
 vnf-samples
 
-# Redhat Linux Virtual Server for Virtual Private Cloud using Custom Image
+# Red hat Linux Virtual Server for Virtual Private Cloud using Custom Image
   
 Use this template to create RHEL 7 virtual server using custom image from your IBM Cloud account in IBM Cloud [VPC Gen2](https://cloud.ibm.com/vpc-ext/overview) by using Terraform or IBM Cloud Schematics.  Schematics uses Terraform as the infrastructure-as-code engine.  With this template, you can create and manage infrastructure as a single unit as follows. For more information about how to use this template, see the IBM Cloud [Schematics documentation](https://cloud.ibm.com/docs/schematics).
 
 
-#IBM Cloud IaaS Support
+# IBM Cloud IaaS Support
 You're provided free technical support through the IBM Cloud™ community and Stack Overflow, which you can access from the Support Center. The level of support that you select determines the severity that you can assign to support cases and your level of access to the tools available in the Support Center. Choose a Basic, Advanced, or Premium support plan to customize your IBM Cloud™ support experience for your business needs.
 
 Learn more: https://www.ibm.com/cloud/support
