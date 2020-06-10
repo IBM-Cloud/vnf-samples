@@ -78,7 +78,7 @@ variable "ssh_key" {
 }
 
 variable "region" {
-  default     = "Dallas"
+  default     = "us-south"
   description = "Optional. The value of the region of VPC."
 }
 
