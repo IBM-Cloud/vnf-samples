@@ -47,7 +47,7 @@ resource "ibm_is_security_group_rule" "test_rhel7_sg_rule_all" {
 }
 
 data "template_file" "user_data" {
-  template = "${file("${path.module}/boot")}"
+  template = "${file("${path.module}/boot.tpl")}"
   vars = {
     ssh_key = "${var.ssh_key}"
   }
