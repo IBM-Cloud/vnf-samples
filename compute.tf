@@ -55,7 +55,7 @@ data "template_file" "user_data" {
 }
 
 resource "ibm_is_instance" "rhel7_vsi" {
-  depends_on = [ibm_is_security_group_rule.test_rhel7_sg_rule_all]
+  // depends_on = [ibm_is_security_group_rule.test_rhel7_sg_rule_all]
   name           = "${var.vnf_instance_name}"
   image          = "${data.ibm_is_image.rhel7_custom_image.id}"
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
