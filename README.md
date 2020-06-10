@@ -59,3 +59,32 @@ Fill in the following values, based on the steps that you completed before you b
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. |
 | `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value |
+
+## Notes
+
+If there is any failure during RHEL7 VSI creation, the created resources must be destroyed before attempting to instantiate again. To destroy resources go to `Schematics -> Workspaces -> [Your Workspace] -> Actions -> Delete` to delete  all associated resources. <br/>
+
+# Post RHEL7 VSI Instance Spin-up
+
+1. From the VPC list, confirm the RHEL7 VSI is powered ON with green button
+2. Assign a Floating IP to the RHEL7-VSI. Refer the steps below to associate floating IP
+    - Go to `VPC Infrastructure Gen 2` from IBM Cloud
+    - Click `Floating IPs` from the left pane
+    - Click `Reserve floating IP` -> Click `Reserve IP`
+    - There will be a (new) Floating IP address with status `Unbind`
+    - Click Three Dot Button corresponding to the Unbound IP address -> Click `Bind`
+    - Select RHEL7 instance from `Instance to bind` column.
+    - After clicking `Bind`, you can see the IP address assigned to your RHEL7-VSI Instance.
+3. In the Security group,  here are the steps to open the port 8443
+    - Go to `VPC Infrastructure Gen 2` from IBM Cloud
+    - Click `Security groups` from the left pane
+    - Click the security group which is corresponding to your VPC
+    - Click `New Rule` in "Inbound Rules" column.
+    - Select `Protocol` as "TCP"
+    - Select `Port Range` under Port
+    - Give `8443` port number in `Port min` and `Port max`
+    - Select `Source type` as `Any`
+    - Click `Save`, and a new rule will be added to your security group
+4. From the CLI, run `ssh cloud-user@<Floating IP>`. 
+5. Enter 'yes' for continue connecting using ssh your key. This is the ssh key, you specified in ssh_key. 
+
