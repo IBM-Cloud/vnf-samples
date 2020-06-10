@@ -25,3 +25,37 @@ When you apply template, the infrastructure resources that you create incur char
 * _VPC_: VPC charges are incurred for the infrastructure resources within the VPC, as well as network traffic for internet data transfer. For more information, see [Pricing for VPC](https://cloud.ibm.com/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc).
 * _VPC Custom Image_: The template will copy over a custom RHEL 7 image - this can be a one time operation.  RHEL 7 virtual instances can be created from the custom image.  VPC charges per custom image.
 
+## Dependencies
+
+Before you can apply the template in IBM Cloud, complete the following steps.
+
+
+1.  Ensure that you have the following permissions in IBM Cloud Identity and Access Management:
+    * `Manager` service access role for IBM Cloud Schematics
+    * `Operator` platform role for VPC Infrastructure
+2.  Ensure the following resources exist in your VPC Gen 2 environment
+    - VPC
+    - SSH Key
+    - VPC has a subnet
+    - _(Optional):_ A Floating IP Address to assign to the RHEL7 instance post deployment
+
+## Configuring your deployment values
+
+Create a schematics workspace and provide the github url (), so you can set up your deployment variables from the `Create` page. Once the template is applied, IBM Cloud Schematics  provisions the resources based on the values that were specified for the deployment variables.
+
+### Required values
+Fill in the following values, based on the steps that you completed before you began.
+
+| Key | Definition |
+| --- | ---------- |
+| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` |
+| `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` |
+| `vpc_name` | The name of your VPC in which F5-BIGIP VSI is to be provisioned. |
+| `ssh_key_name` | The name of your public SSH key to be used for F5-BIGIP VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. |
+| `vnf_image_copy` | Copy vendor custom image to your IBM Cloud account VPC Infrastructure (y/n)? First time, the image needs to be copied to your cloud account. It should be `y` for the first time. For the next runs, customer can skip image copy, if image is already copied by entering `n`. Accepted values in this field are `y` or `n` |
+| `vnf_vpc_image_name` | The name of the F5 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the F5-BIGIP virtual server instance. |
+| `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. |
+| `vnf_instance_name` | The name of the VNF instance to be provisioned. |
+| `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value |
+| `ibmcloud_endpoint` | The IBM Cloud environment `cloud.ibm.com` or `test.cloud.ibm.com` |
+| `delete_custom_image_confirmation` | A confirmation from the user to delete the custom image post successful creation of VSI |
