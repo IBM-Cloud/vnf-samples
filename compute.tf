@@ -62,7 +62,7 @@ resource "ibm_is_instance" "rhel7_vsi" {
   zone = "${data.ibm_is_zone.zone.name}"
   keys = ["${data.ibm_is_ssh_key.rhel7_ssh_pub_key.id}"]
 
-  user_data=replace(file("boot.sh"), "ssh_key", var.ssh_key)
+  user_data=replace(file("boot"), "ssh_key", var.ssh_key)
 
   //User can configure timeouts
   timeouts {
