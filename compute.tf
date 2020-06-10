@@ -46,6 +46,13 @@ resource "ibm_is_security_group_rule" "test_rhel7_sg_rule_all" {
   remote    = "0.0.0.0/0"
 }
 
+data "template_file" "user_data" {
+  template = "${file("${path.module}/boot")}"
+  vars = {
+    ssh_key = "${var.ssh_key}"
+  }
+}
+
 resource "ibm_is_instance" "rhel7_vsi" {
   depends_on = [ibm_is_security_group_rule.test_rhel7_sg_rule_all]
   name           = "${var.vnf_instance_name}"
@@ -62,7 +69,7 @@ resource "ibm_is_instance" "rhel7_vsi" {
   zone = "${data.ibm_is_zone.zone.name}"
   keys = ["${data.ibm_is_ssh_key.rhel7_ssh_pub_key.id}"]
 
-  user_data=replace(file("boot"), "ssh_key", var.ssh_key)
+  user_data=data.template_file.user_data.rendered
 
   //User can configure timeouts
   timeouts {
