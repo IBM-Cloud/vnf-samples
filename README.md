@@ -55,7 +55,7 @@ Fill in the following values, based on the steps that you completed before you b
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. |
 | `ssh_key` | Copy the ssh key value for VSI. This will add the ssh key value in your RHEL 7 image.
 | `vnf_cos_image_url` | This is the vendor COS image SQL URL where the image(RHEL7 qcow2 image) is located. This is to copy the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account.
-| `vnf_vpc_image_name` | The name of the F5 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the F5-BIGIP virtual server instance. |
+| `vnf_vpc_image_name` | The name of the F5 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the RHEL7 virtual server instance. |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. |
 | `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value |
@@ -86,5 +86,5 @@ If there is any failure during RHEL7 VSI creation, the created resources must be
     - Select `Source type` as `Any`
     - Click `Save`, and a new rule will be added to your security group
 4. From the CLI, run `ssh cloud-user@<Floating IP>`. 
-5. Enter 'yes' for continue connecting using ssh your key. This is the ssh key, you specified in ssh_key. 
+5. Enter 'yes' for continue connecting using ssh your key. This is the ssh key value, you specified in ssh_key variable. 
 
