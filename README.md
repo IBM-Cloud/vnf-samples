@@ -13,9 +13,20 @@ Learn more: https://www.ibm.com/cloud/support
 
 ## Prerequisites
 
-- Must have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/network/vpcs).
+- Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/network/vpcs).
 - The given VPC must have at least one subnet IP address unassigned - the RHEL 7 VSI will be assigned a IP Address from the user provided subnet as an input.
-- Must copy the RHEL 7 qcow2 image to COS bucket to install and create a VSI. Download the RHEL 7 qcow2 image, KVM Guest Image (rhel-guest-image-7.0-20140930.0.x86_64.qcow2) from https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-software 
+- Create a Cloud Object Storage (COS) Bucket and upload the qcow2 image using
+the methods described in _IBM COS getting started docs_ (https://test.cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started). This qcow2 image will be used to create a
+custom image (https://cloud.ibm.com/docs/vpc?topic=vpc-managing-images) in the 
+customer account by the terraform script. It's recommended to delete the
+custom image after the vendor VNF is created by terraform.
+- Copy the RHEL 7 qcow2 image to the COS bucket to install and create a VSI. Download the RHEL 7 qcow2 image, KVM Guest Image (rhel-guest-image-7.0-20140930.0.x86_64.qcow2) from https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-software
+- Create a **READ ALL** permissions on the relevant bucket containing the qcow2
+image using the method provided here (https://cloud.ibm.com/docs/cloud-object-storage/iam?topic=cloud-object-storage-iam-public-access#public-access-object). Here is an example for us-south region using
+the IBM Cloud CLI (https://cloud.ibm.com/docs/cli?topic=cli-getting-started):
+
+    $ export token=`ibmcloud iam oauth-tokens | awk '{ print $4 }'`
+    $ curl -v -X “PUT” “https://s3.us-south.cloud-object-storage.appdomain.cloud/vendorbucketname/vendor.qcow2?acl” -H “Authorization: Bearer $token” -H “x-amz-acl: public-read”
 
 ## Costs
 
