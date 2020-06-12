@@ -13,9 +13,20 @@ Learn more: https://www.ibm.com/cloud/support
 
 ## Prerequisites
 
-- Must have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/network/vpcs).
+- Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/).
 - The given VPC must have at least one subnet IP address unassigned - the RHEL 7 VSI will be assigned a IP Address from the user provided subnet as an input.
-- Must copy the RHEL 7 qcow2 image to COS bucket to install and create a VSI. Download the RHEL 7 qcow2 image, KVM Guest Image (rhel-guest-image-7.0-20140930.0.x86_64.qcow2) from https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-software 
+- Create a **Publicly Accessible** Cloud Object Storage (COS) Bucket and upload the qcow2 image using
+the methods described in _IBM COS getting started docs_ (https://test.cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started). This qcow2 image will be used to create a
+custom image (https://cloud.ibm.com/docs/vpc?topic=vpc-managing-images) in the 
+customer account by the terraform script. It's recommended to delete the
+custom image after the VNF is created by terraform.
+- Copy the RHEL 7 qcow2 image to the COS bucket to install and create a VSI. Download the RHEL 7 qcow2 image, KVM Guest Image (rhel-guest-image-7.0-20140930.0.x86_64.qcow2) from https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-software
+- Create a **READ ALL** permissions on the relevant bucket containing the qcow2
+image using the method provided here (https://cloud.ibm.com/docs/cloud-object-storage/iam?topic=cloud-object-storage-iam-public-access#public-access-object). Here is an example for us-south region using
+the IBM Cloud CLI (https://cloud.ibm.com/docs/cli?topic=cli-getting-started):
+
+    $ export token=`ibmcloud iam oauth-tokens | awk '{ print $4 }'`
+    $ curl -v -X “PUT” “https://s3.us-south.cloud-object-storage.appdomain.cloud/vendorbucketname/vendor.qcow2?acl” -H “Authorization: Bearer $token” -H “x-amz-acl: public-read”
 
 ## Costs
 
@@ -46,19 +57,19 @@ Create a schematics workspace and provide the github repository url (https://git
 ### Required values
 Fill in the following values, based on the steps that you completed before you began.
 
-| Key | Definition |
-| --- | ---------- |
-| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` |
-| `region` | The VPC region that you want your VPC virtual servers to be provisioned.
-| `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` |
-| `vpc_name` | The name of your VPC in which VSI is to be provisioned. |
-| `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. |
-| `ssh_key` | Copy the ssh key value for VSI. This will add the ssh key value in your RHEL 7 image.
-| `vnf_cos_image_url` | This is the vendor COS image SQL URL where the image(RHEL7 qcow2 image) is located. This is to copy the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account.
-| `vnf_vpc_image_name` | The starting name of the RHEL7 qcow2 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the RHEL7 virtual server instance. The name is appended with UUID, to create a unique custom image for every run. |
-| `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. |
-| `vnf_instance_name` | The name of the VNF instance to be provisioned. |
-| `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value |
+| Key | Definition | Value Example |
+| --- | ---------- | ------------- | 
+| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` | us-south-1 |
+| `region` | The VPC region that you want your VPC virtual servers to be provisioned. | us-south |
+| `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
+| `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
+| `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
+| `ssh_key` | Copy the ssh key value for VSI. This will add the ssh key value in your RHEL 7 image. | ssh-rsa AAAA .......|
+| `vnf_cos_image_url` | This is the vendor COS image SQL URL where the image(RHEL7 qcow2 image) is located. This is to copy the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account. | cos://us-south/vnf-bucket/rhel-guest-image-7.0-20140930.0.x86_64.qcow2 |
+| `vnf_vpc_image_name` | The starting name of the RHEL7 qcow2 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the RHEL7 virtual server instance. The name is appended with UUID, to create a unique custom image for every run. | rhel7img |
+| `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
+| `vnf_instance_name` | The name of the VNF instance to be provisioned. | rhel7vsi |
+| `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
 
 ## Notes
 
