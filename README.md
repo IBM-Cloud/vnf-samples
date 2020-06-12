@@ -59,6 +59,7 @@ Fill in the following values, based on the steps that you completed before you b
 
 | Key | Definition | Value Example |
 | --- | ---------- | ------------- | 
+| `generation` | The VPC Generation 1 (classic) or Generation 2 that you want your VPC virtual servers to be provisioned.  | 2  |
 | `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` | us-south-1 |
 | `region` | The VPC region that you want your VPC virtual servers to be provisioned. | us-south |
 | `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
