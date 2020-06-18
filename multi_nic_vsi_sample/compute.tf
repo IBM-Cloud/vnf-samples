@@ -37,6 +37,7 @@ resource "ibm_is_instance" "rhel7_vsi" {
   resource_group = "${data.ibm_resource_group.rg.id}"
 
   primary_network_interface {
+    name = "eth0"
     subnet = "${data.ibm_is_subnet.rhel7_subnet1.id}"
   }
   
