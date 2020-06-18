@@ -81,3 +81,8 @@ variable "resource_group" {
   default     = "Default"
   description = "Optional. The value of the resource group of VPC."
 }
+
+variable "vnf_security_group" {
+  default     = "rhel7-security-group"
+  description = "The security group for VNF VPC"
+}
