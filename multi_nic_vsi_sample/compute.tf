@@ -32,7 +32,7 @@ data "template_file" "user_data" {
 
 resource "ibm_is_instance" "rhel7_vsi" {
   name           = "${var.vnf_instance_name}"
-  image          = "${data.ibm_is_image.rhel7_custom_image.id}"
+  image          = "${ibm_is_image.rhel7_custom_image.id}"
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
   resource_group = "${data.ibm_resource_group.rg.id}"
 
