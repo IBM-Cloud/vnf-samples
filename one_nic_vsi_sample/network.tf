@@ -11,10 +11,10 @@
 ##############################################################################
 # Read/validate VPC
 ##############################################################################
-data "ibm_is_vpc" "rhel7_vpc" {
+data "ibm_is_vpc" "vnf_vpc" {
   name = "${var.vpc_name}"
 }
 
-data "ibm_is_subnet" "rhel7_subnet1"{
+data "ibm_is_subnet" "vnf_subnet"{
    identifier = "${var.subnet_id}"
 }

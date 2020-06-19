@@ -16,7 +16,7 @@ variable "vnf_cos_image_url" {
 # zone - VPC zone where resources are to be provisioned.
 ##############################################################################
 variable "zone" {
-  default     = "us-south-1"
+  default     = "us-south-3"
   description = "The VPC Zone that you want your VPC networks and virtual servers to be provisioned in. To list available zones, run `ibmcloud is zones`."
 }
 
@@ -77,12 +77,28 @@ variable "region" {
   description = "Optional. The value of the region of VPC."
 }
 
+##############################################################################
+# resource_group - The resource group to which the VPC belongs to.
+##############################################################################
 variable "resource_group" {
   default     = "Default"
   description = "Optional. The value of the resource group of VPC."
 }
 
+##############################################################################
+# vnf_securtiy_group - The security group to which the VSI interface belongs to.
+##############################################################################
 variable "vnf_security_group" {
   default     = "rhel7-security-group"
   description = "The security group for VNF VPC"
 }
+
+#####################################################################################################
+# api_key - This is the ibm_cloud_api_key which should be used only while testing this code from CLI. 
+# It is not needed while testing from Schematics
+######################################################################################################
+/*
+variable "api_key" {
+  default     = ""
+  description = "holds the user api key"
+}*/

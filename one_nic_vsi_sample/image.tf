@@ -7,7 +7,7 @@
 # Generating random ID
 resource "random_uuid" "test" { }
 
-resource "ibm_is_image" "rhel7_custom_image" {
+resource "ibm_is_image" "vnf_custom_image" {
   depends_on       = ["random_uuid.test"]
   href             = "${var.vnf_cos_image_url}"
   name             = "${var.vnf_vpc_image_name}-${substr(random_uuid.test.result,0,8)}"
@@ -20,7 +20,3 @@ resource "ibm_is_image" "rhel7_custom_image" {
   }
 }
 
-data "ibm_is_image" "rhel7_custom_image" {
-  name       = "${var.vnf_vpc_image_name}-${substr(random_uuid.test.result,0,8)}"
-  depends_on = ["ibm_is_image.rhel7_custom_image"]
-}
