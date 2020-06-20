@@ -60,7 +60,7 @@ Fill in the following values, based on the steps that you completed before you b
 | Key | Definition | Value Example |
 | --- | ---------- | ------------- | 
 | `generation` | The VPC Generation 1 (classic) or Generation 2 that you want your VPC virtual servers to be provisioned.  | 2  |
-| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` | us-south-1 |
+| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` | us-south-3 |
 | `region` | The VPC region that you want your VPC virtual servers to be provisioned. | us-south |
 | `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
 | `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
@@ -71,6 +71,7 @@ Fill in the following values, based on the steps that you completed before you b
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | rhel7vsi |
 | `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `vnf_security_group` | The name of the security group to which the VNF Instance's interface belong to | rhel7-security-group |
 
 ## Notes
 
@@ -87,16 +88,6 @@ If there is any failure during RHEL7 VSI creation, the created resources must be
     - Click Three Dot Button corresponding to the Unbound IP address -> Click `Bind`
     - Select RHEL7 instance from `Instance to bind` column.
     - After clicking `Bind`, you can see the IP address assigned to your RHEL7-VSI Instance.
-3. In the Security group,  here are the steps to open the port 8443
-    - Go to `VPC Infrastructure Gen 2` from IBM Cloud
-    - Click `Security groups` from the left pane
-    - Click the security group which is corresponding to your VPC
-    - Click `New Rule` in "Inbound Rules" column.
-    - Select `Protocol` as "TCP"
-    - Select `Port Range` under Port
-    - Give `8443` port number in `Port min` and `Port max`
-    - Select `Source type` as `Any`
-    - Click `Save`, and a new rule will be added to your security group
-4. From the CLI, run `ssh cloud-user@<Floating IP>`. 
-5. Enter 'yes' for continue connecting using ssh your key. This is the ssh key value, you specified in ssh_key variable. 
+3. From the CLI, run `ssh cloud-user@<Floating IP>`. 
+4. Enter 'yes' for continue connecting using ssh your key. This is the ssh key value, you specified in ssh_key variable. 
 
