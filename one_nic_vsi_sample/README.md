@@ -1,5 +1,6 @@
-# vnf-samples
-vnf-samples
+# one-nic-vsi-sample
+
+This directory contains the sample terraform code to create a VNF Instance with a single network interface. 
 
 # Red hat Linux Virtual Server for Virtual Private Cloud using Custom Image
   
