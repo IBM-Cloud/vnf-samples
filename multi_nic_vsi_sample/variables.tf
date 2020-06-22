@@ -78,15 +78,23 @@ variable "region" {
   description = "Optional. The value of the region of VPC."
 }
 
+##############################################################################
+# resource_group - The resource group to which the VPC belongs to.
+##############################################################################
 variable "resource_group" {
   default     = "Default"
   description = "Optional. The value of the resource group of VPC."
 }
 
+#####################################################################################################
+# api_key - This is the ibm_cloud_api_key which should be used only while testing this code from CLI. 
+# It is not needed while testing from Schematics
+######################################################################################################
+/*
 variable "api_key" {
   default     = ""
   description = "holds the user api key"
-}
+}*/
 
 ##############################################################################
 # vnf_securtiy_group - The security group to which the VSI interface belongs to.

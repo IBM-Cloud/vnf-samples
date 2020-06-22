@@ -78,8 +78,8 @@ resource "ibm_is_instance" "vnf_vsi" {
   network_interfaces {
     name   = "eth1"
     subnet = "${data.ibm_is_subnet.vnf_subnet2.id}"
-    #if vnf_security_group need to be added in this interface then uncomment below line
-    //security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
+    //if vnf_security_group need to be added in this interface then uncomment below line
+    #security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
 
   vpc  = "${data.ibm_is_vpc.vnf_vpc.id}"
