@@ -1,4 +1,4 @@
-# vnf-samples
+# vnf-samples. (Work under progress)
 
 
 This repository contains sample terraform codes to create VNF instances with different configurations like Single NIC Instance, Multi NIC Instance, HA Instances etc.
