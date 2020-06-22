@@ -49,7 +49,7 @@ Before you can apply the template in IBM Cloud, complete the following steps.
 2.  Ensure the following resources exist in your VPC Gen 2 environment
     - VPC
     - SSH Key
-    - VPC has a subnet
+    - VPC has 2 subnets
     - _(Optional):_ A Floating IP Address to assign to the management interface of Ubuntu 18.04 instance post deployment
 
 ## Configuring your deployment values
