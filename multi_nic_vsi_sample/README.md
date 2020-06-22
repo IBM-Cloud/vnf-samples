@@ -27,7 +27,7 @@ custom image after the VNF is created by terraform.
 image using the method provided here (https://cloud.ibm.com/docs/cloud-object-storage/iam?topic=cloud-object-storage-iam-public-access#public-access-object). Here is an example for us-south region using
 the IBM Cloud CLI (https://cloud.ibm.com/docs/cli?topic=cli-getting-started):
 
-    $ export token=\`ibmcloud iam oauth-tokens | awk '{ print $4 }'\` 
+    $ export token=`ibmcloud iam oauth-tokens | awk '{ print $4 }'` 
     $ curl -v -X “PUT” “https://s3.us-south.cloud-object-storage.appdomain.cloud/vendorbucketname/vendor.qcow2?acl” -H “Authorization: Bearer $token” -H “x-amz-acl: public-read”
 
 ## Costs
