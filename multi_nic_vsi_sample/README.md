@@ -1,6 +1,6 @@
 # multi-nic-vsi-sample
 
-This directory contains the sample terraform code to create a VNF Instance with a multiple network interfaces. 
+This directory contains the sample terraform code to create a VNF Instance with multiple network interfaces. In this sample a VNF instance with 2 interfaces is created.
 
 # Ubuntu Linux Virtual Server for Virtual Private Cloud using Custom Image
   
@@ -88,7 +88,7 @@ If there is any failure during VSI creation, the created resources must be destr
     - Click `Reserve floating IP` -> Click `Reserve IP`
     - There will be a (new) Floating IP address with status `Unbind`
     - Click Three Dot Button corresponding to the Unbound IP address -> Click `Bind`
-    - Select Ubuntu instance from `Instance to bind` column.
+    - Select Ubuntu instance (eth0) from `Instance to bind` column.
     - After clicking `Bind`, you can see the IP address assigned to your Ubuntu-VSI Instance.
 3. From the CLI, run `ssh root@<Floating IP>`. 
 4. Enter 'yes' for continue connecting using ssh your key. This is the ssh key value, you specified in ssh_key variable. 
