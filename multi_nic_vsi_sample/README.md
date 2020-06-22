@@ -73,7 +73,7 @@ Fill in the following values, based on the steps that you completed before you b
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | ubuntu18-04-vsi |
 | `subnet_id1` | The ID of the subnet which will be associated with first interface of the VNF instance. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
 | `subnet_id2` | The ID of the subnet which will be associated with second interface of the VNF instance. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
-| `vnf_security_group` | The name of the security group to which the VNF Instance's interface belong to | rhel7-security-group |
+| `vnf_security_group` | The name of the security group to which the VNF Instance's interface belong to | ubuntu-security-group |
 
 ## Notes
 
