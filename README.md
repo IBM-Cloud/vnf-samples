@@ -9,7 +9,8 @@ In order to test the code of a particular use case through the Terraform CLI com
 
 Similarly to test the use case from IBM Cloud Schematics, the path of the use case directory in this github repository need to be provided as the URL.
 
-For example to test the one_nic_vsi_sample use case the URL to be used in the IBM Cloud Schematics will be https://github.com/IBM-Cloud/vnf-samples/tree/master/one_nic_vsi_sample
+For example to test the one_nic_vsi_sample use case, the URL to be used in the IBM Cloud Schematics will be https://github.com/IBM-Cloud/vnf-samples/tree/master/one_nic_vsi_sample. Please refer the README file of respective use case to know more about the values to be specified in Schematics UI.
+
 
 To test the use case in CLI, change directory to the respective folder of use case. Example: /Users/username/vnf-samples/one_nic_vsi_sample. Execute terraform commands in use case directory. 
 
