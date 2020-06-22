@@ -11,4 +11,6 @@ Similarly to test the use case frm IBM Cloud Schematics, the path of the use cas
 
 For example to test the one_nic_vsi_sample use case the URL to be used in the IBM Cloud Schematics will be https://github.com/IBM-Cloud/vnf-samples/tree/master/one_nic_vsi_sample
 
+In order to use a particular use case in the content catalogue as a .tar.gz release file, copy the code of that use case in a separate repository and then use it as a .tar.gz release file. This repository cannot be used in the content catalogue.
+
 Follow the README for each of the use cases to get more details.
