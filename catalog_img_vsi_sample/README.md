@@ -16,6 +16,7 @@ Learn more: https://www.ibm.com/cloud/support
 
 - Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/).
 - The given VPC must have at least one subnet with one IP address unassigned - the Ubuntu 18.04 VSI will be assigned one IP Address from the user provided subnet as the input.
+- The image id of the Catalog image needs to be obtained using the *ibmcloud is images* command from the CLI.
 
 ## Costs
 
@@ -53,7 +54,7 @@ Fill in the following values, based on the steps that you completed before you b
 | `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
 | `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
-| `vnf_vpc_image_id` | The id of the Ubuntu qcow2 Catalog Image to be used to create the Ubuntu virtual server instance. | ubuntu18-04 |
+| `vnf_vpc_image_id` | The id of the Ubuntu qcow2 Catalog Image to be used to create the Ubuntu virtual server instance. | r006-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | ubuntu18-04-vsi |
 | `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
@@ -77,3 +78,8 @@ If there is any failure during VSI creation, the created resources must be destr
     - After clicking `Bind`, you can see the IP address assigned to your Ubuntu-VSI Instance.
 3. From the CLI, run `ssh root@<Floating IP>`. 
 4. Enter 'yes' for continue connecting using ssh your key. This is the ssh key value, you specified in ssh_key variable. 
+
+
+# Current Limitations
+
+Currently image id needs to be specified as an input variable for instance creation. In future there will be support to create instance by providing image name instead of image id.
