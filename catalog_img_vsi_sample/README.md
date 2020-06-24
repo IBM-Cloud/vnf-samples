@@ -16,7 +16,7 @@ Learn more: https://www.ibm.com/cloud/support
 
 - Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/).
 - The given VPC must have at least one subnet with one IP address unassigned - the Ubuntu 18.04 VSI will be assigned one IP Address from the user provided subnet as the input.
-- The image id of the Catalog image needs to be obtained using the *ibmcloud is images* command from the CLI.
+- The image id of the Catalog image needs to be obtained using the `ibmcloud is images` command from the CLI.
 
 ## Costs
 
