@@ -75,7 +75,7 @@ resource "ibm_is_instance" "vnf_vsi" {
   resource_group = "${data.ibm_resource_group.rg.id}"
 
   primary_network_interface {
-    subnet = "${data.ibm_is_subnet.vnf_subnet.id}"
+    subnet = "${var.subnet_id}" #"${data.ibm_is_subnet.vnf_subnet.id}"
     security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
 
