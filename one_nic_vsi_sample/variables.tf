@@ -3,13 +3,19 @@
 ##############################################################################
 
 ##############################################################################
-# vnf_cos_image_url - Vendor provided RHEL7 image COS url.
-#                             The value for this variable is enter at offering
-#                             onbaording time.This variable is hidden from the user.
+# vnf_bucket_base_name - The base name of the bucket which holds the qcow2 Image, For Ex. If bucket name is vnf-rhel-us-south vnf-rhel should be the input here, hyphen(-) and region name will be added by the script before copy.
 ##############################################################################
-variable "vnf_cos_image_url" {
-  default     = ""
-  description = "The COS image object SQL URL for RHEL7 qcow2 image."
+variable "vnf_bucket_base_name" {
+  default = ""
+  description ="The base name of the bucket which holds the qcow2 Image, For Ex. If bucket name is vnf-rhel-us-south vnf-rhel should be the input here, hyphen(-) and region name will be added by the script before copy"
+}
+
+##############################################################################
+# vnf_cos_image_name - The name of the qcow2 Image name stored in the COS Bucket.
+##############################################################################
+variable "vnf_cos_image_name" {
+  default=""
+  description = "The name of the qcow2 Image name"
 }
 
 ##############################################################################

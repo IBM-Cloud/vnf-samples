@@ -67,7 +67,8 @@ Fill in the following values, based on the steps that you completed before you b
 | `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
 | `ssh_key` | Copy the ssh key value for VSI. This will add the ssh key value in your RHEL 7 image. | ssh-rsa AAAA .......|
-| `vnf_cos_image_url` | This is the vendor COS image SQL URL where the image(RHEL7 qcow2 image) is located. This is to copy the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account. | cos://us-south/vnf-bucket/rhel-guest-image-7.0-20140930.0.x86_64.qcow2 |
+| `vnf_bucket_base_name` | The base name of the bucket which holds the qcow2 Image, For Ex. If bucket name is vnf-rhel-us-south vnf-rhel should be the input here, hyphen(-) and region name will be added by the script before copy | vnf-rhel |
+| `vnf_cos_image_name` | The name of the qcow2 Image name stored in the COS Bucket. | rhel-guest-image-7.0-20140930.0.x86_64.qcow2 |
 | `vnf_vpc_image_name` | The starting name of the RHEL7 qcow2 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the RHEL7 virtual server instance. The name is appended with UUID, to create a unique custom image for every run. | rhel7img |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | rhel7vsi |
