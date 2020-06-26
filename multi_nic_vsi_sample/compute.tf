@@ -71,13 +71,13 @@ resource "ibm_is_instance" "vnf_vsi" {
 
   primary_network_interface {
     name = "eth0"
-    subnet = "${data.ibm_is_subnet.vnf_subnet1.id}"
+    subnet = "${var.subnet_id1}" #"${data.ibm_is_subnet.vnf_subnet1.id}"
     security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
   
   network_interfaces {
     name   = "eth1"
-    subnet = "${data.ibm_is_subnet.vnf_subnet2.id}"
+    subnet = "${var.subnet_id2}" #"${data.ibm_is_subnet.vnf_subnet2.id}"
     //if vnf_security_group need to be added in this interface then uncomment below line
     #security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }

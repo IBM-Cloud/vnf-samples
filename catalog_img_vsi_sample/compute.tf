@@ -70,7 +70,7 @@ resource "ibm_is_instance" "vnf_vsi" {
 
   primary_network_interface {
     name = "eth0"
-    subnet = "${data.ibm_is_subnet.vnf_subnet.id}"
+    subnet = "${var.subnet_id}" #"${data.ibm_is_subnet.vnf_subnet.id}"
     security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
   
