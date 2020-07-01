@@ -37,12 +37,12 @@ variable "ssh_key_name" {
 }
 
 ##############################################################################
-# vnf_vpc_image_id - The id of the Ubuntu catalog image to be provisioned in your IBM Cloud account.
+# vnf_vpc_image_name - The name of the Ubuntu catalog image to be provisioned in your IBM Cloud account.
 ##############################################################################
 
-variable "vnf_vpc_image_id" {
+variable "vnf_vpc_image_name" {
   default = ""
-  description = "The id of the Ubuntu catalog image to be provisioned in your IBM Cloud account."
+  description = "The name of the Ubuntu catalog image to be provisioned in your IBM Cloud account."
 }
 
 ##############################################################################

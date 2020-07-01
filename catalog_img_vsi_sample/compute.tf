@@ -64,13 +64,13 @@ resource "ibm_is_security_group_rule" "vnf_sg_rule_icmp_out" {
 resource "ibm_is_instance" "vnf_vsi" {
   depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_icmp_out"]
   name           = "${var.vnf_instance_name}"
-  image          = "${var.vnf_vpc_image_id}"
+  image          = "${data.ibm_is_image.vnf_image.id}"
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
   resource_group = "${data.ibm_resource_group.rg.id}"
 
   primary_network_interface {
     name = "eth0"
-    subnet = "${var.subnet_id}" #"${data.ibm_is_subnet.vnf_subnet.id}"
+    subnet = "${data.ibm_is_subnet.vnf_subnet.id}"
     security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
   
