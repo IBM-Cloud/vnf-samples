@@ -9,7 +9,8 @@ The different scenarios for which the sample code are available are:
 |----------|-------------|-----|
 | one_nic_vsi_sample | Contains the sample terraform code to create a VNF Instance with a single network interface. | https://github.com/IBM-Cloud/vnf-samples/tree/master/one_nic_vsi_sample |
 | multi_nic_vsi_sample | Contains the sample terraform code to create a VNF Instance with multiple network interfaces. | https://github.com/IBM-Cloud/vnf-samples/tree/master/multi_nic_vsi_sample |
-|catalog_img_vsi_sample | Contains the sample terraform code to create a VNF Instance using a catalog image. | https://github.com/IBM-Cloud/vnf-samples/tree/master/catalog_img_vsi_sample |
+|catalog_img_vsi_sample | Contains the sample terraform code to create a VNF Instance using a catalog image name as input. | https://github.com/IBM-Cloud/vnf-samples/tree/master/catalog_img_vsi_sample |
+|catalog_img_id_vsi_sample | Contains the sample terraform code to create a VNF Instance using a catalog image id as input. | https://github.com/IBM-Cloud/vnf-samples/tree/master/catalog_img_id_vsi_sample |
 
 
 # Testing Sample Code 
