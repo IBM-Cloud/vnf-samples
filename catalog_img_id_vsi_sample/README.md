@@ -54,7 +54,6 @@ Fill in the following values, based on the steps that you completed before you b
 | `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
 | `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
-| `vnf_vpc_image_id` | The id of the qcow2 Catalog Image to be used to create the virtual server instance. | ibm-ubuntu-xxxxxxx |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | ubuntu18-04-vsi |
 | `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
