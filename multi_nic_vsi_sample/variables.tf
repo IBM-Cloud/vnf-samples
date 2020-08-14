@@ -13,32 +13,16 @@ variable "vnf_cos_image_url" {
 }
 
 ##############################################################################
-# zone - VPC zone where resources are to be provisioned.
-##############################################################################
-variable "zone" {
-  default     = "us-south-3"
-  description = "The VPC Zone that you want your VPC networks and virtual servers to be provisioned in. To list available zones, run `ibmcloud is zones`."
-}
-
-##############################################################################
-# vpc_name - VPC where resources are to be provisioned.
-##############################################################################
-variable "vpc_name" {
-  default     = ""
-  description = "The name of your VPC where Ubuntu VSI is to be provisioned."
-}
-
-##############################################################################
 # subnet_ids - Subnet where resources are to be provisioned.
 ##############################################################################
 variable "subnet_id1"{
   default = ""
-  description =" The id of the subnet to which Ubuntu VSI's first interface belongs to"
+  description =  "The id of the subnet to which Ubuntu VSI's first interface belongs to"
 }
 
 variable "subnet_id2"{
   default = ""
-  description =" The id of the subnet to which Ubuntu VSI's second interface belongs to"
+  description = "The id of the subnet to which Ubuntu VSI's second interface belongs to"
 }
 
 ##############################################################################
@@ -75,15 +59,7 @@ variable "vnf_profile" {
 
 variable "region" {
   default     = "us-south"
-  description = "Optional. The value of the region of VPC."
-}
-
-##############################################################################
-# resource_group - The resource group to which the VPC belongs to.
-##############################################################################
-variable "resource_group" {
-  default     = "Default"
-  description = "Optional. The value of the resource group of VPC."
+  description = "The value of the region of VPC."
 }
 
 #####################################################################################################

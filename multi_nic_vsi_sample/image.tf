@@ -12,7 +12,7 @@ resource "ibm_is_image" "vnf_custom_image" {
   href             = "${var.vnf_cos_image_url}"
   name             = "${var.vnf_vpc_image_name}-${substr(random_uuid.test.result,0,8)}"
   operating_system = "ubuntu-18-04-amd64"
-  resource_group = "${data.ibm_resource_group.rg.id}"
+  resource_group = "${data.ibm_is_subnet.vnf_subnet1.resource_group}"
 
   timeouts {
     create = "30m"
