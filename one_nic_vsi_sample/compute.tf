@@ -32,8 +32,8 @@ data "template_file" "user_data" {
 
 resource "ibm_is_security_group" "vnf_security_group" {
   name           = "${var.vnf_security_group}"
-  vpc            = "${data.ibm_is_vpc.vnf_vpc.id}"
-  resource_group = "${data.ibm_resource_group.rg.id}"
+  vpc            = "${data.ibm_is_subnet.vnf_subnet.vpc}"
+  resource_group = "${data.ibm_is_subnet.vnf_subnet.resource_group}"
 }
 
 //security group rule to allow ssh
@@ -72,15 +72,15 @@ resource "ibm_is_instance" "vnf_vsi" {
   name           = "${var.vnf_instance_name}"
   image          = "${ibm_is_image.vnf_custom_image.id}"
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
-  resource_group = "${data.ibm_resource_group.rg.id}"
+  resource_group = "${data.ibm_is_subnet.vnf_subnet.resource_group}"
 
   primary_network_interface {
     subnet = "${data.ibm_is_subnet.vnf_subnet.id}"
     security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
   }
 
-  vpc  = "${data.ibm_is_vpc.vnf_vpc.id}"
-  zone = "${data.ibm_is_zone.zone.name}"
+  vpc  = "${data.ibm_is_subnet.vnf_subnet.vpc}"
+  zone = "${data.ibm_is_subnet.vnf_subnet.zone}"
   keys = ["${data.ibm_is_ssh_key.vnf_ssh_pub_key.id}"]
 
   user_data="${data.template_file.user_data.rendered}"

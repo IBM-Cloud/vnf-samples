@@ -7,7 +7,7 @@
 ##############################################################################
 variable "vnf_bucket_base_name" {
   default = ""
-  description ="The base name of the bucket which holds the qcow2 Image, For Ex. If bucket name is vnf-rhel-us-south vnf-rhel should be the input here, hyphen(-) and region name will be added by the script before copy"
+  description = "The base name of the bucket which holds the qcow2 Image, For Ex. If bucket name is vnf-rhel-us-south vnf-rhel should be the input here, hyphen(-) and region name will be added by the script before copy"
 }
 
 ##############################################################################
@@ -19,28 +19,13 @@ variable "vnf_cos_image_name" {
 }
 
 ##############################################################################
-# zone - VPC zone where resources are to be provisioned.
-##############################################################################
-variable "zone" {
-  default     = "us-south-3"
-  description = "The VPC Zone that you want your VPC networks and virtual servers to be provisioned in. To list available zones, run `ibmcloud is zones`."
-}
-
-##############################################################################
-# vpc_name - VPC where resources are to be provisioned.
-##############################################################################
-variable "vpc_name" {
-  default     = ""
-  description = "The name of your VPC where RHEL7 VSI is to be provisioned."
-}
-
-##############################################################################
 # subnet_name - Subnet where resources are to be provisioned.
 ##############################################################################
 variable "subnet_id"{
   default = ""
-  description =" The id of the subnet where RHEL7 VSI to be provisioned."
+  description = "The id of the subnet where RHEL7 VSI to be provisioned."
 }
+
 ##############################################################################
 # ssh_key_name - The name of the public SSH key to be used when provisining RHEL7 VSI.
 ##############################################################################
@@ -75,20 +60,12 @@ variable "vnf_profile" {
 
 variable "ssh_key" {
   default     = ""
-  description = "Optional. The value of the ssh key to be used during cloud-init."
+  description = "The value of the ssh key to be used during cloud-init."
 }
 
 variable "region" {
   default     = "us-south"
-  description = "Optional. The value of the region of VPC."
-}
-
-##############################################################################
-# resource_group - The resource group to which the VPC belongs to.
-##############################################################################
-variable "resource_group" {
-  default     = "Default"
-  description = "Optional. The value of the resource group of VPC."
+  description = "The value of the region of VPC."
 }
 
 ##############################################################################
