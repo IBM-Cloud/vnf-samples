@@ -23,18 +23,3 @@ provider "ibm" {
 data "ibm_is_region" "region" {
   name = "${var.region}"
 }
-
-##############################################################################
-# Read/validate Zone
-##############################################################################
-data "ibm_is_zone" "zone" {
-  name = "${var.zone}"
-  region = "${data.ibm_is_region.region.name}"
-}
-
-##############################################################################
-# Read/validate Resource Group
-##############################################################################
-data "ibm_resource_group" "rg" {
-  name = "${var.resource_group}"
-}
