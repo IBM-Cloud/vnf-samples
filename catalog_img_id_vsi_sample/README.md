@@ -49,10 +49,7 @@ Fill in the following values, based on the steps that you completed before you b
 | Key | Definition | Value Example |
 | --- | ---------- | ------------- | 
 | `generation` | The VPC Generation 1 (classic) or Generation 2 that you want your VPC virtual servers to be provisioned.  | 2  |
-| `zone` | The VPC Zone that you want your VPC virtual servers to be provisioned. To list available zones, run `ibmcloud is zones` | us-south-3 |
 | `region` | The VPC region that you want your VPC virtual servers to be provisioned. | us-south |
-| `resource_group` | The resource group to use. If unspecified, the account's default resource group is used. To list available resource groups, run `ibmcloud resource groups` | Default | 
-| `vpc_name` | The name of your VPC in which VSI is to be provisioned. | test-vpc |
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | ubuntu18-04-vsi |
