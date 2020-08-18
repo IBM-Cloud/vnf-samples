@@ -20,6 +20,14 @@ variable "ssh_key_name" {
 }
 
 ##############################################################################
+# image_name - The name of the f5 big ip image name. Valid values are "bigip-14-1-2-6-0-0-2-all-1slot", "bigip-14-1-2-6-0-0-2-ltm-1slot", "bigip-15-1-0-4-0-0-6-all-1slot", "bigip-15-1-0-4-0-0-6-ltm-1slot" 
+##############################################################################
+variable "image_name" {
+  default     = "bigip-14-1-2-6-0-0-2-all-1slot"
+  description = "The name of the f5 big ip image name. Valid values are 'bigip-14-1-2-6-0-0-2-all-1slot', 'bigip-14-1-2-6-0-0-2-ltm-1slot', 'bigip-15-1-0-4-0-0-6-all-1slot', 'bigip-15-1-0-4-0-0-6-ltm-1slot'."
+}
+
+##############################################################################
 # vnf_vpc_instance_name - The name of your Ubuntu Virtual Server to be provisioned
 ##############################################################################
 variable "vnf_instance_name" {
