@@ -3,18 +3,6 @@
 # - Virtual Server using Ubuntu 18.04 custom image
 ##############################################################################
 
-locals {
-	image_map = {
-	"eu-de" = "r010-cf56a548-d5ca-4833-b0a6-bde256140d93"
-	"us-south" = "r006-f0a8cba9-1e9e-4771-87ba-20b7fd33b16a" 
-	}
-}
-
-output "map_instance" {
-  value = local.image_map["eu-de"]
-
-}
-
 ##############################################################################
 # Read/validate sshkey
 ##############################################################################
@@ -76,7 +64,7 @@ resource "ibm_is_security_group_rule" "vnf_sg_rule_icmp_out" {
 resource "ibm_is_instance" "vnf_vsi" {
   depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_icmp_out"]
   name           = "${var.vnf_instance_name}"
-  image          = local.image_map["${data.ibm_is_region.region.name}"]
+  image          = lookup(local.image_map[var.image_name], data.ibm_is_region.region.name)
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
   resource_group = "${data.ibm_is_subnet.vnf_subnet.resource_group}"
 
