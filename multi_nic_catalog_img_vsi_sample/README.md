@@ -2,7 +2,7 @@
 
 **NOTE:** The multi nic support is not available in cloud.ibm.com 
 
-This directory contains the sample terraform code to create a VNF Instance with single network interface using catalog image name input by user. 
+This directory contains the sample terraform code to create a VNF Instance with multiple network interface using catalog image name input by user. 
 
 # Ubuntu Linux Virtual Server for Virtual Private Cloud using Catalog Image
   
@@ -18,7 +18,7 @@ Learn more: https://www.ibm.com/cloud/support
 
 - Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/).
 - The given VPC must have at least one subnet with one IP address unassigned - the Ubuntu 18.04 VSI will be assigned one IP Address from the user provided subnet as the input.
-- The image id of the Catalog image needs to be obtained using the `ibmcloud is images` command from the CLI.
+- The image name of the Catalog image needs to be obtained using the `ibmcloud is images` command from the CLI.
 
 ## Costs
 
@@ -38,7 +38,7 @@ Before you can apply the template in IBM Cloud, complete the following steps.
 2.  Ensure the following resources exist in your VPC Gen 2 environment
     - VPC
     - SSH Key
-    - VPC has 1 subnet
+    - VPC with multiple subnets
     - _(Optional):_ A Floating IP Address to assign to the management interface of Ubuntu 18.04 instance post deployment
 
 ## Configuring your deployment values
@@ -55,7 +55,11 @@ Fill in the following values, based on the steps that you completed before you b
 | `ssh_key_name` | The name of your public SSH key to be used for VSI. Follow [Public SSH Key Doc](https://cloud.ibm.com/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-ssh-keys) for creating and managing ssh key. | linux-ssh-key |
 | `vnf_profile` | The profile of compute CPU and memory resources to be used when provisioning the vnf instance. To list available profiles, run `ibmcloud is instance-profiles`. | bx2-2x8 |
 | `vnf_instance_name` | The name of the VNF instance to be provisioned. | ubuntu18-04-vsi |
-| `subnet_id` | The ID of the subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `primary_subnet_id` | The ID of the primary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `secondary_subnet_id_1` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `secondary_subnet_id_2` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `secondary_subnet_id_3` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
+| `secondary_subnet_id_4` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
 | `vnf_security_group` | The name of the security group to which the VNF Instance's interface belong to | ubuntu-security-group |
 
 
