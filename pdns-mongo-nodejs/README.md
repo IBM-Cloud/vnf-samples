@@ -619,28 +619,50 @@ Open port 27017 on your Server VSI.
     Add a security group rule.   
     Make a new Custom TCP on port 27017, Source: Anywhere, 0.0.0.0/0   
     
-### Install Node in Client VSI
+### Install Node in Client VSI    
 
-Now, we are in the final step. Lets connect to Client VSI and access the Mongo db: 
+Now, we are in the final step. Lets connect to Client VSI and access the Mongo db:    
 
-1. SSH to client VSI:   
+1. SSH to client VSI:      
 
-ssh root@floating ip
+ssh root@floating ip  
 
-2. Run the below commands:   
+2. Run the below commands:     
 
-> git clone thisrepo.git
+> apt install nodejs    
 
-> cd pdns-node-mongo
+> apt install npm  
 
+> npm install mongoose  
 
-> apt install node     
-> apt install npm
-> npm install mongoosedb
-> 
+> git clone git clone https://github.com/IBM-Cloud/vnf-samples.git
 
+> cd vnf-samples
 
-Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully. Now, lets clean up the resources. 
+> cd pdns-mongo-nodejs
+
+Modify the node js program with remote mongo db connection values.  Then, run the program:
+
+> node mongoose_ex.js
+
+You should see the below output **MongoDB is connected** :  Here, the connection retries for 5 attempts.  
+
+```
+root@schematics-demo-vsi-client-1:~/vnf-samples/pdns-mongo-nodejs# node mongoose_ex.js 
+MongoDB connection with retry
+(node:8231) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+(node:8231) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+MongoDB connection unsuccessful, retry after 5 seconds.
+MongoDB connection with retry
+MongoDB is connected
+
+^C
+
+```
+
+Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully. Now, lets clean up the resources.    
+
+**NOTE:** This example can be improved by installing and configuring the mongo db in an ansible script or cloud-init script and invoking them in terraform. 
 
 
 #### Clean up the workspace:
