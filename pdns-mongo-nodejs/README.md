@@ -7,8 +7,8 @@ The example below illustrates how a nodejs application can access Mongo DB using
 
 The team members who worked on this example:
 
-Sakthi Saravanan Shanmugam (sakshan1@in.ibm.com), IBM Cloud Network
-Malarvizhi Kandasamy (k.malarvizhi@in.ibm.com), IBM Cloud Network   
+Sakthi Saravanan Shanmugam (sakshan1@in.ibm.com), IBM Cloud Network  
+Malarvizhi Kandasamy (k.malarvizhi@in.ibm.com), IBM Cloud Network     
 
 
 ![Demo Overview](images/Demo-Overview.png)
