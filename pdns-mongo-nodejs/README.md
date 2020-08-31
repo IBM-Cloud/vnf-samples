@@ -1,8 +1,8 @@
-# Getting Started with IBM Cloud Private DNS
+# Example to illustrate how Nodejs application can access Mongo DB using Private DNS in a VPC in IBM Cloud
 
 The intend of this article is to walk through the processes that are involved in setting up a simple client and the server virtual server instance (VSI) in the IBM Cloud VPC with Private DNS (P-DNS) using Schematics (Terraform as a Service from IBM Cloud). 
 
-![Demo Overview](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/Demo-Overview.png)
+![Demo Overview](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/Demo-Overview.png)
 
 > What you'll learn
 
@@ -20,7 +20,7 @@ The reader will get to know the steps to the provision below IBM Cloud services 
 
 > Setup and Requirements
 
-While running through this exercise, the user would end up creating a Terraform codebase that would help us provisioning required IBM Cloud services that are intended. The later part of this exercise would explain the process relates to executing the Terraform code using Schematics.
+While running through this exercise, the user would end up creating a Terraform codebase that would help us provisioning required IBM Cloud services that are intended. The later part of this exercise would explain the process relates to executing the Terraform code using Schematics. Also, we have provided the steps to install Mongo db in server VSI and nodejs in client VSI. We will show you how a nodejs application can connect to mongodb using private domain name service.  
 
 ### Assumption:
 
@@ -271,35 +271,35 @@ output "client_floating_ip" {
 ```
 ***Now, the code would look something like the below link.***
 
-https://github.com/sakthishanmugam02/schematics-demo/blob/master/main.tf
+https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/main.tf
 
 > Schematics Overview:
 
 IBM Cloud Schematics delivers Terraform-as-a-Service so that you can use a high-level scripting language to model the resources that you want in your IBM Cloud environment, and enable Infrastructure as Code (IaC). The below picture explains the workflow of the Terraform and Schematics. 
 
-![Schematics Overview](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/Terraform-Schematics-View.png)
+![Schematics Overview](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/Terraform-Schematics-View.png)
 
 ***To execute the Terraform code*** that we have written so far, we can leverage the Schematics tool from IBM. That lessens the task of managing Terraform versions, state files, user management, etc,. To do that login to the IBM Cloud and select Schematics from the left pane.
 
-![Navigate to Schematics](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/navigate-to-schematics.png)
+![Navigate to Schematics](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/navigate-to-schematics.png)
 
 ***Create a Schematics workspace*** by selecting the Location, and by clicking the Create workspace button.
 
 This workspace is an isolated environment where state files, in fact, complete execution lifecycle of Terraform is separated from other workspaces. 
 
-![Create Workspace](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/CreateWorkspaceSchematic.png)
+![Create Workspace](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/CreateWorkspaceSchematic.png)
 
 ***Fill the name and resource group*** for the Schematics workspace that is going to be created, then click Create.
 
-![Create Workspace Form](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/create-form-schematics.png)
+![Create Workspace Form](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/create-form-schematics.png)
 
 ***Import the terraform template*** (link to the repo in which we have pushed the code) and select the terraform version required.
 
-![Import Template](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/import-templates.png)
+![Import Template](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/import-templates.png)
 
 On successful import, the page will get redirected to the workspace settings page, in this exercise, there are no input variables declared, hence it will say "Workspace Variables: There are no variables defined for the workspace."
 
-![No Input Variables](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/no-variables.png)
+![No Input Variables](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/no-variables.png)
 
 Now we are ready with workspace in which we can start executing Terraform code. To do that, we can use the `Generate plan` and `Apply plan`. (that are equivalent to `terraform plan` and the `terraform apply` command.
 
@@ -307,7 +307,7 @@ Now we are ready with workspace in which we can start executing Terraform code. 
 
 We can view the status of the `plan` or the `apply` operation in the `Activity` page, if needed we can choose the see the detailed logs from the Terraform console for each operation by clicking `View log` link against the operation status.
 
-![Activity](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/activity-schematics.png)
+![Activity](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/activity-schematics.png)
 
 #### Configure the Private DNS:
 
@@ -328,10 +328,10 @@ dig testa.test.com
 
 In case if you want to delete the workspace or the resources that got created, choose the `Delete` option from the `Action` drop button.
 
-![Delete](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/delete-button.png)
+![Delete](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/delete-button.png)
 
 Select appropriate checkbox and then click `Delete`.
 
-![Delete Dialogue](https://github.ibm.com/sakshan1/docs/blob/master/getting-started/images/delete-dialogue.png)
+![Delete Dialogue](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/delete-dialogue.png)
 
 
