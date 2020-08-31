@@ -1,6 +1,8 @@
-# Example to illustrate how Nodejs application can access Mongo DB using Private DNS in a VPC in IBM Cloud
+# Example to illustrate how nodejs application can access Mongo DB using Private DNS
 
 The intend of this article is to walk through the processes that are involved in setting up a simple client and the server virtual server instance (VSI) in the IBM Cloud VPC with Private DNS (P-DNS) using Schematics (Terraform as a Service from IBM Cloud). 
+
+The example below illustrates how a nodejs application can access Mongo DB using Private DNS in a VPC in IBM Cloud.
 
 ![Demo Overview](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs/images/Demo-Overview.png)
 
