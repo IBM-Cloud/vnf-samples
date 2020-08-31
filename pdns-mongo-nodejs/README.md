@@ -333,8 +333,9 @@ ii  netplan.io                       0.40.1~18.04.4                      amd64  
 
 If your netplan version is earlier than 0.95, upgrade netplan:  
 
-> apt-get update
-> apt-get upgrade
+> apt-get update  
+
+> apt-get upgrade  
 
 **FYI: Ubuntu 18.04 has a known issue, netplan 0.95 or later is not yet available in Ubuntu 18.04, please see link https://askubuntu.com/questions/1120998/error-in-network-definition-unknown-key-dhcp4-overrides **  
 
