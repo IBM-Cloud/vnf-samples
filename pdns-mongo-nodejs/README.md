@@ -5,10 +5,10 @@ The intend of this article is to walk through the processes that are involved in
 The example below illustrates how a nodejs application can access Mongo DB using Private DNS in a VPC in IBM Cloud.
 
 
-The team who worked on this example:
+The team members who worked on this example:
 
-Sakthi Saravanan Shanmugam (sakshan1@in.ibm.com)  
-Malarvizhi Kandasamy (k.malarvizhi@in.ibm.com)  
+Sakthi Saravanan Shanmugam (sakshan1@in.ibm.com), IBM Cloud Network
+Malarvizhi Kandasamy (k.malarvizhi@in.ibm.com), IBM Cloud Network   
 
 
 ![Demo Overview](images/Demo-Overview.png)
