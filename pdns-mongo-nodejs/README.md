@@ -323,7 +323,7 @@ Otherwise, you will get the below error:
 
 **curl: (6) Could not resolve host: testa.testpdns.com.**    
 
-Since, we have used ubuntu 18_04 image for server and client VSI, we need to follow the steps listed under the section: **VPC with generation 2 compute instances** corresponding to your operation system. I followed the steps for **Configuring Ubuntu Linux 18.04 LTS Bionic Beaver**  
+Since, we have used ubuntu 18_04 image for server and client VSI, we need to follow the steps listed under the section: **VPC with generation 2 compute instances** corresponding to your operating system. I followed the steps for **Configuring Ubuntu Linux 18.04 LTS Bionic Beaver**  
 
 1. Ensure your version of netplan is 0.95 or later:  
 
@@ -372,7 +372,7 @@ Now, lets test whether the private dns configuration is working properly in VSI 
 
 1. SSH to Server VSI :
 
-ssh root@<floating IP> 
+ssh root@floating IP 
       
 2. ping testa.testpdns.com : You should be able to ping using pdns name. You should get response from private ip address of VSI Server.   
 
@@ -392,7 +392,7 @@ Similarly, try the pdns name in Client VSI:
 
 1. SSH to Client VSI :  
   
-ssh root@<floating IP>   
+ssh root@floating IP  
       
 2. ping testa.testpdns.com : You should be able to ping using pdns name. You should get response from private ip address of VSI Server.     
 ```
@@ -413,7 +413,7 @@ Now, lets install Mongodb in Server VSI.
 
 1. SSH to Server VSI :  
   
-ssh root@<floating IP>  
+ssh root@floating IP
 
 2. Install Mongo db by following the steps below:  
 
@@ -468,8 +468,8 @@ Follow the steps from this link: https://ianlondon.github.io/blog/mongodb-auth/
 
 2. Run the below commands:   
 
-> sudo service mongod restart       
-> sudo systemctl status mongod  
+> sudo service mongod restart         
+> sudo systemctl status mongod    
 
 You should see the below output:  
 ```
@@ -495,7 +495,8 @@ a) Set up your user
 First ssh into your server and enter the mongo shell by typing mongo. For this example, I will set up a user named dbuser and give that user read & write access to the user_db database.    
 
 Run the below commands in mongo shell :
-> use user_db
+> use user_db  
+
 > db.createUser({
     user: 'dbuser',
     pwd: 'dbpassword',
@@ -511,15 +512,17 @@ db.createUser({
     roles: [{ role: 'readWrite', db:'user_db'}]
 })
 ```
-You should get output as successfully added user. Exit mongo shell. Run the below command:
+You should get output as successfully added user.     
+
+Run the below command to exit mongo shell :
 
 > exit
 
 b) Enable auth and open MongoDB access up to all IPs   
    
-Edit your MongoDB config file. On Ubuntu:   
+Edit your MongoDB config file. On Ubuntu:     
    
-sudo vim /etc/mongod.conf   
+sudo vim /etc/mongod.conf     
    
 Look for the net line and comment out the **bindIp** line under it, which is currently limiting MongoDB connections to localhost. Remember, we want to connect from other VSI.  Add bindIp as "testa.testpdns.com"
    
@@ -565,11 +568,12 @@ Aug 31 05:25:34 schematics-demo-vsi-server systemd[1]: Started MongoDB Database 
 
 Then run the 2 commands and restart mongodb service: 
 
-> chown mongodb:mongodb /tmp/mongodb-27017.sock
-> chown -R mongodb:mongodb /var/lib/mongodb
-> sudo service mongod stop
-> sudo service mongod start
-> sudo systemctl status mongod
+> chown mongodb:mongodb /tmp/mongodb-27017.sock  
+> chown -R mongodb:mongodb /var/lib/mongodb   
+> sudo service mongod stop  
+> sudo service mongod start   
+> sudo systemctl status mongod    
+
 ```
 ● mongod.service - MongoDB Database Server
    Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
@@ -579,9 +583,9 @@ Then run the 2 commands and restart mongodb service:
    CGroup: /system.slice/mongod.service
            └─14667 /usr/bin/mongod --config /etc/mongod.conf
 ```
-Remember, mongod service should be in **running** status and it should be **enabled**.   
+Remember, mongod service should be in **running** status and it should be **enabled**.     
 
-Now, try to connect to mongodb using the created user, pass and using pdns name. It should be successful.   
+Now, try to connect to mongodb using the created user, pass and using pdns name. It should be successful.     
 
 ```
 root@schematics-demo-vsi-server-1:~# mongo -u dbuser -p dbpassword testa.testpdns.com/user_db 
@@ -592,7 +596,7 @@ MongoDB server version: 4.4.0
 > exit
 bye
 ```
-If you get the below error:   
+If you get the below error:      
 ```
 root@schematics-demo-vsi-server-1:~# mongo -u dbuser -p dbpassword testa.testpdns.com/user_db 
 MongoDB shell version v4.4.0
@@ -621,7 +625,7 @@ Now, we are in the final step. Lets connect to Client VSI and access the Mongo d
 
 1. SSH to client VSI:   
 
-ssh root@<floating ip>  
+ssh root@floating ip
 
 2. Run the below commands:   
 
