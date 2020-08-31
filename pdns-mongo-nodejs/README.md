@@ -610,7 +610,7 @@ exiting with code 1
 
 Restart server VSI. 
 
-Also, ensure that port 27017 is open in sever VSI in cloud.ibm.com:
+Also, ensure that port 27017 is open in server VSI in cloud.ibm.com:
 
 Open port 27017 on your Server VSI. 
 
