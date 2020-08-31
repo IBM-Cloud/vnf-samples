@@ -629,6 +629,11 @@ ssh root@floating ip
 
 2. Run the below commands:   
 
+> git clone thisrepo.git
+
+> cd pdns-node-mongo
+
+
 > apt install node     
 > apt install npm
 > npm install mongoosedb
