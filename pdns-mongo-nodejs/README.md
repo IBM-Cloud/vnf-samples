@@ -622,7 +622,7 @@ Open port 27017 on your Server VSI.
     
 ### Install Node in Client VSI    
 
-Now, we are in the final step. Lets connect to Client VSI and access the Mongo db:    
+Now, we are in the final step. Lets login to Client VSI and access the Mongo db from a nodejs application:    
 
 1. SSH to client VSI:      
 
@@ -636,7 +636,7 @@ ssh root@floating ip
 
 > npm install mongoose  
 
-> git clone git clone https://github.com/IBM-Cloud/vnf-samples.git
+> git clone https://github.com/IBM-Cloud/vnf-samples.git
 
 > cd vnf-samples
 
@@ -646,7 +646,7 @@ Modify the node js program with remote mongo db connection values.  Then, run th
 
 > node mongoose_ex.js
 
-You should see the below output **MongoDB is connected** :  Here, the connection retries for 5 attempts.  
+You should see the below output **MongoDB is connected** :  Here, the connection retries for 30 attempts after every 5 seconds.  
 
 ```
 root@schematics-demo-vsi-client-1:~/vnf-samples/pdns-mongo-nodejs# node mongoose_ex.js 
