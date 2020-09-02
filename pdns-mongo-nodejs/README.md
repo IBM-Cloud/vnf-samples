@@ -635,6 +635,8 @@ ssh root@floating ip
 
 > npm install mongoose  
 
+> npm install express
+
 > git clone https://github.com/IBM-Cloud/vnf-samples.git
 
 > cd vnf-samples
@@ -660,7 +662,23 @@ MongoDB is connected
 
 ```
 
-Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully. Now, lets clean up the resources.    
+Here, is a node js express application that is running and listening at port 3000. You can access the application from your browser as http://vsi-client-floatingip:3000
+
+> node mongoose_express.js
+
+```
+root@schematics-demo-vsi-client-1:~/vnf-samples/pdns-mongo-nodejs# node mongoose_express.js 
+Example app listening at http://localhost:3000
+MongoDB connection with retry
+(node:1529) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+(node:1529) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+MongoDB is connected
+^C
+
+```
+
+
+Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully. Now, lets clean up the resources created using terraform.    
 
 **NOTE:** This example can be improved by installing and configuring the mongo db in an ansible script or cloud-init script and invoking them in terraform. 
 
