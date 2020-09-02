@@ -469,7 +469,12 @@ Follow the steps from this link: https://ianlondon.github.io/blog/mongodb-auth/
 
 2. Run the below commands:   
 
-> sudo service mongod restart         
+> sudo service mongod restart    
+
+  Enable auto start MongoDB when system starts:   
+> sudo systemctl enable mongod
+
+  Check status:    
 > sudo systemctl status mongod    
 
 You should see the below output:  
@@ -486,6 +491,7 @@ root@schematics-demo-vsi-server:~# sudo systemctl status mongod
 
 Aug 31 05:23:00 schematics-demo-vsi-server systemd[1]: Started MongoDB Database Server.
 ```
+Remember, mongod service should be in **running** status and it should be **enabled**.   
 
 3. Connect to mongo db client. Enter the mongo shell by typing mongo.     
 
@@ -496,13 +502,6 @@ a) Set up your user
 First ssh into your server and enter the mongo shell by typing mongo. For this example, I will set up a user named dbuser and give that user read & write access to the user_db database.    
 
 Run the below commands in mongo shell :
-> use user_db  
-
-> db.createUser({
-    user: 'dbuser',
-    pwd: 'dbpassword',
-    roles: [{ role: 'readWrite', db:'user_db'}]
-})
 
 ```
 use user_db     
