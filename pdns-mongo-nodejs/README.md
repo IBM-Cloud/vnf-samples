@@ -662,7 +662,7 @@ MongoDB is connected
 
 ```
 
-Here, is a node js express application that is running and listening at port 3000. You can access the application from your browser as http://vsi-client-floatingip:3000
+Here, is a node js express application that is running and listening at port 3000 in VSI Client in IBM Cloud. You can access the application from your local system  browser as http://vsi-client-floatingip:3000
 
 > node mongoose_express.js
 
