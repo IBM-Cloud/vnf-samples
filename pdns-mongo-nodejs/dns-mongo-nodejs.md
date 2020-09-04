@@ -22,9 +22,11 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 ![Complete registration](images/complete-registration.png). 
 
-6. Check your email inbox. You will receive mail with a link to verify. Sometimes, it is auto verified. Once, it is verified, you will find the status as **verified** as shown below under **Services** - **Domains**.   
+6. Check your email inbox. You will receive mail with a link to verify. Sometimes, it is auto verified. Once, it is verified, you will find the status as **verified** under column **Verified** as shown below under **Services** - **Domains** - **cis-terraform** domain.   
 
 ![domain verified](images/cis-terraform-domain-verified.png). 
+
+7. 
 
 
 
