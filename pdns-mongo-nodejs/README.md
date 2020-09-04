@@ -662,13 +662,13 @@ MongoDB is connected
 
 ```
 
-Here, is a node js express application that is running and listening at port 3000 in VSI Client in IBM Cloud. You can access the application from your local system  browser as http://vsi-client-floatingip:3000
+Here, is a node js express application that is running and listening at port 80 in VSI Client in IBM Cloud. You can access the application from your local system  browser as http://vsi-client-floatingip:80
 
 > node mongoose_express.js
 
 ```
 root@schematics-demo-vsi-client-1:~/vnf-samples/pdns-mongo-nodejs# node mongoose_express.js 
-Example app listening at http://localhost:3000
+Example app listening at http://localhost:80
 MongoDB connection with retry
 (node:1529) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
 (node:1529) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
