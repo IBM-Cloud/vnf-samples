@@ -678,10 +678,13 @@ MongoDB is connected
 ```
 
 
-Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully. Now, lets clean up the resources created using terraform.    
+Congratulations ! You have configured nodejs to connect with mongo db using private dns successfully.   
 
 **NOTE:** This example can be improved by installing and configuring the mongo db in an ansible script or cloud-init script and invoking them in terraform. 
 
+Now, lets move on to the next tutorial, [Adding Public Domain Name Service to Nodejs applicatio](dns-mongo-nodejs.md)
+
+Let's clean up the resources created using terraform.  
 
 #### Clean up the workspace:
 
