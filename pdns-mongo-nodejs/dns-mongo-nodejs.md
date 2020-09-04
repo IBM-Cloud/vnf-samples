@@ -40,7 +40,7 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 ![domain added](images/Internet_Services_Add_Domain.png)
 
-4. When the status of domain is **Active**, click **DNS Records** and add a record of type **A** with Name as **name** and **IP address** pointing to your nodejs application floating ip address. Click **Add record**. 
+4. When the status of domain is **Active**, click **DNS Records** found under **Reliability** in the same screen below. Add a record of type **A** with Name as **name** and **IP address** pointing to your nodejs application floating ip address. Click **Add record**. 
 
 > **Note**: Here, the DNS record added is **A record**. It is by default, listening in port 80 for http protocol and port 443 for https protocol. So, the nodejs application should be running in port number 80. Please see the screen shot below:  
 
