@@ -4,7 +4,11 @@ The article below illustrates an example to access your application using a publ
 
 Public Domain name service has advantages over accessing your application using ip address, as ip addresses are hard to remember. There are security enhancements in DNS servers. DNS servers are designed for security purposes. They usually ensure that attempts to hack your server environment are thwarted before entry into your machines. 
 
+We need a Domain name and DNS Record to access the application as a Public Domain Name Service.   
+
 **Create a domain name in IBM Cloud**
+
+If you already have a domain name in IBM Cloud - Classic Infrastructure, you can skip this section. Go to the section **Create Internet Services in IBM Cloud**.  
 
 Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC Gen 1. 
 
@@ -27,7 +31,7 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 ![domain verified](images/cis-terraform-domain-verified.png)
 
 
-**Create Internet Services in IBM Cloud **
+**Create Internet Services in IBM Cloud**
 
 
 1. Click on **Catalog** tab at the top menu bar in IBM Cloud. Search for **Internet Services**. Select **Internet Services**. Enter a Service name and select a resource group. Select **Enterprise Usage** plan. Click **Create**. 
