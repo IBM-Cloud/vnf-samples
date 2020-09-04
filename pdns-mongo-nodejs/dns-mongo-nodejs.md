@@ -26,7 +26,18 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 ![domain verified](images/cis-terraform-domain-verified.png). 
 
-7. 
+7. Click on **Catalog** tab at the top menu bar in IBM Cloud. Search for **Internet Services**. Select **Internet Services**. Enter a Service name and select a resource group. Select **Enterprise Usage** plan. Click **Create**. 
+
+8. Click **Add Domain** and enter the domain name as **cis-terraform.com**. Click **Next**. Skip DNS Records. Click **Next** in **Domain Management**. It will display 2 **Name Servers**.  Copy the domain name servers.    
+
+![add domain](images/InternetServices_AddDomain.png). 
+
+9. Once the domain name is added, you will get a screen as shown below.    
+
+![domain added](images/Internet_Services_Add_Domain.png). 
+
+
+10. 
 
 
 
