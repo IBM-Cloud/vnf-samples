@@ -40,13 +40,28 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 ![domain added](images/Internet_Services_Add_Domain.png)
 
-4. When the status of domain is **Active**, click **DNS Records** found under **Reliability** in the same screen below. Add a record of type **A** with Name as **name** and **IP address** pointing to your nodejs application floating ip address. Click **Add record**. 
+**Add DNS Name Servers in IBM Cloud**
+
+Now, let's add DNS name servers in IBM Cloud under Classic Infrastructure, VPC Gen 1. 
+
+1. Login to IBM Cloud. Select IBM Classic Infrastructure. 
+
+2. Select Services - Domains. 
+
+3. Edit the Domain **cis-terraform.com** and add the DNS Name Servers copied from **Internet Services** - **Domain Management** screen.   
+
+![add DNS Servers](images/Add_DNS_Name_Servers.png)
+
+
+**Add DNS Records in Internet Services**
+
+1. When the status of domain is **Active**, click **DNS Records** found under **Reliability** in the same screen below. Add a record of type **A** with Name as **name** and **IP address** pointing to your nodejs application floating ip address. Click **Add record**. 
 
 > **Note**: Here, the DNS record added is **A record**. It is by default, listening in port 80 for http protocol and port 443 for https protocol. So, the nodejs application should be running in port number 80. Please see the screen shot below:  
 
 ![A record added](images/DNS_Record_A.png)
 
-5. Now, try to access the application as "**Name of A record . domain name**" as shown below:  
+2. Now, try to access the application as "**Name of A record . domain name**" as shown below:  
 
 ![application dns](images/dns_nodejs.png)
 
