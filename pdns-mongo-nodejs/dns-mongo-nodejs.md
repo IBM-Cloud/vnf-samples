@@ -40,7 +40,7 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 ![add domain](images/InternetServices_AddDomain.png)
 
-3. Once the domain name is added, you will get a screen as shown below. Note the status will remain in **Pending**. After the DNS Name Servers are added in Classic Infrastructures, the status changes to **Active**.  
+3. Once the domain name is added, you will get a screen as shown below. Note the status will remain in **Pending**. After the DNS Name Servers are added in Classic Infrastructure - Domain, the status changes to **Active**.  In the screen shot below, the status is **Active** because the Name Servers copied are already added in IBM Cloud - Classic Infrastructure - Domains. 
 
 ![domain added](images/Internet_Services_Add_Domain.png)
 
