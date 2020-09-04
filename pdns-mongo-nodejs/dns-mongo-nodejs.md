@@ -12,9 +12,14 @@ Now, let's create a domain name in IBM Cloud using Classic Infrastructure, VPC G
 
 2. Select Services - Domains. 
 
-3. Register a new domain as shown below. 
+3. Register a new domain as shown below. Enter the name of the domain as **cis-terraform**.
 
-![Register New Domain](images/Register_New_Domain.png)
+![Register New Domain](images/cis-terraform-domain.png)
+
+4. Click **Check Availability**. Only when the domain is **Available**, try to create domain. 
+
+5. 
+
 
 
 
