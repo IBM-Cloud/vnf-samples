@@ -1,10 +1,10 @@
 ### Access your application using a Public Domain Name Service (DNS)
 
-The article below illustrates an example to access your application using a public domain name service (DNS). 
+The article below illustrates an example to access your application using a public domain name system (DNS). 
 
-Public Domain name service has advantages over accessing your application using ip address, as ip addresses are hard to remember. There are security enhancements in DNS servers. DNS servers are designed for security purposes. They usually ensure that attempts to hack your server environment are thwarted before entry into your machines. 
+Public Domain name system has advantages over accessing your application using ip address, as ip addresses are hard to remember. There are security enhancements in DNS servers. DNS servers are designed for security purposes. They usually ensure that attempts to hack your server environment are thwarted before entry into your machines. 
 
-We need a Domain name and DNS Record to access the application as a Public Domain Name Service.   
+We need a Domain name and DNS Record to access the application using Public Domain Name System.   
 
 **Create a domain name in IBM Cloud**
 
