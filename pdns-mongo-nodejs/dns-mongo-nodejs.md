@@ -1,4 +1,4 @@
-### Access your application using a Public Domain Name Service (DNS)
+### Access your application using a Public Domain Name System (DNS)
 
 The article below illustrates an example to access your application using a public domain name system (DNS). 
 
