@@ -69,7 +69,7 @@ Now, let's add DNS name servers in IBM Cloud under Classic Infrastructure, VPC G
 
 ![application dns](images/dns_nodejs.png)
 
-3. If your port is 3000, you need to access the application as "Name of A record **.** domain name **:** port number**" as shown below:  
+3. If your port is 3000, you need to access the application as "Name of A record **.** domain name **:** port number" as shown below:  
 
 ![application_port_dns](images/dns_nodejs_port.png)
 
