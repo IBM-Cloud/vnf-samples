@@ -34,7 +34,9 @@ The reader will get to know the steps to attach a Block Storage to a VSI and con
 
 ![Block Storage Volume](images/Block-Storage-VSI.png)
 
-4. Next, lets follow this procedure to use block storage volume on ubuntu system ![Using your block storage data volume ](https://cloud.ibm.com/docs/vpc?topic=vpc-start-using-your-block-storage-data-volume). 
+**Mount the Block Storage Volume to Server 1 VSI**  
+
+1. Next, lets follow this procedure to use block storage volume on ubuntu system ![Using your block storage data volume ](https://cloud.ibm.com/docs/vpc?topic=vpc-start-using-your-block-storage-data-volume). Steps to format and mount block storage volume : https://github.com/hkantare/terraform-vpc-db/blob/master/playbooks/mount.yml
 
 a) Login to the Server VSI using floating ip address. 
 
@@ -141,10 +143,144 @@ root@server-1:~# mount
 /dev/vdd on /mnt/secondary type ext4 (rw,relatime,data=ordered)
 
 ```
-It should display /dev/vdd at the last line as file system directory mounted to /mnt/secondary directory. The block storage volume is using partition /dev/vdd in server VSI and is mounted to  /mnt/secondary directory.  
+It should display /dev/vdd at the last line as file system directory mounted to /mnt/secondary directory. The block storage volume is using partition /dev/vdd in server VSI and is mounted to  /mnt/secondary directory.     
+
+2. Now, lets install docker and install mongo db as docker container.    
+
+a) Follow the steps ![here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) to install docker.   
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -   
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
+
+sudo apt-get update  
+
+sudo apt-get upgrade  
+
+apt-cache policy docker-ce 
+
+sudo apt-get install -y docker-ce  
+
+sudo systemctl status docker  
+
+Docker should be running and it should be **enabled**
+```
+root@server-1:~# sudo systemctl status docker  
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-09-09 12:00:03 UTC; 6s ago
+     Docs: https://docs.docker.com
+ Main PID: 12900 (dockerd)
+    Tasks: 10
+```
+
+b) Follow the steps to install mongo db as docker container: ![How to Deploy and Manage MongoDB with Docker](https://phoenixnap.com/kb/docker-mongodb). 
+
+sudo docker pull mongo
+
+sudo docker images
+
+```
+root@server-1:~# sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+mongo               latest              409c3f937574        2 weeks ago         493MB
+```
+
+Run the mongodb docker container and make it to use /mnt/secondary as its data volume.
+
+sudo docker run -d -p 27017:27017 -v /mnt/secondary:/data/db mongo
+```
+root@server-1:~# sudo docker run -d -p 27017:27017 -v /mnt/secondary:/data/db mongo
+0147d9b33e75634a3dcd6a22a5391ea106b2b438144be2f74cb86c585bd2ea89
+
+```
+
+List all containers: docker ps -al
+It should show status as Up and running. 
+
+```
+root@server-1:~# sudo docker ps
+root@server-1:~# docker ps -al
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                      NAMES
+0147d9b33e75        mongo               "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        0.0.0.0:27017->27017/tcp   goofy_haslett
+```
+
+Enter the docker container and install database user_db and create a user, password for the db as shown below:  
+
+```
+root@server-1:~# sudo docker exec -it mongodb bash
+
+root@e544e57790fd:/# mongo
+MongoDB shell version v4.4.0
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("4440f675-f946-42dc-8e23-eed83f0e535a") }
+MongoDB server version: 4.4.0
+Welcome to the MongoDB shell.
+....
+> use user_db  
+```
+
+Run the below commands in mongo shell :
+
+> use user_db     
+ 
+> db.createUser({
+    user: 'dbuser',
+    pwd: 'dbpassword',
+    roles: [{ role: 'readWrite', db:'user_db'}]
+})
+
+> exit 
+ 
+You should get output as successfully added user.
+
+Type **exit** and get out of container.  
+
+c) Install mongo client : Follow the steps ![here](Connecting to your MongoDB container). 
+
+# Install the MongoDB client
+sudo apt-get install mongodb-clients  
+
+# Change mydb to the name of your DB
+mongo -u dbuser -p dbpassword localhost/user_db 
+
+```
+root@server-1:~# mongo -u dbuser -p dbpassword localhost/user_db  
+MongoDB shell version v3.6.3
+connecting to: mongodb://localhost:27017/user_db
+MongoDB server version: 4.4.0
+WARNING: shell and server versions do not match
+Server has startup warnings: 
+{"t":{"$date":"2020-09-09T12:37:17.013+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+{"t":{"$date":"2020-09-09T12:37:18.109+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+> exit
+bye
+```
+
+d) Change directory to /mnt/secondary and list all contents. It should list mongo db data.  
+
+```
+root@server-1:/mnt/secondary# ls
+WiredTiger         WiredTigerHS.wt                       collection-2-3112023543650599217.wt  index-1-3112023543650599217.wt   index-6-3112023543650599217.wt  sizeStorer.wt
+WiredTiger.lock    _mdb_catalog.wt                       collection-4-3112023543650599217.wt  index-2--3803360241763618794.wt  journal                         storage.bson
+WiredTiger.turtle  collection-0--3803360241763618794.wt  diagnostic.data                      index-3-3112023543650599217.wt   lost+found
+WiredTiger.wt      collection-0-3112023543650599217.wt   index-1--3803360241763618794.wt      index-5-3112023543650599217.wt   mongod.lock
+```
+
+3. Now, lets detach the instance and connect to another server VSI. 
+
+Login to cloud.ibm.com, Go to Storage - Block storage volumes - Right click on Block-Storage-server-vsi and detach to instance. Server VSI is detached from Block Storage. 
+
+Login to Server VSI 1, List /mnt/secondary directory, it should show 0.
+
+root@server-1:/mnt/secondary# ls -al
+ls: reading directory '.': Input/output error
+total 0
 
 
+**Mount the Block Storage Volume to Server 2 VSI**  
 
+1. 
 
 
 **References:**
