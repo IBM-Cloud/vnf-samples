@@ -386,9 +386,11 @@ WiredTiger.turtle  collection-0--3803360241763618794.wt  diagnostic.data        
 WiredTiger.wt      collection-0-3112023543650599217.wt   index-1--3803360241763618794.wt      index-5-3112023543650599217.wt   mongod.lock
 ```
 
-Install Mongo db docker container in this server and point mongo db data as /mnt/secondary by following the section: **Install docker and install mongo db as docker container in Server 1 VSI**  
+Install docker and Mongo db docker container in this server. Run the docker container and point mongo db data as /mnt/secondary by following the section: **Install docker and install mongo db as docker container in Server 1 VSI**  
 
-You can install mongo client in server 2 and connect to mongo db database **user_db** by following the section: **Install mongo client**
+> Note: Do not create user_db database, user and password. We are reusing the database. So, it should already exists.   
+
+You can install mongo client in server 2 and connect to the mongo db server database **user_db** by following the section: **Install mongo client**
 
 In this example, we saw how the Block storage volume can be attached/detached and configured to any Virtual Server Instance. Now, you can follow the steps here: ![Example to illustrate how a nodejs application can access Mongo DB using Private DNS](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs)
 
