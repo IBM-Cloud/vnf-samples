@@ -22,7 +22,17 @@ The reader will get to know the steps to attach a Block Storage to a VSI and con
 - IBM Cloud account.   
 - Follow the steps from [Example to illustrate how a nodejs application can access Mongo DB using Private DNS](https://github.com/IBM-Cloud/vnf-samples/blob/master/pdns-mongo-nodejs/README.md) and create a Server VSI, Client VSI and private dns (testb.testpdns.com)
 
-**Create Block Storage Volume in IBM Cloud VPC** 
+**Apply Terraform**   
+
+1. Run the command to initialize ibm terraform provider:  
+> terraform init
+
+2. Run the command to apply terraform:  
+> terraform apply
+
+3. It will create 3 VSI: 1 client VSI and 2 Server VSIs. One of the server VSI is attached to a block storage volume with size 20 GB as shown below:  
+
+![Block Storage Volume](images/Block-Storage_VSI.png)
 
 
 
