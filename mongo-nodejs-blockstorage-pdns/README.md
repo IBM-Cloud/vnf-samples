@@ -30,7 +30,7 @@ The reader will get to know the steps to attach a Block Storage to a VSI and con
 2. Run the command to apply terraform:  
 > terraform apply
 
-3. It will create 3 VSI: 1 client VSI and 2 Server VSIs. One of the server VSI is attached to a block storage volume(resource **ibm_is_volume** is attached to the server VSI ****) with size 20 GB as shown below:  
+3. It will create 3 VSI: 1 client VSI and 2 Server VSIs. One of the server VSI is attached to a block storage volume(resource **ibm_is_volume** is attached to the server VSI **test_schematics_demo_vsi_server_1**) with size 20 GB as shown below:  
 
 ![Block Storage Volume](images/Block-Storage-VSI.png)
 
