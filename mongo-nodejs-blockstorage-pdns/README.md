@@ -11,7 +11,7 @@ The example below illustrates how a Virtual Server Instance in IBM Cloud VPC can
 The reader will get to know the steps to attach a Block Storage to a VSI and configure MongoDB:
 
 - Create Block Storage volume. 
-- Partition the volume, format the volume, and then mount it as a file system in Server VSI. 
+- Format the volume, and then mount it as a file system in Server VSI. 
 - Install Docker and Mongodb as docker container.
 - Run Mongodb container and use the mounted secondary block volume. 
 - Create a database in mongo db.
@@ -207,7 +207,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 0147d9b33e75        mongo               "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        0.0.0.0:27017->27017/tcp   goofy_haslett
 ```
 
-Enter the docker container and install database user_db and create a user, password for the db as shown below:  
+Enter the docker container and create database user_db and create a user, password for the db as shown below:  
 
 ```
 root@server-1:~# sudo docker exec -it mongodb bash
@@ -282,6 +282,8 @@ total 0
 This confirms that volume is detached. 
 
 ### Mount the Block Storage Volume to Server 2 VSI 
+
+Login to cloud.ibm.com, Go to Storage - Block storage volumes - Right click on Block-Storage-server-vsi and click attach to instance. Select server-2 to attach to Block Storage volume. 
 
 a) Login to Server VSI 2. 
 
