@@ -238,7 +238,7 @@ You should get output as successfully added user.
 
 Type **exit** and get out of container.  
 
-c) Install mongo client : Follow the steps ![Connecting to your MongoDB container](https://www.thachmai.info/2015/04/30/running-mongodb-container/). 
+c) **Install mongo client** : Follow the steps ![Connecting to your MongoDB container](https://www.thachmai.info/2015/04/30/running-mongodb-container/). 
 
 #### Install the MongoDB client
 sudo apt-get install mongodb-clients  
@@ -388,7 +388,7 @@ WiredTiger.wt      collection-0-3112023543650599217.wt   index-1--38033602417636
 
 Install Mongo db docker container in this server and point mongo db data as /mnt/secondary by following the section: **Install docker and install mongo db as docker container in Server 1 VSI**  
 
-You can install mongodb client and connect to mongo db data and reuse user_db database. 
+You can install mongo client in server 2 and connect to mongo db database **user_db** by following the section: **Install mongo client**
 
 In this example, we saw how the Block storage volume can be attached/detached and configured to any Virtual Server Instance. Now, you can follow the steps here: ![Example to illustrate how a nodejs application can access Mongo DB using Private DNS](https://github.com/IBM-Cloud/vnf-samples/tree/master/pdns-mongo-nodejs)
 
