@@ -684,6 +684,8 @@ Congratulations ! You have configured nodejs to connect with mongo db using priv
 
 Now, lets move on to the next tutorial, [Access your application using a Public Domain Name System (DNS)](dns-mongo-nodejs.md)
 
+If you want to attach a Block Storage Volume to a Virtual Server Instance, you can refer ![Example to illustrate how a VSI can use Block Storage as data volume to store mongo db data](https://github.com/IBM-Cloud/vnf-samples/tree/master/mongo-nodejs-blockstorage-pdns)
+
 Let's clean up the resources created using terraform.  
 
 #### Clean up the workspace:
