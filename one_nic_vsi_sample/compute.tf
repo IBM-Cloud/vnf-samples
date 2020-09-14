@@ -49,26 +49,23 @@ resource "ibm_is_security_group_rule" "vnf_sg_allow_ssh" {
 }
 
 //security group rule to allow all for inbound
-resource "ibm_is_security_group_rule" "vnf_sg_rule_all" {
+resource "ibm_is_security_group_rule" "vnf_sg_rule_in_all" {
   depends_on = ["ibm_is_security_group_rule.vnf_sg_allow_ssh"]
   group     = "${ibm_is_security_group.vnf_security_group.id}"
   direction = "inbound"
   remote    = "0.0.0.0/0"
 }
 
-//security group rule to allow icmp for outbound
-resource "ibm_is_security_group_rule" "vnf_sg_rule_icmp_out" {
-  depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_all"]
+//security group rule to allow all for outbound
+resource "ibm_is_security_group_rule" "vnf_sg_rule_out_all" {
+  depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_in_all"]
   group     = "${ibm_is_security_group.vnf_security_group.id}"
   direction = "outbound"
   remote    = "0.0.0.0/0"
-  icmp {
-    code = 0
-    type = 8
-  }
 }
+
 resource "ibm_is_instance" "vnf_vsi" {
-  depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_icmp_out"]
+  depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_out_all"]
   name           = "${var.vnf_instance_name}"
   image          = "${ibm_is_image.vnf_custom_image.id}"
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
