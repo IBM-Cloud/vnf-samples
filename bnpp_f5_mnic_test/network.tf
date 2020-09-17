@@ -8,7 +8,7 @@
 ##############################################################################
 
 
-data "ibm_is_subnet" "vnf_primary_subnet{
+data "ibm_is_subnet" "vnf_primary_subnet"{
    identifier = "${var.primary_subnet_id}"
 }
 
