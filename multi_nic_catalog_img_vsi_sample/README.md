@@ -1,6 +1,5 @@
 ## Instance Creation using Catalog image
 
-**NOTE:** The multi nic support is not available in cloud.ibm.com 
 
 This directory contains the sample terraform code to create a VNF Instance with multiple network interface using catalog image name input by user. 
 
