@@ -79,6 +79,7 @@ resource "ibm_is_instance" "vnf_vsi" {
     content {
     name = format("eth%d", (network_interfaces.key+1))
     subnet = network_interfaces.value
+    security_groups = ["${ibm_is_security_group.vnf_security_group.id}"]
     }
   }
   
