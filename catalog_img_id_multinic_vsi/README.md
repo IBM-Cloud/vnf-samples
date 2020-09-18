@@ -59,7 +59,7 @@ Fill in the following values, based on the steps that you completed before you b
 | `secondary_subnet_id_3` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
 | `secondary_subnet_id_4` | The ID of the secondary subnet where the VNF instance will be deployed. Click on the subnet details in the VPC Subnet Listing to determine this value | 0717-xxxxxx-xxxx-xxxxx-8fae-xxxxx |
 | `vnf_security_group` | The name of the security group to which the VNF Instance's interface belong to | ubuntu-security-group |
-| `vnf_vpc_image_name` | The name of the VNF image  | ubuntu-18-04-amd64 |
+| `image_name` | The name of the VNF image  | ubuntu-18-04-amd64 |
 
 
 ## Notes
