@@ -661,7 +661,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 
     Terraform resources can be destroyed using below url command.
 
-<pre><code>https://<FIP></code></pre>
+<pre><code>https://&lt;FIP></code></pre>
 
 <pre><code>Example:
 
