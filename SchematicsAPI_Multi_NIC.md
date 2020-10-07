@@ -644,7 +644,7 @@ curl -X GET https://eu-de.schematics.cloud.ibm.com/v1/workspaces/catalog-sample1
 
 </code></pre>
 
-7. Assign Floating-point IP to the F5 VSI created in Step 7.
+### 7. Assign Floating-point IP to the F5 VSI created in Step 7.
 <pre><code>Example:
 curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips?version=2020-04-12&generation=2' \
 --header "Authorization: Bearer $ACCESS_TOKEN" \
