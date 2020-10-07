@@ -45,7 +45,7 @@ export REFRESH_TOKEN=&lt;refresh_token>
 
 
 ```
-request.json :
+request.json : This is the json file ,which contains the request payload data for creating workspace with the required parameters.
 
 {
 "name":"catalog-sample1",
@@ -117,7 +117,7 @@ request.json :
 }
 
 ```
- <pre><code>
+ <pre><code> Example:
 curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -H "Authorization: Bearer $ACCESS_TOKEN" -H "Content-Type: application/json"  --data @request.json | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -276,7 +276,7 @@ In above command “id” is the schematics id obtained from step 3 output.
 
 <pre><code>Example:
 
-curl -X POST https://schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-376ad599-b556-4d/plan -H "Authorization: Bearer $ACCESS_TOKEN" -H "refresh_token: $REFRESH_TOKEN" | jq
+curl -X POST https://schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-2338c1ba-e914-42/plan -H "Authorization: Bearer $ACCESS_TOKEN" -H "refresh_token: $REFRESH_TOKEN" | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    49  100    49    0     0     14      0  0:00:03  0:00:03 --:--:--    14
@@ -644,6 +644,11 @@ curl -X GET https://eu-de.schematics.cloud.ibm.com/v1/workspaces/catalog-sample1
 </code></pre>
 
 ### 7. Assign Floating-point IP to the F5 VSI created in Step 7.
+In below example , 
+
+target : The network interface this floating IP is to be bound to.The primary network interface id obtained from the output of the step(6)
+name : The unique user-defined name for this floating IP
+
 <pre><code>Example:
 curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips?version=2020-04-12&generation=2' \
 --header "Authorization: Bearer $ACCESS_TOKEN" \
@@ -652,6 +657,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 	"name":"fip112",
 	"target": {"id": "02k7-053ea3d4-6131-4049-9dec-54e0c756c085"}
 }'
+
 {"id":"r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","crn":"crn:v1:bluemix:public:is:eu-fr2-1:a/322c285df3be4e90b19faabf6341f632::floating-ip:r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips/r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","address":"158.231.95.240","name":"fip112","status":"available","created_at":"2020-10-07T06:51:19Z","zone":{"name":"eu-fr2-1","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/regions/eu-fr2/zones/eu-fr2-1"},"target":{"resource_type":"network_interface","primary_ipv4_address":"10.247.0.17","name":"eth0","id":"02k7-053ea3d4-6131-4049-9dec-54e0c756c085","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/instances/02k7_4719bd69-5c11-4b1f-b27e-06c870bb7da1/network_interfaces/02k7-053ea3d4-6131-4049-9dec-54e0c756c085"},"resource_group":{"id":"37bb11cc41794f52adebc2e2b0d583ee","href":"https://resource-controller.cloud.ibm.com/v2/resource_groups/37bb11cc41794f52adebc2e2b0d583ee","name":"Default"}}
 
 </code></pre>
