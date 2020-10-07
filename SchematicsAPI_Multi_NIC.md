@@ -2,7 +2,7 @@
 
 This document provides the steps to provision multi NIC using F5  IBM Schematics API Curl Commands .
 
-1.	Create tokens:
+## 1.	Create tokens:
 access_token and refresh_token need to be created first.
 
 Command to create them is 
@@ -30,7 +30,7 @@ curl -X POST "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: applic
 } 
 </code></pre>
 
-2.  Export the access_token and refresh_token obtained in step 1 as environment variables as ACCESS_TOKEN and REFRESH_TOKEN respectively.
+## 2.  Export the access_token and refresh_token obtained in step 1 as environment variables as ACCESS_TOKEN and REFRESH_TOKEN respectively.
 
 <pre><code>export ACCESS_TOKEN=&lt;access_token>
 export REFRESH_TOKEN=&lt;refresh_token>
