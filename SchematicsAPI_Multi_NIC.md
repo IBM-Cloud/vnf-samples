@@ -2,7 +2,7 @@
 
 This document provides the steps to provision multi NIC using F5  IBM Schematics API Curl Commands .
 
-## 1.	Create tokens:
+### 1.	Create tokens:
 access_token and refresh_token need to be created first.
 
 Command to create them is 
@@ -30,14 +30,14 @@ curl -X POST "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: applic
 } 
 </code></pre>
 
-## 2.  Export the access_token and refresh_token obtained in step 1 as environment variables as ACCESS_TOKEN and REFRESH_TOKEN respectively.
+### 2.  Export the access_token and refresh_token obtained in step 1 as environment variables as ACCESS_TOKEN and REFRESH_TOKEN respectively.
 
 <pre><code>export ACCESS_TOKEN=&lt;access_token>
 export REFRESH_TOKEN=&lt;refresh_token>
 </code></pre>
 
 
-3.  Create workspace.
+### 3.  Create workspace.
 
  Create a schematic workspace in Frankfurt as show below,
  <pre><code>curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -H "Authorization: Bearer &lt;access_token>" -d '{"name":"<workspace_name>","type": ["terraform_v0.12"],"description": "<workspace_description>","resource_group": "<resource_group_ID>","tags": [],"template_repo": {"url": "<source_repo_url>"},"template_data": [{"folder": ".","type": "terraform_v0.12","variablestore": [{"name": "variable_name1","value": "variable_value1"},{"name": "variable_name2","value": "variable_value2"}]}]}'
@@ -286,7 +286,7 @@ curl -X POST https://schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-376a
 }
 </code></pre>
 
-4.	Terraform Apply
+### 5.	Terraform Apply
     
     Terraform Apply can be performed using below curl command.
 
@@ -300,7 +300,7 @@ curl -X POST https://schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-376a
 
 </code></pre>
 
-6.	Get log for the latest activity
+### 6.	Get log for the latest activity
 
     Show the Terraform logs for the most recent action of a template that ran against your workspace.
 
@@ -657,7 +657,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 {"id":"r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","crn":"crn:v1:bluemix:public:is:eu-fr2-1:a/322c285df3be4e90b19faabf6341f632::floating-ip:r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips/r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","address":"158.231.95.240","name":"fip112","status":"available","created_at":"2020-10-07T06:51:19Z","zone":{"name":"eu-fr2-1","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/regions/eu-fr2/zones/eu-fr2-1"},"target":{"resource_type":"network_interface","primary_ipv4_address":"10.247.0.17","name":"eth0","id":"02k7-053ea3d4-6131-4049-9dec-54e0c756c085","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/instances/02k7_4719bd69-5c11-4b1f-b27e-06c870bb7da1/network_interfaces/02k7-053ea3d4-6131-4049-9dec-54e0c756c085"},"resource_group":{"id":"37bb11cc41794f52adebc2e2b0d583ee","href":"https://resource-controller.cloud.ibm.com/v2/resource_groups/37bb11cc41794f52adebc2e2b0d583ee","name":"Default"}}
 
 </code></pre>
-8.	Access Created F5 VSI using Floadting point ip (FIP)
+### 8.	Access Created F5 VSI using Floadting point ip (FIP)
 
     Terraform resources can be destroyed using below url command.
 
@@ -669,7 +669,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 
 </code></pre>
 
-8.	Destroy resources
+### 9.	Destroy resources
 
     Terraform resources can be destroyed using below curl command.
 
@@ -684,7 +684,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 
 </code></pre>
 
-9.	Delete Workspace
+### 10.	Delete Workspace
 
     Workspace can be deleted using below curl command.
 
