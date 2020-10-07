@@ -657,8 +657,6 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 </code></pre>
 ### 8.	Access Created F5 VSI using Floating point ip (FIP)
 
-    Terraform resources can be destroyed using below url command.
-
 <pre><code>https://&lt;FIP></code></pre>
 
 <pre><code>Example:
