@@ -2,7 +2,7 @@
 
 This document provides the steps to provision multi NIC using F5 IBM Schematics API Curl Commands .
 
-### IBM Cloud Schematics API can be foud [here] (https://cloud.ibm.com/apidocs/schematics#introduction)
+### IBM Cloud Schematics API can be found [here](https://cloud.ibm.com/apidocs/schematics#introduction)
 
 ### 1.	Create tokens:
 access_token and refresh_token need to be created first.
