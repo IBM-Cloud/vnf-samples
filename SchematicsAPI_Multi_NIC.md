@@ -118,12 +118,11 @@ request.json :
 
 ```
  <pre><code>
-curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -H "Authorization: Bearer $ACCESS_TOKEN" H "Content-Type: application/json"  --data @request.json | jq
+curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -H "Authorization: Bearer $ACCESS_TOKEN" -H "Content-Type: application/json"  --data @request.json | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  4140    0  2931  100  1209    156     64  0:00:18  0:00:18 --:--:--   673
-  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0curl: (6) Could not resolve host: H
-curl: (3) URL using bad/illegal format or missing URL
+  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0
 {
  ## "id": "catalog-sample1-2338c1ba-e914-42",
   "name": "catalog-sample1",
@@ -649,7 +648,6 @@ curl -X GET https://eu-de.schematics.cloud.ibm.com/v1/workspaces/catalog-sample1
 curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips?version=2020-04-12&generation=2' \
 --header "Authorization: Bearer $ACCESS_TOKEN" \
 --header 'Content-Type: application/json' \
---header 'Cookie: __cfduid=dbd41efb9be799756effb44617e1a710a1594104587' \
 --data-raw '{
 	"name":"fip112",
 	"target": {"id": "02k7-053ea3d4-6131-4049-9dec-54e0c756c085"}
@@ -657,7 +655,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 {"id":"r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","crn":"crn:v1:bluemix:public:is:eu-fr2-1:a/322c285df3be4e90b19faabf6341f632::floating-ip:r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ips/r030-8315f620-97f5-4e0d-92dd-6f9cb6d5bc33","address":"158.231.95.240","name":"fip112","status":"available","created_at":"2020-10-07T06:51:19Z","zone":{"name":"eu-fr2-1","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/regions/eu-fr2/zones/eu-fr2-1"},"target":{"resource_type":"network_interface","primary_ipv4_address":"10.247.0.17","name":"eth0","id":"02k7-053ea3d4-6131-4049-9dec-54e0c756c085","href":"https://eu-fr2.iaas.cloud.ibm.com/v1/instances/02k7_4719bd69-5c11-4b1f-b27e-06c870bb7da1/network_interfaces/02k7-053ea3d4-6131-4049-9dec-54e0c756c085"},"resource_group":{"id":"37bb11cc41794f52adebc2e2b0d583ee","href":"https://resource-controller.cloud.ibm.com/v2/resource_groups/37bb11cc41794f52adebc2e2b0d583ee","name":"Default"}}
 
 </code></pre>
-### 8.	Access Created F5 VSI using Floadting point ip (FIP)
+### 8.	Access Created F5 VSI using Floating point ip (FIP)
 
     Terraform resources can be destroyed using below url command.
 
