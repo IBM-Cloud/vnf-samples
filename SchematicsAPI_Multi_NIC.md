@@ -65,54 +65,42 @@ request.json : This is the json file ,which contains the request payload data fo
    "folder": ".",
    "type": "terraform_v0.12",
    "variablestore": [
-    {
-	  "name": "zone",
-	  "value": "eu-fr2-1"
-	},
-    {
-	 "name": "vpc_name",
-	 "value": "test-vpc-demo-1"
+	{
+		"name": "primary_subnet_id", 
+		"value": "02k7-71501954-6828-45da-a327-5b15f05e86d5"
 	}, 
 	{
-	"name": "primary_subnet_id", 
-	"value": "02k7-71501954-6828-45da-a327-5b15f05e86d5"
-	}, 
-	{
-	"name": "secondary_subnet_id_1", 
-	"value": "02k7-c84c0c1a-4602-45df-8836-d0960bcacc69"
+		"name": "secondary_subnet_id_1", 
+		"value": "02k7-c84c0c1a-4602-45df-8836-d0960bcacc69"
 	},
 	{
-	"name": "secondary_subnet_id_2", 
-	"value": "02k7-0cd7c739-dbb9-4b2c-ba07-89ed3867aa6c"
+		"name": "secondary_subnet_id_2", 
+		"value": "02k7-0cd7c739-dbb9-4b2c-ba07-89ed3867aa6c"
 	},
 	{
-	 "name": "ssh_key_name", 
-	 "value": "my-key-1"
+	 	"name": "ssh_key_name", 
+	 	"value": "my-key-1"
 	 }, 
 	 {
-	  "name": "image_name", 
-	  "value": "bigip-15-1-0-4-0-0-6-ltm-1slot"
+	  	"name": "image_name", 
+	  	"value": "bigip-15-1-0-4-0-0-6-ltm-1slot"
 	 }, 
 	 {
-	  "name": "vnf_instance_name", 
-	  "value": "f5-bnpp-sch-vsi"
+	  	"name": "vnf_instance_name", 
+	  	"value": "f5-bnpp-sch-vsi"
 	 }, 
 	 {
-	   "name": "vnf_profile", 
-	   "value": "bx2-2x8"
+	   	"name": "vnf_profile", 
+	   	"value": "bx2-2x8"
 	 }, 
 	 {
-	    "name": "region", 
+	    	"name": "region", 
 		"value": "eu-fr2"
-     },
-	 {
-		"name": "resource_group",
-	    "value": "Default"
-	 }, 
-	 {
-	   "name": "vnf_security_group", 
-	   "value": "f5-schapi-security-group33"
-	 }
+     	},
+	{
+	   	"name": "vnf_security_group", 
+	   	"value": "f5-schapi-security-group33"
+	}
 	]
   }
  ]
@@ -161,20 +149,6 @@ curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -
       "values_url": "https://eu-de.schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-2338c1ba-e914-42/template_data/catalog_img_id_multinic_vsi-6d9da9ff-b7da-45/values",
       "values": "",
       "variablestore": [
-        {
-          "name": "zone",
-          "secure": false,
-          "value": "eu-fr2-1",
-          "type": "",
-          "description": ""
-        },
-        {
-          "name": "vpc_name",
-          "secure": false,
-          "value": "test-vpc-demo-1",
-          "type": "",
-          "description": ""
-        },
         {
           "name": "primary_subnet_id",
           "secure": false,
@@ -232,13 +206,6 @@ curl --request POST --url https://eu-de.schematics.cloud.ibm.com/v1/workspaces -
           "description": ""
         },
         {
-          "name": "resource_group",
-          "secure": false,
-          "value": "Default",
-          "type": "",
-          "description": ""
-        },
-        {
           "name": "vnf_security_group",
           "secure": false,
           "value": "f5-schapi-security-group33",
@@ -278,7 +245,7 @@ In above command “id” is the schematics id obtained from step 3 output.
 
 <pre><code>Example:
 
-curl -X POST https://schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-2338c1ba-e914-42/plan -H "Authorization: Bearer $ACCESS_TOKEN" -H "refresh_token: $REFRESH_TOKEN" | jq
+curl -X POST https://eu-de.schematics.cloud.ibm.com/v1/workspaces/catalog-sample1-2338c1ba-e914-42/plan -H "Authorization: Bearer $ACCESS_TOKEN" -H "refresh_token: $REFRESH_TOKEN" | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    49  100    49    0     0     14      0  0:00:03  0:00:03 --:--:--    14
@@ -692,7 +659,7 @@ curl --location --request POST 'https://eu-fr2.iaas.cloud.ibm.com/v1/floating_ip
 
     Workspace can be deleted using below curl command.
 
-<pre><code>curl -X DELETE https://eu-de.schematics.cloud.ibm.com/v1/workspaces/{id} -H "Authorization: &lt;access_token>"</code></pre>
+<pre><code>curl -X DELETE https://eu-de.schematics.cloud.ibm.com/v1/workspaces/{id} -H "Authorization: Bearer &lt;access_token>"</code></pre>
 
 <pre><code>Example:
 
