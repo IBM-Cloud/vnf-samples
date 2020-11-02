@@ -1,8 +1,5 @@
 # Custom Image Sample
 
-This is Work In Progress
-
-
 This directory contains the sample terraform code to create a Custom image from a qcow2 image stored in the COS URL. 
 
 
