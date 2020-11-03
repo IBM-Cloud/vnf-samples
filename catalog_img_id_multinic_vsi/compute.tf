@@ -8,6 +8,13 @@ locals {
 }
 
 ##############################################################################
+# lookup image name for a custom image in region if we need it
+##############################################################################
+data "ibm_is_image" "vnf_custom_image" {
+  name = "${var.image_name}"
+}
+
+##############################################################################
 # Read/validate sshkey
 ##############################################################################
 data "ibm_is_ssh_key" "vnf_ssh_pub_key" {
@@ -19,6 +26,11 @@ data "ibm_is_ssh_key" "vnf_ssh_pub_key" {
 ##############################################################################
 data "ibm_is_instance_profile" "vnf_profile" {
   name = "${var.vnf_profile}"
+}
+
+locals {
+# custom image takes priority over public image
+  image_id = data.ibm_is_image.vnf_custom_image.id == null ? lookup(local.image_map[var.image_name], data.ibm_is_region.region.name) : data.ibm_is_image.vnf_custom_image.id
 }
 
 ##############################################################################
@@ -64,7 +76,7 @@ resource "ibm_is_security_group_rule" "vnf_sg_rule_out_all" {
 resource "ibm_is_instance" "vnf_vsi" {
   depends_on = ["ibm_is_security_group_rule.vnf_sg_rule_out_all"]
   name           = "${var.vnf_instance_name}"
-  image          = lookup(local.image_map[var.image_name], data.ibm_is_region.region.name)
+  image          = local.image_id
   profile        = "${data.ibm_is_instance_profile.vnf_profile.name}"
   resource_group = "${data.ibm_is_subnet.vnf_primary_subnet.resource_group}"
 
