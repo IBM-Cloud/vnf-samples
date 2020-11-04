@@ -39,7 +39,7 @@ variable "image_operating_system" {
 ######################################################################################################
 /*
 variable "api_key" {
-  default     = "ZcwWBFuTQvJAjzFssgsc9jJKraVaMI4GysFf-QazJCe5"
+  default     = ""
   description = "holds the user api key"
 }*/
 
