@@ -9,7 +9,7 @@ The examples has a use case where source VSI and destination VSI has 2 custom ro
 Example:  
 {   
 	"action" = "deliver",  
-	"destination" = ibm_is_subnet.test_cr_subnet2.ipv4_cidr_block
+	"destination" = ibm_is_subnet.test_cr_subnet2.ipv4_cidr_block,   
 	"next_hop" = ibm_is_instance.vsi3.primary_network_interface[0].primary_ipv4_address,  
 	"zone" = "us-south-1" 
 }   
