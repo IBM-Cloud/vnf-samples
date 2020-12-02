@@ -4,7 +4,7 @@ Use this template to create a Source, Destination and next hop VSI with custom r
 
 The examples has a use case where source VSI and destination VSI has 2 custom routes to communicate with each other and they have next hop as VSI in another subnet where Anti spoofing is enabled. The data packets start flowing from source VSI to destination VSI through the next hop VSI where Allow IP Spoofing is enabled (IP Forwarding is enabled in ubuntu VSI). If Allow IP Spoofing is turned OFF, the next hop VSI will not send the data packets to destination VSI.  
 
-### Source VSI1 in Subnet 1, Next hop VSI3 in Subnet 2 and Destination VSI2 in Subnet 3
+### Source VSI1 in Subnet 1, Next hop VSI3 in Subnet 3 and Destination VSI2 in Subnet 2
 
 Example:  
 {   
