@@ -8,14 +8,25 @@ The example provided has a use case where source VSI and destination VSI has 2 c
 
 ### Source VSI1 in Subnet 1, Next hop VSI3 in Subnet 3 and Destination VSI2 in Subnet 2
 
-Example:  
+Example:
+
+```
+Route R1:
 {   
 	"action" = "deliver",  
 	"destination" = ibm_is_subnet.test_cr_subnet2.ipv4_cidr_block,   
 	"next_hop" = ibm_is_instance.vsi3.primary_network_interface[0].primary_ipv4_address,  
 	"zone" = "us-south-1" 
-}   
+}  
 
+Route R2:
+{   
+	"action" = "deliver",  
+	"destination" = ibm_is_subnet.test_cr_subnet1.ipv4_cidr_block,   
+	"next_hop" = ibm_is_instance.vsi3.primary_network_interface[0].primary_ipv4_address,  
+	"zone" = "us-south-1" 
+}
+```
 This is the scenario:
 
 Next hop is a single VSI for both onward and return traffic  
