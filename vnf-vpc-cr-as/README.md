@@ -30,7 +30,7 @@ Route R2:
 This is the scenario:
 
 Next hop is a single VSI for both onward and return traffic  
-![image](https://media.github.ibm.com/user/237778/files/56341b00-c2a1-11ea-8098-5b990fa2ab7e). 
+![image](images/cr_as_tf.jpg). 
 
 In the next hop VSI, Allow IP Spoofing has to be enabled, so that the next hop VSI allows the traffic to flow from Source VSI to the destination VSI.
 
