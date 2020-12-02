@@ -30,8 +30,16 @@ Route R2:
 This is the scenario:
 
 Next hop is a single VSI for both onward and return traffic  
-![image](images/cr_as_tf.jpg). 
+![image](https://github.com/IBM-Cloud/vnf-samples/blob/master/images/cr_as_tf.jpg). 
 
 In the next hop VSI, Allow IP Spoofing has to be enabled, so that the next hop VSI allows the traffic to flow from Source VSI to the destination VSI.
 
 Once, the resources are provsioned, Login to each of the VSI and try to ping from source VSI to destination VSI and destination VSI to source VSI. Also, enable TCP dumps and view the logs in next hop VSI. This is the simplest use case for Custom routes and Anti Spoofing functionality. 
+
+### Useful Information for Custom Routes and Anti-Spoofing VPC Gen 2 Offering:  
+User Docs Custom Routes:  https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes   
+User Docs Customer Adjustable Anti-Spoofing: https://cloud.ibm.com/docs/vpc?topic=vpc-ip-spoofing-about   
+API Doc:  https://cloud.ibm.com/apidocs/vpc   
+CLI Doc:  https://cloud.ibm.com/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#custom-routes-section  
+
+
