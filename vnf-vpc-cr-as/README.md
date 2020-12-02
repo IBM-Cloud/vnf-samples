@@ -14,11 +14,7 @@ Example:
 	"zone": {"name": "us-south-2"}
 }
 
-Two scenarios are there under this:
+This is the scenario:
 
-1. Next hop is a single VSI for both onward and return traffic  
+Next hop is a single VSI for both onward and return traffic  
 ![image](https://media.github.ibm.com/user/237778/files/56341b00-c2a1-11ea-8098-5b990fa2ab7e). 
-
-
-2. Next hop are 2 separate VSIs, for onward and return traffic. 
-![image](https://media.github.ibm.com/user/237778/files/664bfa80-c2a1-11ea-8171-2e8f190414ca). 
