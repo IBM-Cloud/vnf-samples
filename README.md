@@ -11,6 +11,7 @@ The different scenarios for which the sample code are available are:
 | multi_nic_vsi_sample | Contains the sample terraform code to create a VNF Instance with multiple network interfaces. | https://github.com/IBM-Cloud/vnf-samples/tree/master/multi_nic_vsi_sample |
 |catalog_img_vsi_sample | Contains the sample terraform code to create a VNF Instance using a catalog image name as input. | https://github.com/IBM-Cloud/vnf-samples/tree/master/catalog_img_vsi_sample |
 |catalog_img_id_vsi_sample | Contains the sample terraform code to create a VNF Instance using a catalog image id as input. | https://github.com/IBM-Cloud/vnf-samples/tree/master/catalog_img_id_vsi_sample |
+|vnf-vpc-cr-as | Contains the sample terraform code to create a VPC Custom Routes and Antispoofing. | https://github.com/IBM-Cloud/vnf-samples/tree/master/vnf-vpc-cr-as |
 
 
 # Testing Sample Code 
