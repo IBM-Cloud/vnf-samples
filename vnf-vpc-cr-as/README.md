@@ -38,7 +38,7 @@ Once, the resources are provsioned, Login to each of the VSI and try to ping fro
 
 ### Notes
 
-1. Multiple subnets can be associated with a single routing table.
+1. Multiple subnets can be associated with a single routing table. 
 
 	For example 
 	```
@@ -53,6 +53,8 @@ Once, the resources are provsioned, Login to each of the VSI and try to ping fro
 		//Above routing table is the same as in test_cr_subnet1
 	}
 	```
+	
+	(However in the sample code we have shown different routing tables being associated with different subnets.)
 	
 2. Routing table with any ingress parameters set as true should not be associated with any subnets.
 
