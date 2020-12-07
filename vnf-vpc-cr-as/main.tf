@@ -1,18 +1,3 @@
-variable "region" {
-  default     = "us-south"
-  description = "The VPC Region that you want your VPC, networks and the F5 virtual server to be provisioned in. To list available regions, run `ibmcloud is regions`."
-}
-
-variable "generation" {
-  default     = 2
-  description = "The VPC Generation to target. Valid values are 2 or 1."
-}
-
-variable "resource_group" {
-  default     = "Default"
-  description = "The resource group to use. If unspecified, the account's default resource group is used."
-}
-
 ##############################################################################
 # Read/validate Region
 ##############################################################################
@@ -21,17 +6,17 @@ data "ibm_is_region" "region" {
 }
 
 data "ibm_is_zone" "zone" {
-  name   = "us-south-1"
+  name   = var.zone
   region = data.ibm_is_region.region.name
 }
 
 data "ibm_is_vpc" "test_cr_vpc" {
-  name = "malar-vpc"
+  name = var.vpc
 }
 
 # lookup SSH public keys by name
-data "ibm_is_ssh_key" "malar_ssh_key" {
-  name = "malar-ssh-key"
+data "ibm_is_ssh_key" "my_ssh_key" {
+  name = var.ssh_key
 }
 
 data "ibm_is_image" "custom_image" {
@@ -42,7 +27,6 @@ data "ibm_is_image" "custom_image" {
 # Provider block - Alias initialized tointeract with VNFSVC account
 ##############################################################################
 provider "ibm" {
- ibmcloud_api_key = "xyz"
   generation       = var.generation
   region           = var.region
   ibmcloud_timeout = 300
@@ -54,15 +38,6 @@ provider "ibm" {
 data "ibm_resource_group" "rg" {
   name = var.resource_group
 }
-
-//vpc 
-/*
-resource "ibm_is_vpc" "test_cr_vpc" {
-  depends_on = [data.ibm_resource_group.rg]
-  name = "malar-cr-vpc"
-  resource_group = data.ibm_resource_group.rg.id
-}
-*/
 
 resource "ibm_is_security_group" "cr_security_group" {
   name           = "cr-securitygroup"
@@ -102,18 +77,6 @@ resource "ibm_is_security_group_rule" "cr_sg_rule_out_icmp" {
 }
 
 //custom route table for subnet 1
-resource "ibm_is_vpc_routing_table" "test_cr_route_table_ingress" {
-  depends_on = [data.ibm_resource_group.rg]
-  name       = "test-cr-route-table-ingress"
-  vpc    = data.ibm_is_vpc.test_cr_vpc.id
-  route_direct_link_ingress = false
-  route_transit_gateway_ingress = false
-  route_vpc_zone_ingress = false
-
-}
-
-
-//custom route table for subnet 1
 resource "ibm_is_vpc_routing_table" "test_cr_route_table1" {
   depends_on = [data.ibm_resource_group.rg]
   name       = "test-cr-route-table11"
@@ -125,8 +88,8 @@ resource "ibm_is_subnet" "test_cr_subnet1" {
   depends_on       = [ibm_is_vpc_routing_table.test_cr_route_table1]
   name             = "test-cr-subnet11"
   vpc              = data.ibm_is_vpc.test_cr_vpc.id
-  zone             = "us-south-1"
-  ipv4_cidr_block  = "10.240.10.0/24"
+  zone             = var.zone
+  ipv4_cidr_block  = var.subnet1_ipv4_cidr_block
   routing_table = ibm_is_vpc_routing_table.test_cr_route_table1.routing_table
   //User can configure timeouts
   timeouts {
@@ -148,8 +111,8 @@ resource "ibm_is_subnet" "test_cr_subnet2" {
   depends_on       = [ibm_is_vpc_routing_table.test_cr_route_table2]
   name             = "test-cr-subnet22"
   vpc              = data.ibm_is_vpc.test_cr_vpc.id
-  zone             = "us-south-1"
-  ipv4_cidr_block  = "10.240.20.0/24"
+  zone             = var.zone
+  ipv4_cidr_block  = var.subnet2_ipv4_cidr_block
   routing_table = ibm_is_vpc_routing_table.test_cr_route_table2.routing_table
   //User can configure timeouts
   timeouts {
@@ -171,8 +134,8 @@ resource "ibm_is_subnet" "test_cr_subnet3" {
   depends_on       = [ibm_is_vpc_routing_table.test_cr_route_table3]
   name             = "test-cr-subnet33"
   vpc              = data.ibm_is_vpc.test_cr_vpc.id
-  zone             = "us-south-1"
-  ipv4_cidr_block  = "10.240.30.0/24"
+  zone             = var.zone
+  ipv4_cidr_block  = var.subnet3_ipv4_cidr_block
   routing_table = ibm_is_vpc_routing_table.test_cr_route_table3.routing_table
   //User can configure timeouts
   timeouts {
@@ -223,7 +186,7 @@ resource "ibm_is_instance" "vsi1" {
     allow_ip_spoofing = false
   }
 
-  keys = [data.ibm_is_ssh_key.malar_ssh_key.id]
+  keys = [data.ibm_is_ssh_key.my_ssh_key.id]
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
   zone = "us-south-1"
 }
@@ -247,7 +210,7 @@ resource "ibm_is_instance" "vsi2" {
   }
 
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
-  keys = [data.ibm_is_ssh_key.malar_ssh_key.id]
+  keys = [data.ibm_is_ssh_key.my_ssh_key.id]
   zone = "us-south-1"
 }
 
@@ -272,7 +235,7 @@ resource "ibm_is_instance" "vsi3" {
 
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
   zone = "us-south-1"
-  keys = [data.ibm_is_ssh_key.malar_ssh_key.id]
+  keys = [data.ibm_is_ssh_key.my_ssh_key.id]
 }
 
 //next hop floating ip for above VSI
