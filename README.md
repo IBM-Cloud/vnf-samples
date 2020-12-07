@@ -27,4 +27,8 @@ Each of these scenarios can be tested using Terraform CLI commands and IBM Cloud
 
   (3) In order to use a particular scenario in the content catalogue as a .tar.gz release file, copy the code of the specific    scenario in a separate repository and then use it as a .tar.gz release file. This repository content as such cannot be used in the content catalogue.
 
-Follow the README for each of the scenarios to get more details. 
+Follow the README for each of the scenarios to get more details.
+
+# Create IBM Cloud Catalog Offering
+
+To create a Terraform based IBM Cloud Catalog offering, follow the instructions in [ContentCatalog.md](ContentCatalog.md)

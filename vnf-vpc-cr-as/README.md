@@ -30,8 +30,38 @@ Route R2:
 This is the scenario:
 
 Next hop is a single VSI for both onward and return traffic  
-![image](https://media.github.ibm.com/user/237778/files/56341b00-c2a1-11ea-8098-5b990fa2ab7e). 
+![image](https://github.com/IBM-Cloud/vnf-samples/blob/master/images/cr_as_tf.jpg). 
 
 In the next hop VSI, Allow IP Spoofing has to be enabled, so that the next hop VSI allows the traffic to flow from Source VSI to the destination VSI.
 
 Once, the resources are provsioned, Login to each of the VSI and try to ping from source VSI to destination VSI and destination VSI to source VSI. Also, enable TCP dumps and view the logs in next hop VSI. This is the simplest use case for Custom routes and Anti Spoofing functionality. 
+
+### Notes
+
+1. Multiple subnets can be associated with a single routing table. 
+
+	For example 
+	```
+	resource "ibm_is_subnet" "test_cr_subnet1" {
+  		...
+  		routing_table = ibm_is_vpc_routing_table.test_cr_route_table1.routing_table 
+	}
+	
+	resource "ibm_is_subnet" "test_cr_subnet2" {
+  		...
+  		routing_table = ibm_is_vpc_routing_table.test_cr_route_table1.routing_table
+		//Above routing table is the same as in test_cr_subnet1
+	}
+	```
+	
+	(However in the sample code we have shown different routing tables being associated with different subnets.)
+	
+2. Routing table with any ingress parameters set as true should not be associated with any subnets.
+
+### Useful Information for Custom Routes and Anti-Spoofing VPC Gen 2 Offering:  
+User Docs Custom Routes:  https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes   
+User Docs Customer Adjustable Anti-Spoofing: https://cloud.ibm.com/docs/vpc?topic=vpc-ip-spoofing-about   
+API Doc:  https://cloud.ibm.com/apidocs/vpc   
+CLI Doc:  https://cloud.ibm.com/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#custom-routes-section  
+
+
