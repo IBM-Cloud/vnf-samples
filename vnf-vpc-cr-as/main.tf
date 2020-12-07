@@ -149,7 +149,7 @@ resource "ibm_is_vpc_routing_table_route" "test_custom_route1" {
   depends_on     = [ibm_is_subnet.test_cr_subnet1]
   vpc         = data.ibm_is_vpc.test_cr_vpc.id
   routing_table = ibm_is_vpc_routing_table.test_cr_route_table1.routing_table
-  zone           = "us-south-1"
+  zone           = var.zone
   name           = "custom-route-11"
   next_hop       = ibm_is_instance.vsi3.primary_network_interface[0].primary_ipv4_address
   action         = "deliver"
@@ -161,7 +161,7 @@ resource "ibm_is_vpc_routing_table_route" "test_custom_route2" {
   depends_on     = [ibm_is_subnet.test_cr_subnet2]
   vpc         = data.ibm_is_vpc.test_cr_vpc.id
   routing_table = ibm_is_vpc_routing_table.test_cr_route_table2.routing_table
-  zone           = "us-south-1"
+  zone           = var.zone
   name           = "custom-route-22"
   next_hop       = ibm_is_instance.vsi3.primary_network_interface[0].primary_ipv4_address
   action         = "deliver"
@@ -188,7 +188,7 @@ resource "ibm_is_instance" "vsi1" {
 
   keys = [data.ibm_is_ssh_key.my_ssh_key.id]
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
-  zone = "us-south-1"
+  zone = var.zone
 }
 
 //source floating ip for above VSI
@@ -211,7 +211,7 @@ resource "ibm_is_instance" "vsi2" {
 
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
   keys = [data.ibm_is_ssh_key.my_ssh_key.id]
-  zone = "us-south-1"
+  zone = var.zone
 }
 
 //destination floating ip for above VSI
@@ -234,7 +234,7 @@ resource "ibm_is_instance" "vsi3" {
   }
 
   vpc  = data.ibm_is_vpc.test_cr_vpc.id
-  zone = "us-south-1"
+  zone = var.zone
   keys = [data.ibm_is_ssh_key.my_ssh_key.id]
 }
 
