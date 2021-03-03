@@ -27,7 +27,7 @@ image using the method provided here (https://cloud.ibm.com/docs/cloud-object-st
 the IBM Cloud CLI (https://cloud.ibm.com/docs/cli?topic=cli-getting-started):
 
   <pre><code>$ export token=`ibmcloud iam oauth-tokens | awk '{ print $4 }'`
-  $ curl -v -X “PUT” “https://s3.us-south.cloud-object-storage.appdomain.cloud/vendorbucketname/vendor.qcow2?acl” -H “Authorization: Bearer $token” -H “x-amz-acl: public-read”</code></pre>
+  $ curl -v -X "PUT" "https://s3.us-south.cloud-object-storage.appdomain.cloud/vendorbucketname/vendor.qcow2?acl" -H "Authorization: Bearer $token" -H "x-amz-acl: public-read"</code></pre>
 
 ## Costs
 
