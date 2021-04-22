@@ -3,7 +3,7 @@
 ###
 
 provider "ibm" {
-  ibmcloud_api_key = "eeZfQFlBE6QAlDDph-SoJwbXXLg-AaRPt-LCKkHr-cHR"
+  ibmcloud_api_key = "xyz"
   generation = 2
   region     = "us-south"
 }
