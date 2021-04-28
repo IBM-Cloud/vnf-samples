@@ -12,9 +12,8 @@ Learn more: https://www.ibm.com/cloud/support
 
 - Have access to [Gen 2 VPC](https://cloud.ibm.com/vpc-ext/).
 - Create a **Publicly Accessible** Cloud Object Storage (COS) Bucket and upload the qcow2 image using
-the methods described in _IBM COS getting started docs_ (https://test.cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started). This qcow2 image will be used to create a
-custom image (https://cloud.ibm.com/docs/vpc?topic=vpc-managing-images) in the 
-customer account by the terraform script. It's recommended to delete the
+the methods described in _IBM COS getting started docs_ (https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage). This qcow2 image will be used to create a
+custom image (https://cloud.ibm.com/docs/vpc?topic=vpc-managing-images) that can be used by terraform script later in the process. It's recommended to delete the
 custom image after the VNF is created by terraform.
 - Create a **READ ALL** permissions on the relevant bucket containing the qcow2
 image using the method provided here (https://cloud.ibm.com/docs/cloud-object-storage/iam?topic=cloud-object-storage-iam-public-access#public-access-object). Here is an example for us-south region using
@@ -42,18 +41,19 @@ Ensure that you have the following permissions in IBM Cloud Identity and Access 
 
 ## Configuring your deployment values
 
-Create a schematics workspace and provide the github repository url (https://github.com/IBM-Cloud/vnf-samples/custom_image_sample) under settings to pull the latest code, so that you can set up your deployment variables from the `Create` page. Once the template is applied, IBM Cloud Schematics  provisions the resources based on the values that were specified for the deployment variables.
+Create a schematics workspace and provide the github repository url (https://github.com/IBM-Cloud/vnf-samples/tree/master/custom_image_sample) under `Settings` to pull the latest terraform code from the Github repository. The deployment variables are generated from the terraform code. Fill in values for the various deployment variables and select `Apply Plan`. Once the template is applied, IBM Cloud Schematics  provisions the resources based on the values that were specified for the deployment variables. Tips on filling in the variable values can be found below.
 
 ### Required values
 Fill in the following values, based on the steps that you completed before you began.
 
 | Key | Definition | Value Example |
 | --- | ---------- | ------------- | 
-| `generation` | The VPC Generation 1 (classic) or Generation 2 that you want your VPC virtual servers to be provisioned.  | 2  |
-| `region` | The VPC region that you want your VPC virtual servers to be provisioned. | us-south |
-| `vnf_cos_image_url` | This is the vendor COS image SQL URL where the image(Ubuntu qcow2 image) is located. This is to copy the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account. | cos://us-south/vnf-bucket/bionic-server-cloudimg-amd64.qcow2 |
-| `vnf_vpc_image_name` | The starting name of the Ubuntu qcow2 Custom Image to be provisioned in your IBM Cloud account and (if already available) to be used to create the Ubuntu virtual server instance. The name is appended with UUID, to create a unique custom image for every run. | ubuntu18-04-img |
-| `image_operating_system` | Description of underlying OS of an image. | centos-7-amd64 |
+| `generation` | The VPC Generation 1 (classic) or Generation 2 that you want your VPC virtual servers to be provisioned. Only use Gen 2. | 2  |
+| `vnf_cos_image_url` | The COS image SQL URL where the image(Ubuntu qcow2 image) is located. This copies the image from COS to VPC custom image in your IBM Cloud account VPC Infrastructure. First time, the image needs to be copied to your VPC cloud account. | cos://us-south/vnf-bucket/bionic-server-cloudimg-amd64.qcow2 |
+| `vnf_vpc_image_name` | The name of the VSI image that will be provisioned. | ubuntu18-04-img |
+| `region` | The VPC region to provision the VSI image in. To list regions: `ibmcloud is regions`| us-south |
+| `image_operating_system` | Description of underlying OS of an image. To list available OSs: `ibmcloud is oses`| centos-7-amd64 |
+
 
 ## Notes
 
