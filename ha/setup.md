@@ -12,7 +12,8 @@ This document explains some of the basic steps needed to configure IBM VPC Virtu
 4) Create any additional subnet's needed for the VSI workload's that will be routed through the NLB/VNF's.
 5) Grant a service authorization for this IBM Cloud Account to allow the NLB to modify custom routes if an NLB failover occurs. See Images below for guidance. This should only be needed once per Account.
 
-<SCREENSHOTS>
+![](/images/grant-service-auth1.png)
+![](/images/grant-service-auth2.png)
 
 # Deploy the VNF
 
@@ -134,14 +135,14 @@ Custom routes will be needed to ensure ingress data traffic is routed through th
 
 Let's consider the following example setup for a Palo Alto VM-Series:
 
-<DIAGRAM>
+![](/images/vnf-palo-flow-diagram.png)
 
 An Ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) "hop" through the NLB setup in "Route Mode". In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip.
   
 # NLB failovers and custom routes
 
-* The NLB is deployed as two seperate / clustered VSI's running in an Active / Passive mode. The primary IP must be used in the custom route. You can use an `nslookup` on the NLB hostname to determine which IP is the primary for use in your route config.
-* The VNF's must also be configured to allow traffic from both the active and passive NLB nodes. The IP's can be retrieved from the GET REST API call:
+* The NLB is deployed as an active / passive cluster. Each node has a distinct IP. The active IP must be used in the custom routes that are created. You can use an `nslookup` on the NLB hostname to determine which IP is the primary for use in your route config.
+* The VNF's must also be configured to allow traffic from both the active and passive NLB nodes. This is needed for the health check. The IP's can be retrieved from the GET REST API call:
  
 ```
 curl -k -s -v \
