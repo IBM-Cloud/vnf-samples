@@ -12,6 +12,8 @@ This document explains some of the basic steps needed to configure IBM VPC Virtu
 4) Create any additional subnet's needed for the VSI workload's that will be routed through the NLB/VNF's.
 5) Grant a service authorization for this IBM Cloud Account to allow the NLB to modify custom routes if an NLB failover occurs. See Images below for guidance. This should only be needed once per Account.
 
+More details on service to service authorization can be found [here](https://cloud.ibm.com/docs/account?topic=account-serviceauth&interface=ui#create-auth)
+
 ![](/images/grant-service-auth1.png)
 ![](/images/grant-service-auth2.png)
 
@@ -137,7 +139,9 @@ Let's consider the following example setup for a Palo Alto VM-Series:
 
 ![](/images/vnf-palo-flow-diagram.png)
 
-An Ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) "hop" through the NLB setup in "Route Mode". In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip.
+An Ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) "hop" through the NLB setup in "Route Mode". In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip. In this example the client is in a different zone than the target.
+
+More information on custom routes can be found [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes)
   
 # NLB failovers and custom routes
 
