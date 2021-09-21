@@ -22,7 +22,8 @@ More details on service to service authorization can be found [here](https://clo
 There are multiple IBM Cloud VNF catalog offerings. Vendor specific details will be provided at a later date.
 
 1) Ensure the VNF data interface is on the same shared subnet as the NLB we will provision later.
-2) The VNF configuration will need to enable "health checks" from the NLB. HTTP or TCP is supported. See the section "NLB HA failovers and custom routes" below for details on retrieving the NLB IP's. 
+2) Ensure the VNF data interface (shared subnet with NLB) has "Allow IP Spoofing" enabled. You can enable through the VPC VSI UI -> Network Interfaces 
+3) The VNF configuration will need to enable "health checks" from the NLB. HTTP or TCP is supported. See the section "NLB HA failovers and custom routes" below for details on retrieving the NLB IP's. 
 
 # Deploy the NLB
 
