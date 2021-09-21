@@ -132,6 +132,10 @@ curl -k -s -v \
 
 6) Ensure the NLB's Pool includes the VNF VSI members and the health check is "Passed".
 
+# Configure Security Groups
+
+The VNF data network interface is attached to a VPC Security Group. Ensure the Security Group has Inbound rules that allow traffic on the health port setup between the NLB and the VNF. For example, if the health check is setup for TCP on Port 80 (HTTP) then create an "Inbound rule" under that Security Group.
+
 # Configure Custom Routes
 
 Custom routes will be needed to ensure ingress data traffic is routed through the NLB on it's way to the VNF and target destination. In some cases custom routes may also be needed to ensure egress traffic is returned to the original client source.
