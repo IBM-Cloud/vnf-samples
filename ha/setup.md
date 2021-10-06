@@ -1,8 +1,11 @@
 ## IBM Cloud VNF High Availability Setup
 
-This document explains some of the basic steps needed to configure IBM VPC Virtual Network Function (VNFs) for HA. The feature is currently allow-list only and only available in the us-east region. Supported use cases include:
+This document explains some of the basic steps needed to configure IBM VPC Virtual Network Function (VNFs) for HA. Supported use cases include:
+
 * Active / Active
 * Active / Passive
+
+The Network Load Balancer (NLB) Route Mode feature used to support VNF HA is currently only available with a private IP and currently only TCP data traffic is supported. Both public IP and UDP data traffic will be supported in the future.
 
 # Configure the VPC Resources
 
@@ -19,7 +22,7 @@ More details on service to service authorization can be found [here](https://clo
 
 # Deploy the VNF
 
-There are multiple IBM Cloud VNF catalog offerings. Vendor specific details will be provided at a later date.
+There are multiple IBM Cloud VNF catalog offerings. Vendor specific details will be provided at a later date. Several use cases specific to Palo Alto and F5 VNF's are discussed below in the "Configure Custom Routes" section.
 
 1) Ensure the VNF data interface is on the same shared subnet as the NLB we will provision later.
 2) Ensure the VNF data interface (shared subnet with NLB) has "Allow IP Spoofing" enabled. You can enable through the VPC VSI UI -> Network Interfaces 
@@ -29,7 +32,7 @@ There are multiple IBM Cloud VNF catalog offerings. Vendor specific details will
 
 Follow the IBM Cloud Documentation for [Creating a route mode Network Load Balancer for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-nlb-vnf&interface=ui)
 
-The doc describes steps to provision the NLB from the UI, CLI, and REST API. Below is an example of an NLB provisioned via the REST API:
+The doc above describes steps to provision the NLB from the UI, CLI, and REST API. Below is an example of an NLB provisioned via the REST API:
 
 1) Ensure you have an IBM Cloud API Key which you can use to retrieve the RIAS token and inject in the REST call below. You can use something like:
 
@@ -136,7 +139,7 @@ curl -k -s -v \
 
 # Configure Security Groups
 
-The VNF data network interface is attached to a VPC Security Group. Ensure the Security Group has Inbound rules that allow traffic on the health port setup between the NLB and the VNF. For example, if the health check is setup for TCP on Port 80 (HTTP) then create an "Inbound rule" under that Security Group.
+The VNF data network interface is attached to a VPC Security Group. Ensure the Security Group has Inbound rules that allow traffic on the health port setup between the NLB and the VNF. For example, if the health check is setup for TCP on Port 80 (HTTP) then create an "Inbound rule" under that Security Group. Additionally, ensure rules are created to allow or restrict data traffic if desired. 
 
 # Configure Custom Routes
 
@@ -175,5 +178,5 @@ curl -k -s -v \
         -X GET $RIAS_EP/v1/load_balancers?generation=2
 ```
 
-
+* If the NLB fail's over to the other node the custom routes will be automatically updated to hop to the new NLB IP.
 
