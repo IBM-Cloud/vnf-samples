@@ -27,9 +27,11 @@ There are multiple IBM Cloud VNF catalog offerings. Vendor specific details will
 
 # Deploy the NLB
 
-1) Ensure your IBM Cloud account is allow listed to the NLB "Route Mode" support available in us-east.
-2) Currently this is only available via the [IBM RIAS REST API's](https://pages.github.ibm.com/riaas/api-spec/spec_aspirational/#/Load%20balancers/create_load_balancer) with the "Route Mode" not publicly documented. 
-3) Ensure you have an IBM Cloud API Key which you can use to retrieve the RIAS token and inject in the REST call below. You can use something like:
+Follow the IBM Cloud Documentation for [Creating a route mode Network Load Balancer for VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-nlb-vnf&interface=ui)
+
+The doc describes steps to provision the NLB from the UI, CLI, and REST API. Below is an example of an NLB provisioned via the REST API:
+
+1) Ensure you have an IBM Cloud API Key which you can use to retrieve the RIAS token and inject in the REST call below. You can use something like:
 
 ```
 #!/bin/bash
@@ -47,11 +49,11 @@ export RIAS_TOKEN=$ACCESS_TOKEN
 echo export RIAS_TOKEN="\"$RIAS_TOKEN\""
 ```
 
-4) REST Details:
+2) REST Details:
 * Specify new "route_mode":true to enable "Route Mode"
 * Specify the shared VNF "subnets" from the instances above.
 * Specify the VNF VSI instance id in the "pools" -> "members"
-* Remove "listeners" -> "pool" from the payload.
+
 
 Example Payload to create an NLB in "Route Mode" with 2 VNF VSI members with a TCP health check on port 80.
 
@@ -112,7 +114,7 @@ Example Payload to create an NLB in "Route Mode" with 2 VNF VSI members with a T
 }
 ```
 
-5) Execute the REST call. You can use something like:
+3) Execute the REST call. You can use something like:
 
 ```
 #!/bin/bash
@@ -130,7 +132,7 @@ curl -k -s -v \
         -X POST $RIAS_EP/v1/load_balancers?generation=2
 ```
 
-6) Ensure the NLB's Pool includes the VNF VSI members and the health check is "Passed".
+4) Ensure the NLB's Pool includes the VNF VSI members and the health check is "Passed".
 
 # Configure Security Groups
 
@@ -140,14 +142,27 @@ The VNF data network interface is attached to a VPC Security Group. Ensure the S
 
 Custom routes will be needed to ensure ingress data traffic is routed through the NLB on it's way to the VNF and target destination. In some cases custom routes may also be needed to ensure egress traffic is returned to the original client source.
 
+More information on custom routes can be found [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes)
+
+## VNF as an Active/Active HA Transparent Proxy Firewall
 Let's consider the following example setup for a Palo Alto VM-Series:
 
 ![](/images/vnf-palo-flow-diagram.png)
 
-An Ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) "hop" through the NLB setup in "Route Mode". In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip. In this example the client is in a different zone than the target.
+This example will configure the Palo Alto VNF as a transparent proxy firewall in Active / Active mode. Because this is transparent, the client (source) makes a TCP request to the target (destination) IP at 10.240.66.4 instead of the firewall IP.
 
-More information on custom routes can be found [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes)
-  
+An ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded. In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip. In this example the client is in a different zone than the target but the target is in the same zone as the NLB/VNF.
+
+## VNF as an Active/Active HA Non-Transparent Proxy Firewall
+
+Let's consider the following example setup for an F5 Big-IP:
+
+![](/images/vnf-f5-flow-diagram.png)
+
+This example will configure the F5 VNF as a non-transparent proxy firewall in Active / Active mode. Because this is a non-transparent proxy, the client (source) makes a TCP request to the F5 Virtual IP at 10.241.1.10. The F5 VNF will inspect the packet and forward on to the target (10.241.1.8) that was added to the pool.
+
+An ingress custom route was created to ensure client (10.241.64.4) data packets destined for the F5 VNF (external interface at 10.241.1.10) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded. In this Active / Active example no egress route is needed since the target will respond to the source IP (F5 is setup to use SNAT). The F5 VNF will then forward the traffic directly back to the client, bypassing the NLB. Since the NLB and VNF are in the same subnet the Auto Last Hop: Disabled setting must also be configured to ensure the F5 does not use the destination MAC address of the NLB in it's routing decision.
+
 # NLB failovers and custom routes
 
 * The NLB is deployed as an active / passive cluster. Each node has a distinct IP. The active IP must be used in the custom routes that are created. You can use an `nslookup` on the NLB hostname to determine which IP is the primary for use in your route config.
