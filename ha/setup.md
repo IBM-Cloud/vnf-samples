@@ -12,7 +12,7 @@ The Network Load Balancer (NLB) Route Mode feature used to support VNF HA is cur
 1) Create a VPC.
 2) Create 1 subnet for the VNF management traffic interface. This can be shared between multiple VNF's to support clustering, etc.
 3) Create 1 subnet that will be shared between the VNF's data traffic interface and the Network Load Balancer (NLB).
-4) Create any additional subnet's needed for the VSI workload's that will be routed through the NLB/VNF's.
+4) Create any additional subnets needed for the VSI workloads that will be routed through the NLB/VNF's.
 5) Grant a service authorization for this IBM Cloud Account to allow the NLB to modify custom routes if an NLB failover occurs. See Images below for guidance. This should only be needed once per Account.
 
 More details on service to service authorization can be found [here](https://cloud.ibm.com/docs/account?topic=account-serviceauth&interface=ui#create-auth)
@@ -147,24 +147,24 @@ Custom routes will be needed to ensure ingress data traffic is routed through th
 
 More information on custom routes can be found [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes)
 
-## VNF as an Active/Active HA Transparent Proxy Firewall
+## Active/Active HA Transparent VNF
 Let's consider the following example setup for a Palo Alto VM-Series:
 
 ![](/images/vnf-palo-flow-diagram.png)
 
-This example will configure the Palo Alto VNF as a transparent proxy firewall in Active / Active mode. Because this is transparent, the client (source) makes a TCP request to the target (destination) IP at 10.240.66.4 instead of the firewall IP.
+This example will configure the Palo Alto as a transparent highly available Active / Active VNF. Because this is transparent, the client (source) makes a TCP request to the target (destination) IP at 10.240.66.4 instead of the firewall IP.
 
 An ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded. In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip. In this example the client is in a different zone than the target but the target is in the same zone as the NLB/VNF.
 
-## VNF as an Active/Active HA Non-Transparent Proxy Firewall
+## Active/Active HA Non-Transparent VNF 
 
 Let's consider the following example setup for an F5 Big-IP:
 
 ![](/images/vnf-f5-flow-diagram.png)
 
-This example will configure the F5 VNF as a non-transparent proxy firewall in Active / Active mode. Because this is a non-transparent proxy, the client (source) makes a TCP request to the F5 Virtual IP at 10.241.1.10. The F5 VNF will inspect the packet and forward on to the target (10.241.1.8) that was added to the pool.
+This example will configure the F5 as a non-transparent highly available Active / Active VNF. Because this is non-transparent, the client (source) makes a TCP request to the F5 Virtual IP at 10.241.1.10. The F5 VNF will inspect the packet and forward on to the target (10.241.1.8) that was added to the pool.
 
-An ingress custom route was created to ensure client (10.241.64.4) data packets destined for the F5 VNF (external interface at 10.241.1.10) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded. In this Active / Active example no egress route is needed since the target will respond to the source IP (F5 is setup to use SNAT). The F5 VNF will then forward the traffic directly back to the client, bypassing the NLB. Since the NLB and VNF are in the same subnet the Auto Last Hop: Disabled setting must also be configured to ensure the F5 does not use the destination MAC address of the NLB in it's routing decision.
+An ingress custom route was created to ensure client (10.241.64.4) data packets destined for the F5 VNF (external interface at 10.241.1.10) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all ports will be automatically forwarded. In this Active / Active example no egress route is needed since the target will respond to the source IP (F5 is setup to use SNAT). The F5 VNF will then forward the traffic directly back to the client, bypassing the NLB. Since the NLB and VNF are in the same subnet the Auto Last Hop: Disabled setting must also be configured to ensure the F5 does not use the destination MAC address of the NLB in it's routing decision.
 
 # NLB failovers and custom routes
 
