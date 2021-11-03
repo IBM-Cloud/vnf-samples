@@ -169,7 +169,7 @@ An ingress custom route was created to ensure client (10.241.64.4) data packets 
 # NLB failovers and custom routes
 
 * The NLB is deployed as an active / passive cluster. Each node has a distinct IP. The active IP must be used in the custom routes that are created. You can use an `nslookup` on the NLB hostname to determine which IP is the primary for use in your route config.
-* The VNF's must also be configured to allow traffic from both the active and passive NLB nodes. This is needed for the health check. The IP's can be retrieved from the GET REST API call:
+* The VNF's must also be configured to allow traffic from both the active and passive NLB nodes. This is needed for the health check. The NLB IP's can be retrieved from the NLB UI -> Overview -> Private IPs:
  
 ```
 curl -k -s -v \
