@@ -150,11 +150,11 @@ More information on custom routes can be found [here](https://cloud.ibm.com/docs
 ## Active/Active HA Transparent VNF
 Let's consider the following example setup for a Palo Alto VM-Series:
 
-![](/images/vnf-palo-flow-diagram.png)
+![](/images/vnf-transparent-flow-diagram.png)
 
-This example will configure the Palo Alto as a transparent highly available Active / Active VNF. Because this is transparent, the client (source) makes a TCP request to the target (destination) IP at 10.240.66.4 instead of the firewall IP.
+This example will configure the Palo Alto as a transparent highly available Active / Active VNF. Because this is transparent, the client (source) makes a TCP request to the target VSI (destination) IP at 10.241.66.5 instead of the firewall IP.
 
-An ingress custom route was created to ensure client (10.240.1.5) data packets destined for the target (10.240.66.4) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded. In this Active / Active example an egress route is also needed to ensure data traffic from the target will "hop" through the NLB on the return trip. In this example the client is in a different zone than the target but the target is in the same zone as the NLB/VNF.
+An egress custom route was created to ensure client (10.241.0.6) data packets destined for the target (10.241.66.5) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded to their destination. Since the VNFs are in the NLB pool they will be the next hop after the NLB. In this Active / Active single region example an egress route is also needed to ensure the return packet from the target will "hop" through the NLB on the return trip, then through the same VNF it was sent through, and finally back to the client. In this example the client is in a different zone than the target but the target is in the same zone as the NLB/VNF.
 
 ## Active/Active HA Non-Transparent VNF 
 
