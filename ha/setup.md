@@ -150,7 +150,7 @@ More information on custom routes can be found [here](https://cloud.ibm.com/docs
 ## Active/Active HA Transparent VNF
 Let's consider the following example setup for a Palo Alto VM-Series:
 
-![](/images/vnf-transparent-flow-diagram.png)
+![](/images/vnf-transparent-flow-diagram2.png)
 
 This example will configure the Palo Alto as a transparent highly available Active / Active VNF. Because this is transparent, the client (source) makes a TCP request to the target VSI (destination) IP at 10.241.66.5 instead of the firewall IP.
 
