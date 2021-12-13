@@ -147,7 +147,8 @@ Custom routes will be needed to ensure ingress data traffic is routed through th
 
 More information on custom routes can be found [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-custom-routes)
 
-## Active/Active HA Transparent VNF
+## Active/Active HA Transparent VNF Single VPC
+
 Let's consider the following example setup for a Palo Alto VM-Series:
 
 ![](/images/vnf-transparent-flow-diagram2.png)
@@ -155,6 +156,23 @@ Let's consider the following example setup for a Palo Alto VM-Series:
 This example will configure the Palo Alto as a transparent highly available Active / Active VNF. Because this is transparent, the client (source) makes a TCP request to the target VSI (destination) IP at 10.241.66.5 instead of the firewall IP.
 
 An egress custom route was created to ensure client (10.241.0.6) data packets destined for the target (10.241.66.5) will "hop" through the NLB. Since the NLB is configured in "Route Mode", TCP requests on all port's will be automatically forwarded to their destination. Since the VNFs are in the NLB pool they will be the next hop after the NLB. In this Active / Active single region example an egress route is also needed to ensure the return packet from the target will "hop" through the NLB on the return trip, then through the same VNF it was sent through, and finally back to the client. In this example the client is in a different zone than the target but the target is in the same zone as the NLB/VNF.
+
+## Active/Active HA Transparent VNF Transit VPC (Hub-and-Spoke)
+
+In this example the transparent VNF is used within the transit (hub) VPC to process data traffic within the VPC spokes.
+
+![](/images/vnf-transparent-private-hub-and-spoke.png)
+
+The following resources are configured:
+1) The VPC hub contains the private NLB which is configured in "Route Mode" and the transparent VNFs are added to it's pool to enable HA. 
+2) VPC spoke 1 contains a private Application Load Balancer (ALB) with a pool containing the workload subnet's for zone1 (10.174.0.0/24) and zone2 (10.174.4.0/24). 
+3) VPC spoke 2 contains a private ALB with a pool containing the workload subnet for zone1 (10.174.2.0/24).
+4) A Transit Gateway is configured to manage the interconnections between the hub and spokes.
+
+A workload in VPC-spoke#1 zone1 that needs to communicate with a workload in VPC-spoke#2 zone1 must traverse the VNF in the VPC-hub. An egress route from the VPC-spoke#1 subnet (10.174.0.0/24) destined for VPC-spoke#2 (10.174.2.0/24) that hops through the VPC-hub's NLB (10.175.0.4) will allow the send traffic to reach it's destination. A similar egress route must be created on VPC-spoke#2 that allows the response to traverse VPC-hub as well. For workload's in VPC-spoke#1 zone2 we must create a similar egress route for send traffic as well.
+
+Finally, since the NLB may failover and require an update to the next hop, we must create an Ingress route with the source as the Transit Gateway to ensure the NLB IP is updated on failover. The NLB can only update custom routes within it's VPC (VPC-hub) and can not automatically update routes in the spoke VPCs.
+
 
 ## Active/Active HA Non-Transparent VNF 
 
