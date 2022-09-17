@@ -1,0 +1,163 @@
+---
+- name: vnf-ha-terraform install
+  hosts: all
+  become: true
+  vars_files:
+    - vars.yaml
+
+  tasks:
+    - debug:
+        msg: "Installing required packages ..."
+
+    - name: disable apt periodic
+      command: sed -i '$ a APT::Periodic::Enable "0";' /etc/apt/apt.conf.d/10periodic
+
+    - name: Remove lock files
+      file:
+        path: ?~@~\{{ item }}?~@~]
+        state: absent
+      with_items:
+        - /var/lib/apt/lists/lock
+        - /var/cache/apt/archives/lock
+        - /var/lib/dpkg/lock
+        - /var/lib/dpkg/lock-frontend
+        
+    - pause:
+        seconds: 60       
+
+    - debug:
+        msg: "Removed lock files ..."
+
+    - name: Run apt-get update
+      apt:
+        update_cache: yes
+
+    - name: Remove lock files
+      file:
+        path: ?~@~\{{ item }}?~@~]
+        state: absent
+      with_items:
+        - /var/lib/apt/lists/lock
+        - /var/cache/apt/archives/lock
+        - /var/lib/dpkg/lock
+        - /var/lib/dpkg/lock-frontend
+        
+    - pause:
+        seconds: 60         
+
+    - debug:
+        msg: "Removed lock files ..."
+        
+    - name: Install the package "sshpass"
+      apt:
+        name: sshpass
+        state: present
+
+    - debug:
+        msg: "Installing python3-pip ..."
+
+    - name: Install the package python3-pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install the package ibm-vpc
+      pip:
+        name: ibm-vpc
+        version: 0.3.0
+        executable: pip3
+
+    - name: Upgrade the package ibm-vpc to latest version
+      pip:
+        name: ibm-vpc
+        state: latest
+        executable: pip3
+
+    - name: Install the package flask
+      pip:
+        name: flask
+        executable: pip3
+
+    - debug:
+        msg: "Clone ha fail over repository git"
+
+    - name: Git checkout
+      git:
+        repo: 'https://github.com/MalarvizhiK/vnf-ha-cloud-failover-func.git'
+        dest: /tmp/vnf-ha-cloud-failover-func
+        force: yes
+
+    - name: Run ha_initialize_json script
+      command: python3 /tmp/vnf-ha-cloud-failover-func/ha_initialize_json.py --apikey {{ apikey }} --vpcid {{ vpcid }} --vpcurl {{ vpcurl }} --zone {{ zone }} --mgmtip1 {{ mgmtip1 }} --mgmtip2 {{ mgmtip2 }} --extip1 {{ extip1 }} --extip2 {{ extip2 }}
+      register: cmd_output
+
+    - debug:
+        msg: "ha_initialize_json script output: {{ cmd_output.stdout }}"
+
+    - name: Find the installed python executable 
+      command: which python3
+      register: result
+
+    - set_fact:
+        py3loc: "{{ result.stdout }}"
+
+    - debug:
+        msg: "Install location of python3: {{ py3loc }}"
+
+    - name: Update python executable in flask.service file
+      replace:
+        path: /tmp/vnf-ha-cloud-failover-func/flask.service
+        regexp: 'whichpython3'
+        replace: "{{ py3loc }}"
+
+    - name: Move flask.service file to /lib/systemd/system
+      copy:
+        src: /tmp/vnf-ha-cloud-failover-func/flask.service
+        dest: /lib/systemd/system/flask.service
+        remote_src: yes
+
+    - name: Do a daemon reload
+      systemd:
+        daemon_reload: yes
+
+    - name: Enable Flask
+      systemd:
+        name: flask
+        enabled: yes
+      ignore_errors: true
+
+    - name: Start Flask
+      systemd:
+        name: flask
+        state: started
+      ignore_errors: true
+
+    - name: Check flask status
+      command: service flask status
+      args:
+        warn: false
+      register: flask_status
+
+    - debug:
+        msg: "systemctl flask status: {{ flask_status.stdout }}"
+
+    - debug:
+        msg: "Updating tgactive script ..."
+
+    - name: copy update_script.sh to mgmt node
+      command: sshpass -p {{ item.hapwd }} scp -o StrictHostKeyChecking=no /tmp/vnf-ha-cloud-failover-func/update_script.sh root@{{ item.mgmtip }}:/config/failover/
+      with_items:
+        - { hapwd: "{{ ha1pwd }}", mgmtip: "{{ mgmtip1 }}" }
+        - { hapwd: "{{ ha2pwd }}", mgmtip: "{{ mgmtip2 }}" }
+
+    - name: Execute update_script.sh on mgmt node
+      command: sshpass -p {{ item.hapwd }} ssh -o StrictHostKeyChecking=no -l root {{ item.mgmtip }} "sh /config/failover/update_script.sh" {{ item.ipaddress }}
+      with_items:
+        - { hapwd: "{{ ha1pwd }}", mgmtip: "{{ mgmtip1 }}", ipaddress: "{{ ipaddress }}" }
+        - { hapwd: "{{ ha2pwd }}", mgmtip: "{{ mgmtip2 }}", ipaddress: "{{ ipaddress }}" }
+
+    - debug:
+        msg: "{{ item.mgmtip }}: Updated tgactive with url http://{{ item.ipaddress }}:3000/"
+      with_items:
+        - { mgmtip: "{{ mgmtip1 }}", ipaddress: "{{ ipaddress }}" }
+        - { mgmtip: "{{ mgmtip2 }}", ipaddress: "{{ ipaddress }}" }

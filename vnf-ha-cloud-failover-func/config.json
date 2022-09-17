@@ -1,0 +1,18 @@
+{
+"install_location": "",
+"apikey": "",
+"vpc_url": "",
+"vpc_id": "",
+"zone": "",
+"ha_pair":
+[
+	{
+		"mgmt_ip": "mip_1",
+		"ext_ip": "eip_1"
+	},
+	{
+		"mgmt_ip": "mip_2",
+		"ext_ip": "eip_2"
+	}
+]
+}
