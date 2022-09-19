@@ -1,0 +1,32 @@
+- name: Download kubeconfig
+  get_url:
+      url: https://containers.cloud.ibm.com/global/v1/clusters/{{ cluster_id }}/config
+      dest: "{{ zip_path }}"
+      force: yes
+      timeout: 40
+      headers: 
+        Authorization: '{{ IC_IAM_TOKEN }}'
+        X-Auth-Refresh-Token: '{{ IC_IAM_REFRESH_TOKEN }}'
+          
+- name: Delete earlier instances of kube config if any
+  file:
+    path: "{{ kube_config_path }}"
+    state: absent
+
+- name: ansible create directory for unzip kubeconfig
+  file:
+    path: "{{ kube_config_path }}"
+    state: directory
+
+- name: Unzip Kube config
+  shell:
+    cmd: /usr/bin/unzip "{{ zip_path }}" -d "{{ kube_config_path }}"
+
+- name: Read config.yaml into kube_config var
+  shell:
+    cmd: find "{{kube_config_path}}" -name "*.yml"
+  register: kube_config
+
+- name: Display the kubeconfig file path
+  debug:
+    var: kube_config.stdout

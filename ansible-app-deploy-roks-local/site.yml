@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  vars:
+    temp_path: /tmp
+
+- name: apply common configuration to all nodes
+  hosts: localhost
+  roles:
+    - role: web
+    - role: loadbalancer
+

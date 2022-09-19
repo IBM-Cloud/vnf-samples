@@ -1,0 +1,23 @@
+- name: Create alb web service 
+  k8s:
+    api_version: v1
+    namespace: default
+    definition:
+      kind: Service
+      metadata:
+        name: app-lb-service
+        annotations:
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: "private"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets: "0717-7d8aed3d-d84d-4341-b262-7f170b57673b,0727-bbd9ad8f-ba87-40f1-8d47-0d42405ae989,0737-163cb5c4-7211-4d78-a88a-b992ed016d5d"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "us-south-1"
+      spec:
+        selector:
+          app: appflasknode
+        ports:
+          - name: http
+            protocol: TCP
+            port: 8000
+            targetPort: 8000
+        type: LoadBalancer 
+
+
