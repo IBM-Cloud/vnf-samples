@@ -1,0 +1,67 @@
+- name: Create nlb dal10 web service 
+  k8s:
+    api_version: v1
+    namespace: default
+    definition:
+      kind: Service
+      metadata:
+        name: flasknode-vpc-nlb-us-south-1
+        annotations:
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: "private"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "3255508"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal10"
+      spec:
+        selector:
+          app: appflasknode
+        ports:
+          - name: http
+            protocol: TCP
+            port: 8000
+            targetPort: 8000
+        type: LoadBalancer 
+
+
+- name: Create nlb dal12 web service
+  k8s:
+    api_version: v1
+    namespace: default
+    definition:
+      kind: Service
+      metadata:
+        name: flasknode-vpc-nlb-us-south-2
+        annotations:
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: "private"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "3255516"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal12"
+      spec:
+        selector:
+          app: appflasknode
+        ports:
+          - name: http
+            protocol: TCP
+            port: 8000
+            targetPort: 8000
+        type: LoadBalancer
+
+
+- name: Create nlb dal13 web service
+  k8s:
+    api_version: v1
+    namespace: default
+    definition:
+      kind: Service
+      metadata:
+        name: flasknode-vpc-nlb-us-south-3
+        annotations:
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: "private"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "3255512"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal13"
+      spec:
+        selector:
+          app: appflasknode
+        ports:
+          - name: http
+            protocol: TCP
+            port: 8000
+            targetPort: 8000
+        type: LoadBalancer

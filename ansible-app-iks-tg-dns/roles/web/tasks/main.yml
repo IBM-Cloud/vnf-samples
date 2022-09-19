@@ -1,0 +1,29 @@
+- name: Create Web Application
+  k8s:
+    api_version: v1
+    namespace: default
+    definition:
+      kind: Deployment
+      metadata:
+        name: app-lb-deployment
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            app: appflasknode
+        template:
+          metadata:
+            labels:
+              app: appflasknode
+          spec:
+            containers:
+              - name: appflasknode
+                image: us.icr.io/malar-ns/cloudant-python-alb-app:latest
+                ports:
+                  - containerPort: 8000
+                imagePullPolicy: Always
+                env:
+                - name: APIKEY
+                  value: ""
+                - name: CLOUDANT_URL
+                  value: "https://404811ba-d175-4cc6-b729-a8c412b4cd9b-bluemix.cloudantnosqldb.appdomain.cloud"
