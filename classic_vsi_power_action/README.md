@@ -33,13 +33,18 @@ Below are the input to the script. These inputs should be specified in
 `vsi_power_action.env` file.
 
 - `IBMCLOUD_API_KEY` - IBM Cloud Account API Key for creating Code Engine Project.
+Go to the [link](https://www.ibm.com/docs/en/app-connect/containers_cd?topic=servers-creating-cloud-api-key)
+to know how to create an IBM Cloud API Key.
 - `IBMCLOUD_REGION` - IBM Cloud region where Code Engine should be created. Example: `"us-south"`.
 - `IBMCLOUD_RESOURCE_GROUP` - IBM Cloud Resource Group (if it default, then the
 input should be Default)
 - `IBMCLOUD_PROJECT_NAME` - IBM Cloud Code Engine Project Name.
 - `CLASSIC_VSI_ACCOUNT_API_KEY` - Classic VSI Account API Key.  This is the account
-where all the VSIs should be scheduled for power on/off.
-- `CLASSIC_VSI_ACCOUNT_USER_NAME` - Classic VSI Account User name.
+where all the VSIs should be scheduled for power on/off. Go to the [link](https://cloud.ibm.com/docs/account?topic=account-classic_keys&interface=ui#create-classic-infrastructure-key)
+to know how to create an IBM Cloud API Key for classic infrastructure.
+- `CLASSIC_VSI_ACCOUNT_USER_NAME` - Classic VSI Account User name. In most cases, the username
+of your classic infrastructure API key will be your <account_ID>_<email_address>.
+It is the same as your VPN username displayed on your User details page in the VPN password section.
 - `CLASSIC_VSI_LIST_FILE` - Classic VSI list file `vsi_id.txt`. This file should
 contain the list of VSI IDs which are needed to be scheduled for power on/off.
 Example for having the VSI IDs in the file
