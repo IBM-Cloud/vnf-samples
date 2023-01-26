@@ -25,6 +25,11 @@ When the F5 HA pair failover script gets triggered, it invokes the Python applic
 
 ![Custom Routes](../images/Custom_Routes.png)  
 
+### Invoke this application in IBM Cloud Schematics:   
+
+
+
+
 
 ### Cloud Services used
 
