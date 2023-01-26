@@ -29,11 +29,13 @@ When the F5 HA pair failover script gets triggered, it invokes the Python applic
 
 ![Custom Routes](../images/Custom_Routes.png)  
 
+The fail over script is found here in Active/Passive F5 instance: /config/failover/tgactive. The fail overscript invokes the custom Python application to update next hop IP.   
+
 ### Invoke this application in IBM Cloud Schematics:   
 
+The application can be invoked in IBM Cloud Schematics and the solution can be deployed.
 
-
-
+![IBM Cloud Schematics](../images/Schematics_Workspace_VNF.png)  
 
 ### Cloud Services used
 
