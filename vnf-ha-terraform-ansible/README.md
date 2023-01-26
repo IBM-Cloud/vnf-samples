@@ -11,7 +11,7 @@ Repository to store terraform, ansible, script files for F5 VNF High availabilit
 <!-- blank line -->
 <figure class="video_container">
   <video controls="true" allowfullscreen="true">
-    <source src="https://raw.githubusercontent.com/IBM-Cloud/vnf-samples/master/vnf-ha-terraform-ansible/create-application-high-availability-f5.mp4"  type="video/mp4">
+    <source src="https://raw.githubusercontent.com/IBM-Cloud/vnf-samples/master/vnf-ha-terraform-ansible/create-application-high-availability-f5.mp4" type="video/mp4">
   </video>
 </figure>
 <!-- blank line -->
