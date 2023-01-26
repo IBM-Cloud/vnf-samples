@@ -31,9 +31,9 @@ When the F5 HA pair failover script gets triggered, it invokes the Python applic
 
 ### Invoke this application in IBM Cloud Schematics:   
 
+The application can be invoked in IBM Cloud Schematics and the solution can be deployed.
 
-
-
+![IBM Cloud Schematics](../images/Schematics_Workspace_VNF.png)  
 
 ### Cloud Services used
 
