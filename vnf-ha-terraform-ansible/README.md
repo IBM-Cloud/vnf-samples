@@ -8,7 +8,7 @@ Repository to store terraform, ansible, script files for F5 VNF High availabilit
 
 ## Video of the F5 VNF HA Solution
 
-![Video demonstration](create-application-high-availability-f5.mp4)
+[![](https://markdown-videos.deta.dev/youtube/-5nm1yHqa-w)](https://www.youtube.com/watch?v=-5nm1yHqa-w)
 
 ## IBM Cloud Solution for F5 High Availability (Active - Passive)  
 
