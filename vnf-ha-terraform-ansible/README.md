@@ -8,7 +8,7 @@ Repository to store terraform, ansible, script files for F5 VNF High availabilit
 
 ## Video of the F5 VNF HA Solution
 
-[![](https://studio.youtube.com/video/-5nm1yHqa-w/)](https://studio.youtube.com/video/-5nm1yHqa-w/))
+[![]([https://studio.youtube.com/video/-5nm1yHqa-w/](https://www.youtube.com/watch?v=-5nm1yHqa-w)
 
 [![](https://markdown-videos.deta.dev/youtube/WHyOHQ_GkNo)](https://youtu.be/WHyOHQ_GkNo)
 
