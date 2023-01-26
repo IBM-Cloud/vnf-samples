@@ -10,9 +10,12 @@ Repository to store terraform, ansible, script files for F5 VNF High availabilit
 
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="create-application-high-availability-f5.mp4" frameborder="0" allowfullscreen="true"> </iframe>
+  <video controls="true" allowfullscreen="true">
+    <source src="create-application-high-availability-f5.mp4" type="video/mp4">
+  </video>
 </figure>
 <!-- blank line -->
+
 
 
 ## IBM Cloud Solution for F5 High Availability (Active - Passive)  
