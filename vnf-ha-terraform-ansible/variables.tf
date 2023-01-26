@@ -13,6 +13,11 @@ variable "region" {
   description = "The VPC Region that you want your VSI to be provisioned in. To list available regions, run `ibmcloud is regions`."
 }
 
+variable "IC_API_KEY" {
+  default     = ""
+  description = "The VPC Region that you want your VSI to be provisioned in. To list available regions, run `ibmcloud is regions`."
+}
+
 variable "rias_api_url" {
   default     = "https://us-south.iaas.cloud.ibm.com"
   description = "The public RIAS endpoint url of VPC. This is used by vpc sdk."

@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    ibm = {
+      source = "IBM-Cloud/ibm"
+    }
+  }
+}
+
 data "ibm_is_region" "region" {
   name = var.region
 }
@@ -13,13 +21,14 @@ data "ibm_is_ssh_key" "ssh_key" {
 }
 
 data "ibm_is_image" "custom_image" {
-  name = "ibm-ubuntu-18-04-1-minimal-amd64-2"
+  name = "ibm-ubuntu-20-04-5-minimal-amd64-1"
 }
 
 ##############################################################################
 # Provider block - Alias initialized tointeract with VNFSVC account
 ##############################################################################
 provider "ibm" {
+  ibmcloud_api_key = var.IC_API_KEY
   generation       = var.generation
   region           = var.region
   ibmcloud_timeout = 300
@@ -30,7 +39,7 @@ provider "ibm" {
 ##############################################################################
 
 resource "ibm_is_security_group" "ubuntu_vsi_sg" {
-  name           = "ubuntu-vsi-sg"
+  name           = "ubuntu-vsi-sg-2"
   vpc            = data.ibm_is_subnet.vnf_subnet.vpc
   resource_group = data.ibm_is_subnet.vnf_subnet.resource_group
 }
@@ -79,7 +88,7 @@ resource "ibm_is_security_group_rule" "ubuntu_sg_rule_all_out" {
 //source vsi
 resource "ibm_is_instance" "ubuntu_vsi" {
   depends_on     = [ibm_is_security_group_rule.ubuntu_sg_rule_all_out]
-  name           = "ubuntu-ha-vsi"
+  name           = "ubuntu-ha-vsi-2"
   image          = data.ibm_is_image.custom_image.id
   profile        = "bx2-2x8"
   resource_group = data.ibm_is_subnet.vnf_subnet.resource_group
@@ -96,7 +105,7 @@ resource "ibm_is_instance" "ubuntu_vsi" {
 
 //floating ip for above VSI
 resource "ibm_is_floating_ip" "ubuntu_vsi_fip" {
-  name   = "ubuntu-vsi-fip"
+  name   = "ubuntu-vsi-fip-2"
   target = ibm_is_instance.ubuntu_vsi.primary_network_interface[0].id
 }
 
@@ -104,6 +113,7 @@ resource "ibm_is_floating_ip" "ubuntu_vsi_fip" {
 # Provision the server using ansible-provisioner
 # ---------------------------------------------------------------------------------------------------------------------
 
+/*
 resource "null_resource" "ubuntu_ansible_provisioner" {
   depends_on = [ibm_is_floating_ip.ubuntu_vsi_fip]
 
@@ -117,7 +127,8 @@ resource "null_resource" "ubuntu_ansible_provisioner" {
     private_key = var.private_ssh_key
   }
 
-  provisioner "ansible" {
+  
+  provisioner "local-exec"  {
     plays {
       playbook {
         file_path = "script/install.yaml"
@@ -145,5 +156,35 @@ resource "null_resource" "ubuntu_ansible_provisioner" {
 
   }
 }
+*/
 
+resource "null_resource" "copy_file_provisioner" {
+  depends_on = [ibm_is_floating_ip.ubuntu_vsi_fip]
+  
+  #Copies the string in content into ./hosts
+  provisioner "local-exec" {
+   command = "echo ${ibm_is_floating_ip.ubuntu_vsi_fip.address} ansible_ssh_host=${ibm_is_floating_ip.ubuntu_vsi_fip.address} ansible_connection=ssh ansible_ssh_user=root ansible_ssh_common_args=\"'-o StrictHostKeyChecking=no'\" > hosts_file.txt"
+   }
 
+}
+  
+resource "null_resource" "ubuntu_ansible_provisioner" {
+  depends_on = [null_resource.copy_file_provisioner]
+  
+  connection {
+	type = "ssh"  
+    host = ibm_is_floating_ip.ubuntu_vsi_fip.address
+    user = "root"
+    private_key = file("./txt.txt")
+  }
+
+  provisioner "local-exec"  {
+	  connection {
+		type = "ssh"  
+	    host = ibm_is_floating_ip.ubuntu_vsi_fip.address
+	    user = "root"
+	    private_key = file("./txt.txt")
+	  }  
+    command = "chmod 0600 txt.txt; ansible-playbook script/install.yaml -i hosts_file.txt --fork 1 --user root --private-key ./txt.txt -e 'vpcid=${data.ibm_is_subnet.vnf_subnet.vpc} vpcurl=${var.rias_api_url} zone=${data.ibm_is_subnet.vnf_subnet.zone} apikey=${var.apikey} mgmtip1=${var.mgmt_ip1} extip1=${var.ext_ip1} mgmtip2=${var.mgmt_ip2} extip2=${var.ext_ip2} ipaddress=${ibm_is_instance.ubuntu_vsi.primary_network_interface[0].primary_ipv4_address} ha1pwd=${var.ha_password1} ha2pwd=${var.ha_password2}'"
+  }
+}
