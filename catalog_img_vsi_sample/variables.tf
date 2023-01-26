@@ -7,7 +7,7 @@
 # subnet_id - Subnet where resources are to be provisioned.
 ##############################################################################
 variable "subnet_id"{
-  default = ""
+  default = "0716-4628836b-003d-4368-b8b7-135f57eb134a"
   description = "The id of the subnet to which Ubuntu VSI's interface belongs to"
 }
 
@@ -15,7 +15,7 @@ variable "subnet_id"{
 # ssh_key_name - The name of the public SSH key to be used when provisining Ubuntu VSI.
 ##############################################################################
 variable "ssh_key_name" {
-  default     = ""
+  default = "malar-new-ssh-key"
   description = "The name of the public SSH key to be used when provisining Ubuntu VSI."
 }
 
@@ -24,7 +24,7 @@ variable "ssh_key_name" {
 ##############################################################################
 
 variable "vnf_vpc_image_name" {
-  default = ""
+  default = "ibm-ubuntu-20-04-3-minimal-amd64-2"
   description = "The name of the Ubuntu catalog image to be provisioned in your IBM Cloud account."
 }
 
@@ -32,7 +32,7 @@ variable "vnf_vpc_image_name" {
 # vnf_vpc_instance_name - The name of your Ubuntu Virtual Server to be provisioned
 ##############################################################################
 variable "vnf_instance_name" {
-  default     = "ubuntu18-04-vsi"
+  default     = "ubuntu20-04-vsi"
   description = "The name of your Ubuntu Virtual Server to be provisioned."
 }
 
@@ -53,16 +53,15 @@ variable "region" {
 # api_key - This is the ibm_cloud_api_key which should be used only while testing this code from CLI. 
 # It is not needed while testing from Schematics
 ######################################################################################################
-/*
 variable "api_key" {
   default     = ""
   description = "holds the user api key"
-}*/
+}
 
 ##############################################################################
 # vnf_securtiy_group - The security group to which the VSI interface belongs to.
 ##############################################################################
 variable "vnf_security_group" {
-  default     = "ubuntu-security-group"
+  default     = "ubuntu-security-group-1"
   description = "The security group for VNF VPC"
 }
