@@ -1,0 +1,18 @@
+---
+
+- name: configure vpn gateway in classic server
+  hosts: classicserver05
+
+  tasks:
+  - name: post install reload, restart ipsec
+    command: ipsec reload
+
+  - name: post install reload, restart ipsec
+    command: ipsec restart
+
+  - name: prerouting
+    command: iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 8000 -j DNAT --to-destination "{{ address1 }}"
+
+  - name: postrouting
+    command: iptables -t nat -A POSTROUTING -o eth0 -p tcp --dport 8000 -d "{{ address1 }}" -j SNAT --to-source 10.163.49.105
+

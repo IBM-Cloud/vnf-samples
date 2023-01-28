@@ -1,0 +1,7 @@
+---
+
+- name: configure vpn gateway in classic server
+  hosts: classicserver05
+  roles:  
+    - role: vpn 
+
