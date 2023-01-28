@@ -1,0 +1,9 @@
+---
+
+- name: restart ipsec
+  service:
+    name: ipsec
+    state: restarted
+
+- name: reload ipsec
+  command: ipsec reload

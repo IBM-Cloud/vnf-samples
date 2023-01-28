@@ -1,0 +1,30 @@
+--- 
+vpn_gateway_config_dir: 
+  path: /etc
+vpn_gateway_configs: 
+  - 
+    local: 
+      id: 169.38.71.124
+      networks: 10.163.49.64/26
+      public: "%defaultroute"
+    name: classic-vpc-test
+    psk: secret
+    remote: 
+      networks: 192.168.0.0/24
+      public: 52.116.143.198
+vpn_gateway_default_config_params: 
+  name: classic-vpc-test
+  authby: secret
+  auto: start
+  dpdaction: restart
+  dpddelay: 30
+  dpdtimeout: 120
+  esp: aes256gcm16-aes192gcm16-aes128gcm16,aes256-aes192-aes128-sha512-sha384-sha256!
+  ike: aes256-aes192-aes128-sha512-sha384-sha256-modp2048s256-modp2048s224-modp1024s160-ecp521-ecp384-ecp256-modp8192-modp6144-modp4096-modp3072-modp2048-x25519!
+  ikelifetime: 36000s
+  keyingtries: 0
+  leftauth: psk
+  lifetime: 10800s
+  rightauth: psk
+  type: tunnel
+

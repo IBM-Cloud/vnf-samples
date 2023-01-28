@@ -1,0 +1,27 @@
+---
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install strongswan
+  apt:
+    name: "{{ item }}" 
+  loop:
+    - strongswan
+    - strongswan-pki
+    - libcharon-extra-plugins
+
+- name: IPSec must be running
+  service:
+    name: ipsec
+    enabled: true
+    state: started

@@ -1,0 +1,73 @@
+---
+- name: Set required sysctl settings
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  loop: "{{ sysctl_config | dict2items }}"
+  vars:
+    sysctl_config:
+      net.ipv4.ip_forward: 1
+
+- name: Init connections variable
+  set_fact:
+    vpn_gateway_connections: []
+
+- name: Apply connection defaults
+  set_fact:
+    vpn_gateway_connections: "{{ vpn_gateway_connections + [vpn_gateway_default_config_params \
+      | combine({ \
+        'left': item.local.public, \
+        'leftid': item.local.id, \
+        'leftsubnet': item.local.networks, \
+        'right': item.remote.public, \
+        'rightsubnet': item.remote.networks \
+      }) \
+      | combine(item.params | default({}))] \
+    }}"
+  when: (item.state | default('present')) == 'present'
+  loop: "{{ vpn_gateway_configs }}"
+
+- name: Create IPsec config directory
+  file:
+    path: "{{ vpn_gateway_config_dir.path }}"
+    owner: root
+    group: root
+    state: directory
+  notify: restart ipsec
+
+- name: Include IPsec configuration
+  lineinfile:
+    path: /etc/ipsec.conf
+    state: present
+    regexp: "^include {{ vpn_gateway_config_dir.path + '/*.conf' | regex_escape }}$"
+    line: "include {{ vpn_gateway_config_dir.path }}/*.conf"
+  notify: restart ipsec
+
+- name: Include IPsec secrets
+  lineinfile:
+    path: /etc/ipsec.secrets
+    state: present
+    regexp: "^include {{ vpn_gateway_config_dir.path + '/*.secrets' | regex_escape }}$"
+    line: "include {{ vpn_gateway_config_dir.path }}/*.secrets"
+  notify: restart ipsec
+
+- name: Copy IPsec configuration
+  template:
+    src: ipsec.conf.j2
+    dest: "{{ vpn_gateway_config_dir.path }}/ipsec.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ipsec
+
+- name: Copy IPsec secrets
+  template:
+    src: ipsec.secrets.j2
+    dest: "{{ vpn_gateway_config_dir.path }}/ipsec.secrets"
+    owner: root
+    group: root
+    mode: 0600
+  notify: reload ipsec
