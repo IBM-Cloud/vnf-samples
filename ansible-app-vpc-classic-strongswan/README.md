@@ -3,7 +3,7 @@
 ### Automating 3 tier web application deployment with NLB on IBM Cloud Kubernetes Service Classic. Access the application in VPC using Strongswan VPN gateway. 
 ### Configure Strongswan VPN between VPC and Classic
 
-![VPN with Strongswan](images/VPC_Classic-strongswan.png )
+![VPN with Strongswan](../images/VPC_Classic-strongswan.png )
 
 To run locally in your mac to configure a webapp in a IKS cluster
 
