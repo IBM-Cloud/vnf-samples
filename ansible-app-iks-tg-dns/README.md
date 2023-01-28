@@ -60,7 +60,9 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
-4. Check application:
+4. After the ansible playbook is executed, verify that the containers and service are created.   
+
+Check application:
 
 ```
 malark@Malars-MacBook-Pro ansible-app-iks-tg-dns % kubectl get deployments                           
@@ -83,7 +85,15 @@ flasknode-vpc-nlb-us-south-3   LoadBalancer   172.21.153.108   10.187.250.42    
 kubernetes                     ClusterIP      172.21.0.1       <none>           443/TCP          23d
 ```
 
-6. Login to a classic VSI and invoke web application using NLB:
+6. Once the NLB is created, you can create the Transit gateway by running the terraform script as shown below. The terraform script needs the VPC and Classic Infrastructure connection type. 
+
+```
+malark@Malars-MacBook-Pro ansible-app-iks-tg-dns % terraform apply --var-file="terraform.tfvars" -auto-approve
+
+```
+Now, the client virtual server in VPC can access the application in Classic Infrastructure  through Transit gateway connection. In the below commands, we are connecting to a client VSI and accessing the NLB URL of Classic Infrastructure. The application fetches records from Cloudant database and displays in the frontend. 
+
+7. Login to a classic VSI and invoke web application using NLB:
 
 ```
 malark@Malars-MacBook-Pro ansible-app-iks-tg-dns % ssh root@169.xxxx
@@ -122,3 +132,5 @@ root@dal10classicvs:~# curl http://10.177.187.146:8000
     
 </table
 ```
+
+8. Since, there are 3 NLB services for each subnet, lets create a Domain Name Service(DNS) Zone, Global Load Balancer (GLB) and a Pool. Let’s add the 3 NLB static IPs as origins in the GLB Pool using the terraform script. Once the GLB, zone and origin pools are created, the application can be accessed using a domain name like http://think.myapp.com:8000 to route the traffic to any of the 3 NLB services.
