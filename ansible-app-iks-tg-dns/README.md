@@ -4,7 +4,6 @@
 
 ![VPC-Classic-Using TG](../images/Classic_VPC_TG.png)
 
-
 Git clone the repository and execute the ansible playbook. Under ansible roles directory, you will find that web and loadbalancer services are provided by user along with VLAN and zone, region, Cloudant Database URL and API Key. Login to cloud, download the Kubernetes cluster config in your local system, and execute the ansible playbook to deploy application, and create NLB service. 
 
 
