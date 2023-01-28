@@ -1,6 +1,12 @@
 # Automating web application deployment with NLB on IBM Cloud Kubernetes Service
 
 # ansible-app-iks-tg-dns
+
+![VPC-Classic-Using TG](../images/Classic_VPC_TG.png)
+
+Git clone the repository and execute the ansible playbook. Under ansible roles directory, you will find that web and loadbalancer services are provided by user along with VLAN and zone, region, Cloudant Database URL and API Key. Login to cloud, download the Kubernetes cluster config in your local system, and execute the ansible playbook to deploy application, and create NLB service. 
+
+
 To run locally in your mac to configure a webapp in a IKS cluster
 
 
