@@ -129,23 +129,6 @@ changed: [classicserver04.VNF-Experiments-Account.cloud]
 PLAY RECAP *************************************************************************************************************************************************************************************************
 classicserver04.VNF-Experiments-Account.cloud : ok=17   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
--e Deploying Application and NLB.. Please wait for sometime..
-
-
-kubectl get pods
-NAME                                 READY   STATUS    RESTARTS   AGE
-app-lb-deployment-66f5758774-8zz2z   1/1     Running   0          34m
-app-lb-deployment-66f5758774-grg8c   1/1     Running   0          34m
-app-lb-deployment-66f5758774-wb9h6   1/1     Running   0          34m
-kubectl get svc
-NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
-flasknode-vpc-nlb-us-south-1   LoadBalancer   172.21.209.35   10.177.71.98    8000:31501/TCP   34m
-flasknode-vpc-nlb-us-south-2   LoadBalancer   172.21.178.19   10.74.203.131   8000:30598/TCP   34m
-flasknode-vpc-nlb-us-south-3   LoadBalancer   172.21.71.30    10.187.127.13   8000:32023/TCP   34m
-kubernetes                     ClusterIP      172.21.0.1      <none>          443/TCP          105d
-10.177.71.98
-Running terraform to deploy VPN Connection
-
 
 ```
 
@@ -213,40 +196,3 @@ logout
 
 ```
 
-7.Login to VPC VSI and invoke app in Classic:
-```
-root@demo-think-peer-vsi:~# curl http://10.163.49.107:8000
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show all employees</title>
-</head>
-<body>
-<h3>List of all employees</h3>
-
-<table border="1">
-    <tr>
-        <th align="center">Employee Id</th>
-		<th align="center">Name</th>
-    </tr>
-    
-    <tr>
-        <td align="center">444</td>
-        <td align="center">Sita</td>
-	</tr>
-    
-    <tr>
-        <td align="center">234</td>
-        <td align="center">IBM</td>
-	</tr>
-    
-    <tr>
-        <td align="center">123</td>
-        <td align="center">Network</td>
-	</tr>
-    
-</table>root@demo-think-peer-vsi:~# exit
-logout
-
-```
