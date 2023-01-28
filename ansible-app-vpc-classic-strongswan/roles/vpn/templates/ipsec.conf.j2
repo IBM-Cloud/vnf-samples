@@ -1,0 +1,12 @@
+{{ ansible_managed|comment }}
+
+{% for connection in vpn_gateway_connections %}
+{# 
+{{ connection.left }} -> {{ connection.right }}
+#}
+conn {{ connection.name }}
+{% for param_key in connection %}
+    {{ param_key }}={{ connection[param_key] }}
+{% endfor %}
+{% endfor %}
+

@@ -1,0 +1,13 @@
+---
+- import_tasks: validate.yml
+  tags: ['vpn_gateway', 'vpn_gateway_validate', 'validate']
+  when: vpn_gateway_configs is defined and (vpn_gateway_configs | length > 0)
+
+- import_tasks: install.yml
+  when: vpn_gateway_configs is defined and (vpn_gateway_configs | length > 0)
+  tags: ['vpn_gateway', 'vpn_gateway_install', 'install']
+
+- import_tasks: config.yml
+  tags: ['vpn_gateway', 'vpn_gateway_config', 'config']
+  when: vpn_gateway_configs is defined and (vpn_gateway_configs | length > 0)
+

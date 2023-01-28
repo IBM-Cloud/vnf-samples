@@ -1,0 +1,7 @@
+---
+- name: Validate PSK
+  assert:
+    that: item.psk | length > 0
+    fail_msg: "Variable 'psk' is not correct for vpn_gateway_configs with name: {{ item.name }}"
+  when: (item.state | default('present')) == 'present'
+  loop: "{{ vpn_gateway_configs }}"
