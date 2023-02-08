@@ -19,7 +19,7 @@ variable "IC_API_KEY" {
 }
 
 variable "rias_api_url" {
-  default     = "https://us-south.iaas.cloud.ibm.com"
+  default     = "https://us-south.iaas.cloud.ibm.com/v1"
   description = "The public RIAS endpoint url of VPC. This is used by vpc sdk."
 }
 

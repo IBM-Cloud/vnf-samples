@@ -64,7 +64,7 @@
     - name: Install the package ibm-vpc
       pip:
         name: ibm-vpc
-        version: 0.13.0
+        version: 0.14.0
         executable: pip3
 
     - name: Install the package flask
