@@ -36,7 +36,7 @@ class HAFailOver(object):
     CONFIGFILE = "config.json"
 
     apikey = None
-    vpc_url = "https://us-south.iaas.cloud.ibm.com"
+    vpc_url = "https://us-south.iaas.cloud.ibm.com/v1"
     vpc_id =''
     table_id = ''
     route_id = ''
@@ -52,7 +52,7 @@ class HAFailOver(object):
     logger = ''
 
     config_file = "config.json"
-    version = "2020-04-10"
+    version = "2022-09-13"
     zone = "us-south-1"
 
     service = None
@@ -66,10 +66,9 @@ class HAFailOver(object):
         self.logger.addHandler(loghandler)
         if self.apikey is None:
             self.parse_config_json()
-        authenticator = IAMAuthenticator(self.apikey)
+        authenticator = IAMAuthenticator(self.apikey, url='https://iam.cloud.ibm.com')
         self.service = VpcV1(authenticator=authenticator)
         self.service.set_service_url(self.vpc_url)
-        self.service = VpcV1(self.version, authenticator=authenticator) 
         self.logger.info("Initialized vpc service")
          
     def parse_config_json(self):
@@ -115,17 +114,25 @@ class HAFailOver(object):
         self.logger.info("calling update vpc routing table route")    
         self.logger.info("vpc id " + self.vpc_id) 
         list_tables = ''
+        authenticator = IAMAuthenticator(self.apikey, url='https://iam.cloud.ibm.com')
+        self.service = VpcV1(authenticator=authenticator)
+        self.service.set_service_url(self.vpc_url)
         if self.service.list_vpc_routing_tables(self.vpc_id).get_result() is not None:
             list_tables = self.service.list_vpc_routing_tables(self.vpc_id).get_result()['routing_tables']
         update_done = False
         for table in list_tables:
             print(table['id'], "\t",  table['name'])
+            if (table['name'] != 'ha-route-tbl'):
+                continue
             table_id_temp = table['id']
             list_routes = self.service.list_vpc_routing_table_routes(vpc_id= self.vpc_id, routing_table_id=table_id_temp)
             routes = list_routes.get_result()['routes']
             for route in routes:
                 route_id_temp = route['id']
-                if route['next_hop']['address'] == self.next_hop_vsi: 
+                self.logger.info ("route id " + route['id'])
+                self.logger.info ("route " + str(route['next_hop']))
+                self.logger.info("next hop vsi " + self.next_hop_vsi)
+                if route['next_hop']['address'] == self.next_hop_vsi:
                     self.logger.info("vpc routing table routes found, id: %s, name: %s: " % (route['id'], route['name']))
                     self.logger.info("vpc routing table route, id: %s, name: %s, zone: %s, next_hop:%s, destination:%s " % (route['id'], route['name'], route['zone']['name'], route['next_hop']['address'], route['destination']))
                     zone_identity_model = {'name': route['zone']['name']}
@@ -143,6 +150,7 @@ class HAFailOver(object):
             
     def find_ext_ip_ha_pair(self, remote_addr):
         self.logger.info("find mgmt and ext ip " + json.dumps(self.ha_pair))
+        self.logger.info("remote addr " + remote_addr)
         temp_ha_pair = self.ha_pair.copy()
         for pair in temp_ha_pair: 
             print(pair[self.MGMT_IP])
