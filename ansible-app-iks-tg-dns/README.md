@@ -79,10 +79,10 @@ app-lb-deployment-7456497dc5-vqs8c   1/1     Running   0          60s
 ```
 malark@Malars-MacBook-Pro ansible-app-iks-tg-dns % kubectl get services       
 NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE
-flasknode-vpc-nlb-us-south-1   LoadBalancer   172.21.119.57    10.177.187.146   8000:32575/TCP   22s
-flasknode-vpc-nlb-us-south-2   LoadBalancer   172.21.105.33    10.74.5.178      8000:30078/TCP   19s
-flasknode-vpc-nlb-us-south-3   LoadBalancer   172.21.153.108   10.187.250.42    8000:31353/TCP   17s
-kubernetes                     ClusterIP      172.21.0.1       <none>           443/TCP          23d
+flasknode-vpc-nlb-us-south-1   LoadBalancer   x.x.x.x    x.x.x.x  8000:32575/TCP   22s
+flasknode-vpc-nlb-us-south-2   LoadBalancer   x.x.x.x    x.x.x.x      8000:30078/TCP   19s
+flasknode-vpc-nlb-us-south-3   LoadBalancer   x.x.x.x   x.x.x.x    8000:31353/TCP   17s
+kubernetes                     ClusterIP      x.x.x.x       <none>           443/TCP          23d
 ```
 
 6. Once the NLB is created, you can create the Transit gateway by running the terraform script as shown below. The terraform script needs the VPC and Classic Infrastructure connection type. 
@@ -99,7 +99,7 @@ Now, the client virtual server in VPC can access the application in Classic Infr
 malark@Malars-MacBook-Pro ansible-app-iks-tg-dns % ssh root@169.xxxx
 Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-113-generic x86_64)
 ....
-root@dal10classicvs:~# curl http://10.177.187.146:8000
+root@dal10classicvs:~# curl http://x.x.x.x:8000
 <!DOCTYPE html>
 <html lang="en">
 <head>
