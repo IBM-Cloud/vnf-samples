@@ -60,13 +60,13 @@ TASK [Gathering Facts] *********************************************************
 ok: [classicserver04.VNF-Experiments-Account.cloud]
 
 TASK [vpn : Validate PSK] **********************************************************************************************************************************************************************************
-ok: [classicserver04.VNF-Experiments-Account.cloud] => (item={'local': {'id': '169.38.71.122', 'networks': '10.163.49.64/26', 'public': '%defaultroute'}, 'name': 'classic-vpc-test', 'psk': 'secret', 'remote': {'networks': '192.168.0.0/24', 'public': '52.116.143.198'}}) => {
+ok: [classicserver04.VNF-Experiments-Account.cloud] => (item={'local': {'id': 'x.x.x.x', 'networks': 'x.x.x.x', 'public': '%defaultroute'}, 'name': 'classic-vpc-test', 'psk': 'secret', 'remote': {'networks': 'x.x.x.x', 'public': 'x.x.x.x'}}) => {
     "ansible_loop_var": "item",
     "changed": false,
     "item": {
         "local": {
-            "id": "169.38.71.122",
-            "networks": "10.163.49.64/26",
+            "id": "x.x.x.x",
+            "networks": "x.x.x.x",
             "public": "%defaultroute"
         },
         "name": "classic-vpc-test",
@@ -103,7 +103,7 @@ TASK [vpn : Init connections variable] *****************************************
 ok: [classicserver04.VNF-Experiments-Account.cloud]
 
 TASK [vpn : Apply connection defaults] *********************************************************************************************************************************************************************
-ok: [classicserver04.VNF-Experiments-Account.cloud] => (item={'local': {'id': '169.38.71.122', 'networks': '10.163.49.64/26', 'public': '%defaultroute'}, 'name': 'classic-vpc-test', 'psk': 'secret', 'remote': {'networks': '192.168.0.0/24', 'public': '52.116.143.198'}})
+ok: [classicserver04.VNF-Experiments-Account.cloud] => (item={'local': {'id': 'x.x.x.x', 'networks': 'x.x.x.x/26', 'public': '%defaultroute'}, 'name': 'classic-vpc-test', 'psk': 'secret', 'remote': {'networks': 'x.x.x.x', 'public': 'x.x.x.x'}})
 
 TASK [vpn : Create IPsec config directory] *****************************************************************************************************************************************************************
 ok: [classicserver04.VNF-Experiments-Account.cloud]
@@ -150,17 +150,17 @@ app-lb-deployment-7456497dc5-z892c   1/1     Running       0          18s
 ```
 malark@Malars-MacBook-Pro recommender-engine-hybrid-cloud-automation % kubectl get svc                                                       
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
-flasknode-vpc-nlb-us-south-1   LoadBalancer   172.21.209.35   10.177.71.98    8000:31501/TCP   168m
-flasknode-vpc-nlb-us-south-2   LoadBalancer   172.21.178.19   10.74.203.131   8000:30598/TCP   168m
-flasknode-vpc-nlb-us-south-3   LoadBalancer   172.21.71.30    10.187.127.13   8000:32023/TCP   168m
-kubernetes                     ClusterIP      172.21.0.1      <none>          443/TCP          105d
+flasknode-vpc-nlb-us-south-1   LoadBalancer   x.x.x.x   x.x.x.x    8000:31501/TCP   168m
+flasknode-vpc-nlb-us-south-2   LoadBalancer   x.x.x.x   x.x.x.x   8000:30598/TCP   168m
+flasknode-vpc-nlb-us-south-3   LoadBalancer   x.x.x.x    x.x.x.x   8000:32023/TCP   168m
+kubernetes                     ClusterIP      x.x.x.x      <none>          443/TCP          105d
 
 ```
 
 6. Login to a classic VSI and invoke web application using NLB:
 
 ```
-root@classicserver04:~# curl http://10.177.71.98:8000 
+root@classicserver04:~# curl http://x.x.x.x:8000 
 <!DOCTYPE html>
 <html lang="en">
 <head>
