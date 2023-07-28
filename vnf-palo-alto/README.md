@@ -203,7 +203,7 @@ NOTE: It is important to commit the changes into the system after a setting gets
 -> Click on “Project” from the left panel.
 ![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS2.png)
 
--> Create a new project by providing unique name and selecting the location where the VNFs resides. Then, click on create.
+-> Create a new project by providing unique name and selecting the region where the VNFs resides. Then, click on create.
 ![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS3.png)
 
 -> After creating a project, create an application by clicking the “Application” option from left panel.
@@ -212,7 +212,7 @@ NOTE: It is important to commit the changes into the system after a setting gets
 -> Provide a unique name, select “Container Image” and provide the image reference path. Also provide the port number(if any) to which the app would be listening and leave the rest of the default settings. Then, click on “Create”.
 ![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS5.png)
 
--> 	After a container is successfully created, test the link by clicking on the top right “Test Application” option and then on “Application URL”.
+-> After a container is successfully created, test the link by clicking on the top right “Test Application” option and then on “Application URL”.
 ![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS6.png)
 
 -> Copy the link opened in the new browser tab.
