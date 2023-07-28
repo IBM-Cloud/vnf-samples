@@ -1,5 +1,7 @@
 ﻿Login to IBM Cloud Catalog and search for “Check Point CloudGuard IaaS Security Cluster”
 
+ ![Alt_Text](images/Picture1.png?raw=true "Optional Title")
+
 Now provide the name, resource group and location.
 
 Fill the below details as required 
