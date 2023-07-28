@@ -194,7 +194,7 @@ NOTE: It is important to commit the changes into the system after a setting gets
 
 ## PaloAlto HA Setup And CodeEngine Certificate Errors
 
-### Code Engine Error
+### Code Engine Setup in IBM Cloud
 
 -> Log in to IBM Cloud.\
 -> Search for “Code Engine” in “ Search Resource and Product” box.
