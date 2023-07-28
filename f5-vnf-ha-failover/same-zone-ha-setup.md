@@ -16,7 +16,7 @@ In cloud.ibm.com, create 2 VSIs with 1 primary NIC and 3 secondary NICs. Note th
 
 1.	Activating the device license: For _f5-same-zone-1_, Login to https://150.239.87.172/ using admin id and password that you gave during VSI setup and activate the licenses for your VSI either using the manual or automatic method. On the left panel, select _Licensing > License_. Click on _Activate_. Following page will open.
 
-    ![activate_license](../images/ha-config/activate_license_1.png)
+    ![activate_license](images/ha-config/activate_license_1.png)
 
     1.	If you choose _Automatic_ activation method, paste the license key in _Base Registration Key_ field and click on _Next_.
 
