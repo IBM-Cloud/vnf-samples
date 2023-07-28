@@ -192,10 +192,76 @@ NOTE: It is important to commit the changes into the system after a setting gets
 
 -> After some time (around 5-10 mins) all the setting will get sync. And HA configuration will be completed in both the devices in same/different zones.
 
+## PaloAlto HA Setup And CodeEngine Certificate Errors
 
+### Code Engine Error
 
+-> Log in to IBM Cloud.\
+-> Search for “Code Engine” in “ Search Resource and Product” box.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS1.png)
 
+-> Click on “Project” from the left panel.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS2.png)
 
+-> Create a new project by providing unique name and selecting the location where the VNFs resides. Then, click on create.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS3.png)
 
+-> After creating a project, create an application by clicking the “Application” option from left panel.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS4.png)
+
+-> Provide a unique name, select “Container Image” and provide the image reference path. Also provide the port number(if any) to which the app would be listening and leave the rest of the default settings. Then, click on “Create”.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS5.png)
+
+-> 	After a container is successfully created, test the link by clicking on the top right “Test Application” option and then on “Application URL”.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS6.png)
+
+-> Copy the link opened in the new browser tab.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS7.png)
+
+### Palo Alto Setup to send failover logs to Code Engine HTTP Server
+
+-> Login to the active Palo Alto VNF.\
+-> Go to “Devices” tab.\
+-> From the left Panel under “Server Profiles”, click on “HTTP” and then click on “Add” button from the bottom to add a profile.\
+-> A “HTTP Sever Profile” would be displayed.\
+-> Provide details specifically the “Address” column. Provide the copied app link of Code Engine.(Note: Remove ‘Https://’ from the copied link.\
+   Example, if copied link is “https:// palo.13l7qejonsv.ussouth.codeengine.appdomain.cloud/” then only provide “palo.13l7qejonsv.us-south.codeengine.appdomain.cloud”).\
+->	Then, to check the connection, click on the “Test Server Connection” button.
+
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS8.png)
+
+### Certificate Error of Code Engine Application
+
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS9.png)
+
+-> Palo Alto Firewall is trying to validate the Code Engine App’s address certificate to send firewall’s failover logs to a trusted server, but it’s not able to validate it.\ 
+-> The certificate itself is valid, but the certificate chain is having a broken link.\
+-> To inspect the app’s link, the certificate is tested on http://digicert.com/help and the below results were obtained which shows a broken link (scroll below).\
+-> The Code Engine team is trying to resolve the above problem from the Code Engine end.\
+-> But to avoid this from client-side Code Engine team proposed two ways:\
+      1)	Get your own custom domain and certificate using CIS, Secrets Manager and Let'sEncrypt.\
+      2)	Add the intermediate certificate  ISRG Root X1 DST Root CA X3 to your trust-store.
+
+### Digicert Result
+
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS10.png)
+
+### HA Setup Error
+
+-> After configuring the high availability in both Palo Alto Firewalls, they synchronize their configuration setting with each other.\
+-> As shown in the below screenshots that after synchronization both firewalls have same network interface settings by default. If one interface setting is changed from UI or from CLI then it will get reflected in other also due to synchronization.
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS11.png)
+
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS12.png)
+
+-> As shown in the above screenshots, both the firewalls shares the same ethernet1/3 and ethernet1/4 IP addresses.\
+-> But they have different IP address configuration in the IBM cloud VSI network interfaces which are directly linked with these (ethernet1/3 and ethernet1/4) virtual interfaces in firewalls.\
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS13.png)
+
+![PaloAltoSetupErrors](code-engine-and-ha-setup-error-images/SS14.png)
+
+-> Due to these difference in IP address in both IBM cloud’s VSI interfaces(eth3 and eth4) and Palo Alto Firewall interfaces(ethernet1/3 and ethernet1/4) of passive firewall the traffics cannot be rerouted to it if a failover occurs in the active one.\
+-> This issue can be resolved by using Virtual IP(VIP) address, which will enable both the VSIs to switch/share same IP addresses among themselves when a failover occurs as VIPs are not bounded to a particular interface so can be shared/transferred among multiple machines.\
+-> Hence, HA setup is possible in IBM Cloud(single and multi-zone) but due to lack of VIP address support in IBM Cloud, for now the setup will not work. May work in future when VIP will be supported in IBM cloud.
 
 
