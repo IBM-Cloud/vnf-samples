@@ -1,0 +1,4 @@
+flask
+ibm-cloud-sdk-core
+ibm-vpc>=0.17.0
+python-dotenv
