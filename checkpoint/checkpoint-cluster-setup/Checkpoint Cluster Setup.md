@@ -1,6 +1,6 @@
 ﻿Login to IBM Cloud Catalog and search for “Check Point CloudGuard IaaS Security Cluster”
 
- ![VPC-VPC-Using VPN Gatweway](../images/Picture1.png)
+ ![VPC-VPC-Using VPN Gatweway](/images/Picture1.png)
 
 Now provide the name, resource group and location.
 
