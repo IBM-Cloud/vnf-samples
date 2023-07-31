@@ -46,6 +46,6 @@ Follow the steps in [CheckPointGatewayConfig.md](https://github.ibm.com/orion/vn
 Server.
 
 Note:
-▪ For Step 1, use the Floating IP from above.
-▪ For Step 2, use username as ‘admin’ and password as the one set above.
-▪ For Step 3, provide a new admin Password and then onwards always use the new admin Password to login again.
+ - For Step 1, use the Floating IP from above.
+ - For Step 2, use username as ‘admin’ and password as the one set above.
+ - For Step 3, provide a new admin Password and then onwards always use the new admin Password to login again.
