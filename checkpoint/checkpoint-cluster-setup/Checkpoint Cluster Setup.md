@@ -4,20 +4,35 @@
 
 Now provide the name, resource group and location.
 
+ ![Alt_Text](images/Picture2.png?raw=true "Optional Title")
+
 Fill the below details as required 
+
+ ![Alt_Text](images/Picture3.png?raw=true "Optional Title")
 
 After that click on Install
 
+ ![Alt_Text](images/Picture4.png?raw=true "Optional Title")
+
 Now Terraform jobs will start. It will take 10-15 mins to configure the cluster.
+
+ ![Alt_Text](images/Picture5.png?raw=true "Optional Title")
 
 After the job runs successfully, click on the Load Balancer from VPC Infrastructure.
 
+ ![Alt_Text](images/Picture6.png?raw=true "Optional Title")
+
 Check that your load balancer is active.
+
+ ![Alt_Text](images/Picture7.png?raw=true "Optional Title")
 
 Click on the load balancer name and check the health status of the members.
 
+ ![Alt_Text](images/Picture8.png?raw=true "Optional Title")
+
 Now click on the Virtual Sever Instances and find your instances to be active and also check the Floating IP attached with both the instances.
 
+ ![Alt_Text](images/Picture9.png?raw=true "Optional Title")
 
 Setting Admin Password for Cluster Gateways 
 For security purposes we will need to log into both Check Point gateways with our SSH-key. Here we will set Admin account password allowing us to login in to the web portal to run the First-Time-Wizard configuration utility. To login use the below command with Floating-IP of checkpoint-gateway-instance.
@@ -40,20 +55,25 @@ For security purposes we will need to log into both Check Point gateways with ou
 
 Note: We followed Step 3(a).
 
+ ![Alt_Text](images/Picture10.png?raw=true "Optional Title")
+
 1. In the Check Point Security Gateway Cluster Creation window, you must click Classic Mode.
+
+  ![Alt_Text](images/Picture11.png?raw=true "Optional Title")
 
 1. From the left tree, click General Properties.
 1. In the IPv4 Address field, you must enter the 0.0.0.0 address.
 
-
+ ![Alt_Text](images/Picture12.png?raw=true "Optional Title")
 
 1. On the Network Security tab, you must clear IPsec VPN.
 
-
+ ![Alt_Text](images/Picture13.png?raw=true "Optional Title")
 
 1. From the left tree, click Cluster Members.
 1. Click Add > New Cluster Member.
 
+ ![Alt_Text](images/Picture14.png?raw=true "Optional Title")
 
 
 `       `The Cluster Member Properties window opens.
@@ -74,8 +94,11 @@ Note: We followed Step 3(a).
 Repeat Steps a-h to add the next Cluster Member.
 
 
+ ![Alt_Text](images/Picture15.png?raw=true "Optional Title")
 
+ ![Alt_Text](images/Picture16.png?raw=true "Optional Title")
 
+  ![Alt_Text](images/Picture17.png?raw=true "Optional Title")
 
 1. From the left tree, click ClusterXL and VRRP.
 1. In the Select the cluster mode and configuration section, select Active-Active.
@@ -85,6 +108,9 @@ Repeat Steps a-h to add the next Cluster Member.
 This configures the Cluster Members to synchronize the information about the connections they inspect.
 
 - Best Practice - Enable this setting to prevent connection drops after a cluster failover.
+
+ ![Alt_Text](images/Picture18.png?raw=true "Optional Title")
+
 1. Optional: Select Start synchronizing [  ] seconds after connection initiation and enter the applicable value.
 
 This option is available only for clusters R80.20 and higher.
@@ -103,13 +129,18 @@ Notes : This setting in the cluster object applies to all connections that pass 
 1. Open the cluster object and continue the configuration.
 1. From the left tree, click Network Management.
 
+ ![Alt_Text](images/Picture19.png?raw=true "Optional Title")
+ 
 1. From the top, click the Get Interfaces > Get Interfaces With Topology.
 
-
+ ![Alt_Text](images/Picture20.png?raw=true "Optional Title")
 
 - Important - On all Cluster Members in Active-Active mode, names of interfaces that belong to the same "side" must be identical (Known Limitation PMTR-70256).
 1. Select each interface and click Edit.
-1. From the left tree, click the General page.	
+1. From the left tree, click the General page.
+
+ ![Alt_Text](images/Picture21.png?raw=true "Optional Title")
+ 
 1. In the General section, in the Network Type field, select the applicable type:
 - For cluster traffic interfaces, select Cluster.
 
@@ -136,6 +167,8 @@ Override > Specific > select the applicable Network object or Network Group obje
 1. Click OK.
 1. Publish the SmartConsole session.
 
+ ![Alt_Text](images/Picture22.png?raw=true "Optional Title")
+ 
 1. Configure and install the applicable Access Control Policy and Threat Prevention Policy.
 
-
+ ![Alt_Text](images/Picture23.png?raw=true "Optional Title")
