@@ -1,6 +1,6 @@
 ### Steps to setup Checkpoint VNF
 
-[Setup VPC](Checkpoint-VPC and SSH creation/VPC and SSH-key Creation.md) 
+[Setup VPC](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-VPC%20and%20SSH%20creation/VPC%20and%20SSH-key%20Creation.md) 
 
 
 ### Management Server 
