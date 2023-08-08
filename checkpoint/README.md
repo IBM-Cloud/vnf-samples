@@ -7,8 +7,14 @@
 
 [Setup Management Server](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-Management%20Server/Checkpoint-Management-Server%20Instance%20Creation%20and%20Configuration..md)
 
-### Security Gateway
+### Cluster Setup 
 
-### Cluster Setup
+[Cluster setup](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/checkpoint-cluster-setup/Checkpoint%20Cluster%20Setup.md)
+
+### Standalone Setup
+
+[Standalone setup]()
 
 ### Adding a license 
+
+[Adding a license]()
