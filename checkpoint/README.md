@@ -13,7 +13,7 @@
 
 ### Standalone Setup
 
-[Standalone setup]()
+[Standalone setup](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-Gateway%20Server/Checkpoin-Gateway-Server%20Instance%20Creation%20and%20Configuration..md)
 
 ### Adding a license 
 
