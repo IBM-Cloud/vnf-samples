@@ -4,13 +4,13 @@ Go to Assets/Info and Create Account.
 
 ![Alt_Text](images/Picture1.png?raw=true "Optional Title")
 
-After creating the account, you have to create a new user.
-
-![Alt_Text](images/Picture2.png?raw=true "Optional Title")
-
-Fill the below form to create a new user. Name the user as IBM.  
+Fill the below form to create a new user. Enter your name and company. 
 
 ![Alt_Text](images/Picture3.png?raw=true "Optional Title")
+
+After creating new user, you have to create a UC Account. Name the Customer Name as IBM.  
+
+![Alt_Text](images/Picture2.png?raw=true "Optional Title")
 
 After the user creation successful, click on the **Product Evaluation** under **Try Our Products** menu.
 
