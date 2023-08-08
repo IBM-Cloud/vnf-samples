@@ -5,6 +5,8 @@
 
 ### Management Server 
 
+[Setup Management Server](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-Management%20Server/Checkpoint-Management-Server%20Instance%20Creation%20and%20Configuration..md)
+
 ### Security Gateway
 
 ### Cluster Setup
