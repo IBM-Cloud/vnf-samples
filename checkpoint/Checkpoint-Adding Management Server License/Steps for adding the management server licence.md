@@ -1,4 +1,6 @@
-﻿Go to <https://usercenter.checkpoint.com/> and create an account.
+﻿Go to <https://usercenter.checkpoint.com/> and create an account. After login to Checkpoint.    
+ 
+Go to Assets/Info and Create Account.  
 
 ![Alt_Text](images/Picture1.png?raw=true "Optional Title")
 
@@ -6,7 +8,7 @@ After creating the account, you have to create a new user.
 
 ![Alt_Text](images/Picture2.png?raw=true "Optional Title")
 
-Fill the below form to create a new user.
+Fill the below form to create a new user. Name the user as IBM.  
 
 ![Alt_Text](images/Picture3.png?raw=true "Optional Title")
 
