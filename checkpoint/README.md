@@ -17,4 +17,4 @@
 
 ### Adding a license 
 
-[Adding a license]()
+[Adding a license](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-Adding%20Management%20Server%20License/Steps%20for%20adding%20the%20management%20server%20licence.md)
