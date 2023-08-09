@@ -52,19 +52,11 @@
 	
     Click the Optional one and modify as below:
 
-In Optional, also provide tmos_admin_password, toggle all yes to no in secrets, big_management_floating_ip should be true.        
-
-    
-	![F5Vsi3](images/HA-Standalone/F5Vsi3.png)	
-	
+In Optional, also provide tmos_admin_password, toggle all yes to no in secrets, big_management_floating_ip should be true.
+	![F5Vsi3](images/HA-Standalone/F5Vsi3.png)
 	![F5Vsi4](images/HA-Standalone/F5Vsi4.png)
-	
 	Check the checkbox and click Install.
-
 	![F5_jump_vsi1](images/HA-Standalone/F5_jump_vsi1.png)
-	
 	Same way we have created 2nd VSI
-	
 	![F5_jump_vsi2](images/HA-Standalone/F5_jump_vsi2.png)	
-	
 	Virtual sever instance is created.
