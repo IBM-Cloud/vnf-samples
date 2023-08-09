@@ -3,7 +3,7 @@
 
 ### Standalone Setup
 
-[Standalone setup](https://github.com/IBM-Cloud/vnf-samples/blob/master/checkpoint/Checkpoint-Gateway%20Server/)
+[Standalone setup](https://github.com/IBM-Cloud/vnf-samples/blob/master/f5-vnf-ha-failover/Standalone_steps.md)
 
 
 ### Cluster Setup 
