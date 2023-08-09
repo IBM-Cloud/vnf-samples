@@ -8,6 +8,9 @@
    ![Alt_Text](images/Picture_3.png)
 
 - To fill the required input variables, refer to the description for the deployment parameters taken from the readme file. After filling all the required input variables, read and agree to the third-party terms and then click on Install.
+
+Use the Subnet of Dallas 1 (zone 1) in VPC. 
+
  ![Alt_Text](images/Picture_4.png)
  ![Alt_Text](images/Picture_5.png)
  ![Alt_Text](images/Picture_6.png)
