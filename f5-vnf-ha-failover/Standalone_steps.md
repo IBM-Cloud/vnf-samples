@@ -28,7 +28,7 @@
 
     ![vpc6](images/HA-Standalone/vpc6.png)
 	
-8.	I have created 4 subnets  in dallas2 zone to use in both VSI’s (default subnets were already present in dallas1). Now, click on Create virtual private cloud button on your right. Verify whether your VPC is created successfully.
+8.	I have created 4 subnets (internal, external, management, cluster) in dallas2 zone to use in both VSI’s (default subnets were already present in dallas1). Now, click on Create virtual private cloud button on your right. Verify whether your VPC is created successfully.
 
     ![subnet1](images/HA-Standalone/subnet1.png)
 	
