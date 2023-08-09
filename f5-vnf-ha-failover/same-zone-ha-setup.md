@@ -3,7 +3,7 @@
 In cloud.ibm.com, create 2 VSIs with 1 primary NIC and 3 secondary NICs. Note that the VSIs are created with primary and secondary subnets in the same range as shown below.
 
 #### VPC: f5-test-vpc-same-zone
-#### f5-same-zone-1 (150.239.87.172):
+#### f5-same-zone-2 (150.239.87.172):
 - f5-01-mgmt-sub (10.241.1.4) management ip address
 - f5-01-int-sub (10.241.2.4) internal ip address
 - f5-01-ext-sub (10.241.3.4) external ip address
