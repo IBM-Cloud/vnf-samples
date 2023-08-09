@@ -28,7 +28,24 @@
 
     ![vpc6](images/HA-Standalone/vpc6.png)
 	
-8.	I have created 4 subnets (internal, external, management, cluster) in dallas2 zone to use in both VSI’s (default subnets were already present in dallas1). Now, click on Create virtual private cloud button on your right. Verify whether your VPC is created successfully.
+8.	I have created 4 subnets (internal, external, management, cluster) in dallas2 zone to use in both VSI’s (default subnets were already present in dallas1). Now, click on Create virtual private cloud button on your right. Verify whether your VPC is created successfully. Use the same subnet id for both VNFs, as the IP Range should match for mgmt in both VNFs mgmt (10.241.1), int (10.241.2), ext (10.241.3), ha (10.241.0):
+
+
+VPC: f5-test-vpc-same-zone
+VSI1 (150.239.87.172):
+
+    f5-01-mgmt-sub (10.241.1.4) management ip address
+    f5-01-int-sub (10.241.2.4) internal ip address
+    f5-01-ext-sub (10.241.3.4) external ip address
+    f5-01-ha-sub (10.241.0.4) ha ip address
+
+VSI2 (52.116.127.246):
+
+    f5-01-mgmt-sub (10.241.1.6) management ip address
+    f5-01-int-sub (10.241.2.6) internal ip address
+    f5-01-ext-sub (10.241.3.5) external ip address
+    f5-01-ha-sub (10.241.0.6) ha ip address
+
 
     ![subnet1](images/HA-Standalone/subnet1.png)
 	
