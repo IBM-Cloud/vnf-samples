@@ -51,6 +51,8 @@
     ![F5Vsi2](images/HA-Standalone/F5Vsi2.png)
 	
     Click the Optional one and modify as below:
+
+In Optional, also provide tmos_admin_password, toggle all yes to no in secrets, big_management_floating_ip should be true.    
     
 	![F5Vsi3](images/HA-Standalone/F5Vsi3.png)	
 	
