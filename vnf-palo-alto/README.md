@@ -95,7 +95,8 @@ Palo Alto Firewall standalone and high availability(single/multi-zone) setup in 
 -> Click on the Floating IP Address of the management subnet.
 ![StandAlone](standalone-images/SS_25.png)
 
--> Palo Alto home page will be opened in the browser. Reset password prompt would be displayed. 
+-> Palo Alto home page will be opened in the browser. Reset password prompt would be displayed. userid/pass admin/admin for the first time.
+
 ![StandAlone](standalone-images/SS_26.png)
 
 -> Repeat the above steps for the creation of another VNF/VSI in same/another zone.
