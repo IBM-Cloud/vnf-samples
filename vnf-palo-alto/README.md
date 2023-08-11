@@ -268,4 +268,16 @@ NOTE: It is important to commit the changes into the system after a setting gets
 -> This issue can be resolved by using Virtual IP(VIP) address, which will enable both the VSIs to switch/share same IP addresses among themselves when a failover occurs as VIPs are not bounded to a particular interface so can be shared/transferred among multiple machines.\
 -> Hence, HA setup is possible in IBM Cloud(single and multi-zone) but due to lack of VIP address support in IBM Cloud, for now the setup will not work. May work in future when VIP will be supported in IBM cloud.
 
+## References
 
+### Palo Alto HA (Active/Passive):
+https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/high-availability/set-up-activepassive-ha/configure-activepassive-ha
+
+### Palo Alto forwarding the logs to a HTTP server:
+https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/forward-logs-to-an-https-destination#id864f20ae-1b96-456a-bd0d-b83e011f0d29
+
+### Palo Alto Types of System Logs:
+https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/view-and-manage-logs/log-types-and-severity-levels/system-logs
+
+### Palo Alto Types of System Logs Fields:
+https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions/system-log-fields#id9502d0c7-67d3-4f74-a0a9-3fdd671afd28
