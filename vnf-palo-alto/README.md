@@ -156,7 +156,10 @@ Palo Alto Firewall standalone and high availability(single/multi-zone) setup in 
 ![HAConfig](ha-images/SS13.png)
 
 -> Select “High Availability” from the left navigation panel and to setup the “Control Link (HA1)”, click on the gear icon on the top right of the “Control Link (HA1)” window.\
--> Select port “ethernet1/2”, provide “eth2” interface private IP address of VSI (xxx.xxx.xxx.xxx) to “IPv4/IPv6 Address”. Also provide netmask as “255.255.255.0” and gateway IP address (xxx.xxx.xxx.1). And click on “OK”.\
+-> Select port “ethernet1/2”, provide “eth2” interface private IP address of VSI (xxx.xxx.xxx.xxx) to “IPv4/IPv6 Address”. Also provide netmask as “255.255.255.0” and gateway IP address (xxx.xxx.xxx.1 - repeat the same eth2 address last bit should be 1). And click on “OK”.\ 
+
+**NOTE**: The gateway can really be any unique address within the subnet itself, but most network administrators designate the first number of the subnet as the gateway. Therefore, 192.168. 99.1 would be the default gateway of our source device given the fact that we have a 255.255. 255.0 subnet mask.
+
 NOTE: Gateway address is important if both VSIs are in different subnets.
 ![HAConfig](ha-images/SS14.png)
 
